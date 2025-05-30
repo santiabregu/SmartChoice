@@ -1,1 +1,6 @@
 # Core dependencies will be added as the project develops 
+nltk==3.8.1
+scikit-learn==1.4.0
+numpy==1.26.3
+pandas==2.2.0
+spacy==3.7.2 
