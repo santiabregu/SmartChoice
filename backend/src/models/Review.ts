@@ -1,10 +1,10 @@
 import { Schema, model, Document } from 'mongoose';
 
-interface ISentimentAnalysis {
-  overall: number;
-  aspects: {
-    [key: string]: number;
-  };
+interface ITextAnalysis {
+  tokens: string[];
+  lemmatized: string[];
+  stems: string[];
+  tf_idf_vector?: { [term: string]: number };
 }
 
 export interface IReview extends Document {
@@ -13,13 +13,16 @@ export interface IReview extends Document {
   resena: string;
   puntuacion: number;
   fecha: Date;
-  sentimiento: ISentimentAnalysis;
-  aspectos_clave: string[];
-  resumen: string;
+  website: {
+    url: string;
+    nombre: string;
+    fecha_extraccion: Date;
+  };
+  analisis_texto: ITextAnalysis;
   metadata: {
     filename: string;
     processingDate: Date;
-    aiModel: string;
+    language: string;
   };
 }
 
@@ -29,24 +32,29 @@ const ReviewSchema = new Schema<IReview>({
   resena: { type: String, required: true },
   puntuacion: { type: Number, min: 0, max: 5 },
   fecha: { type: Date, default: Date.now },
-  sentimiento: {
-    overall: Number,
-    aspects: {
-      type: Map,
-      of: Number
-    }
+  website: {
+    url: { type: String, required: true },
+    nombre: { type: String, required: true },
+    fecha_extraccion: { type: Date, default: Date.now }
   },
-  aspectos_clave: [String],
-  resumen: String,
+  analisis_texto: {
+    tokens: [String],
+    lemmatized: [String],
+    stems: [String],
+    tf_idf_vector: { type: Map, of: Number }
+  },
   metadata: {
     filename: String,
-    processingDate: Date,
-    aiModel: String
+    processingDate: { type: Date, default: Date.now },
+    language: { type: String, default: 'es' }
   }
 });
 
 // Índices para búsqueda eficiente
 ReviewSchema.index({ resena: 'text' });
-ReviewSchema.index({ aspectos_clave: 1 });
+ReviewSchema.index({ 'analisis_texto.tokens': 1 });
+ReviewSchema.index({ 'analisis_texto.lemmatized': 1 });
+ReviewSchema.index({ 'website.url': 1 });
+ReviewSchema.index({ 'website.nombre': 1 });
 
 export const Review = model<IReview>('Review', ReviewSchema); 

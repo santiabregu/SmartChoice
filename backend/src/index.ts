@@ -1,32 +1,24 @@
-import express from 'express';
-import cors from 'cors';
+import app from './app';
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-import { reviewRouter } from './routes/review.routes';
+import { config } from 'dotenv';
 
-dotenv.config();
+config();
 
-const app = express();
 const PORT = process.env.PORT || 3000;
+const MONGO_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/reviews';
 
-// Middleware
-app.use(cors());
-app.use(express.json());
-
-// Conectar a MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/smartchoice')
-  .then(() => console.log('Conectado a MongoDB'))
-  .catch(err => console.error('Error conectando a MongoDB:', err));
-
-// Rutas
-app.use('/api/reviews', reviewRouter);
-
-// Ruta de prueba
-app.get('/', (req, res) => {
-  res.json({ message: 'SmartChoice API funcionando correctamente' });
-});
-
-// Iniciar servidor
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
-}); 
+// Connect to MongoDB
+mongoose.connect(MONGO_URI)
+  .then(() => {
+    console.log('Connected to MongoDB');
+    
+    // Start Express server
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+      console.log(`Python service expected at ${process.env.PYTHON_SERVICE_URL || 'http://localhost:8000'}`);
+    });
+  })
+  .catch((error) => {
+    console.error('Error connecting to MongoDB:', error);
+    process.exit(1);
+  }); 

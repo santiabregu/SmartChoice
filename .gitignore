@@ -1,12 +1,39 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Testing
+coverage/
+
+# Production
+build/
+dist/
+out/
+
+# Misc
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
 # Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
+env/
 build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 .eggs/
@@ -19,17 +46,27 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-
-# Virtual Environment
-venv/
-env/
-ENV/
+.pytest_cache/
+.coverage
+htmlcov/
 
 # IDE
 .idea/
 .vscode/
 *.swp
 *.swo
+
+# NLTK data
+backend/src/python/nltk_data/
+
+# Project specific
+data/reviews/*
+!data/reviews/.gitkeep
+
+# Virtual Environment
+venv/
+env/
+ENV/
 
 # Environment variables
 .env
@@ -48,7 +85,6 @@ yarn-error.log*
 Thumbs.db
 
 # Node.js
-node_modules/
 .npm/
 .node_repl_history
 .yarn-integrity
