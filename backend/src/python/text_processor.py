@@ -14,6 +14,15 @@ class TextProcessor:
         self.inverted_index = defaultdict(dict)  # term -> {doc_id -> positions}
         self.document_lengths = {}  # doc_id -> length
         self.total_documents = 0
+        self.sinonimos = {
+            'auricular': ['auriculares', 'cascos', 'headphones', 'audifonos'],
+            'bateria': ['batería', 'pila', 'duración', 'autonomía', 'dura'],
+            'bueno': ['buena', 'excelente', 'genial', 'impresionante', 'útil', 'perfecto'],
+            'sonido': ['audio', 'acústica', 'calidad'],
+            'precio': ['costo', 'valor', 'económico'],
+            'comodidad': ['cómodo', 'ergonómico', 'confortable'],
+            'tecnologia': ['tecnología', 'tech', 'dispositivo', 'electrónico']
+        }
         
     def normalize_text(self, text: str) -> str:
         """Normaliza el texto aplicando reglas específicas para español"""
@@ -57,89 +66,108 @@ class TextProcessor:
         print(f"\nProcesando texto para doc_id: {doc_id}")
         print(f"Texto original: {text}")
         
-        # Tokenización
+        # Tokenización y normalización inicial
         tokens = self.tokenize(text)
         print(f"Tokens totales ({len(tokens)}): {tokens}")
         
         # Filtrado de stopwords y normalización
-        tokens = [token for token in tokens if token not in self.stop_words and token != 'NUM']
+        tokens = [self.normalize_text(token) for token in tokens if token not in self.stop_words and token != 'NUM']
         print(f"Tokens después de eliminar stopwords ({len(tokens)}): {tokens}")
         
-        # Stemming con mapeo original y sinónimos
-        stemmed = []
+        # Expandir con sinónimos y aplicar stemming
+        expanded_tokens = []
+        stemmed_tokens = []
         stem_map = {}  # Para mantener registro de qué palabras generaron cada stem
         
-        # Diccionario de sinónimos en español
-        sinonimos = {
-            'auricular': ['auriculares', 'cascos', 'headphones', 'audifonos'],
-            'bateria': ['batería', 'pila', 'duración', 'autonomía', 'dura'],
-            'bueno': ['buena', 'excelente', 'genial', 'impresionante', 'útil', 'perfecto'],
-            'sonido': ['audio', 'acústica', 'calidad'],
-            'precio': ['costo', 'valor', 'económico'],
-            'comodidad': ['cómodo', 'ergonómico', 'confortable'],
-            'tecnologia': ['tecnología', 'tech', 'dispositivo', 'electrónico']
-        }
-        
-        # Expandir tokens con sinónimos
-        expanded_tokens = []
+        # Procesar cada token
         for token in tokens:
+            # Añadir el token original
             expanded_tokens.append(token)
-            # Buscar sinónimos
-            for concepto, sinonimos_list in sinonimos.items():
-                if token in sinonimos_list:
-                    expanded_tokens.extend([s for s in sinonimos_list if s != token])
-                    # Añadir el concepto principal también
-                    expanded_tokens.append(concepto)
+            
+            # Buscar sinónimos (usando token normalizado)
+            normalized_token = self.normalize_text(token)
+            for concepto, sinonimos_list in self.sinonimos.items():
+                # Normalizar concepto y sinónimos para comparación
+                normalized_concepto = self.normalize_text(concepto)
+                normalized_sinonimos = [self.normalize_text(s) for s in sinonimos_list]
+                
+                if normalized_token in normalized_sinonimos or normalized_token == normalized_concepto:
+                    # Añadir sinónimos y concepto principal
+                    expanded_tokens.extend([s for s in sinonimos_list if self.normalize_text(s) != normalized_token])
+                    if normalized_concepto != normalized_token:
+                        expanded_tokens.append(concepto)
         
         # Aplicar stemming a tokens expandidos
         for token in expanded_tokens:
             stem = self.stemmer.stem(token)
-            stemmed.append(stem)
+            stemmed_tokens.append(stem)
             if stem not in stem_map:
                 stem_map[stem] = set()
             stem_map[stem].add(token)
         
-        print(f"Términos después de stemming y expansión ({len(stemmed)}): {stemmed}")
+        print(f"Términos después de stemming y expansión ({len(stemmed_tokens)}): {stemmed_tokens}")
         print("Mapeo de stems a palabras originales:")
         for stem, originals in stem_map.items():
             print(f"  {stem}: {originals}")
         
         # Si tenemos un doc_id, actualizamos el índice invertido
         if doc_id:
-            self._update_inverted_index(stemmed, doc_id)
+            # Indexar tanto los tokens originales como los stems
+            all_terms = list(set(expanded_tokens + stemmed_tokens))
+            self._update_inverted_index(all_terms, doc_id)
             print(f"Índice invertido actualizado para doc_id: {doc_id}")
             print(f"Tamaño actual del índice: {len(self.inverted_index)} términos")
         
         return {
             "tokens": tokens,
-            "stemmed": stemmed,
+            "expanded": expanded_tokens,
+            "stemmed": stemmed_tokens,
             "stem_map": stem_map,
-            "tf_vector": self._calculate_tf(stemmed)
+            "tf_vector": self._calculate_tf(stemmed_tokens)
         }
     
     def _update_inverted_index(self, tokens: List[str], doc_id: str):
         """Actualiza el índice invertido con las posiciones de los términos"""
-        # Actualizar longitud del documento
-        self.document_lengths[doc_id] = len(tokens)
+        # Actualizar longitud del documento (acumular si ya existe)
+        if doc_id in self.document_lengths:
+            self.document_lengths[doc_id] += len(tokens)
+        else:
+            self.document_lengths[doc_id] = len(tokens)
         
-        # Eliminar todas las referencias anteriores a este doc_id
-        for term_dict in self.inverted_index.values():
-            if doc_id in term_dict:
-                del term_dict[doc_id]
+        # Conjunto para almacenar todos los términos a indexar
+        terms_to_index = set()
         
-        # Actualizar índice con las nuevas posiciones
+        # Procesar cada token
         for pos, token in enumerate(tokens):
-            if token not in self.inverted_index:
-                self.inverted_index[token] = {}
-            self.inverted_index[token][doc_id] = [pos]
+            # Añadir el token original
+            terms_to_index.add(token.lower())
+            
+            # Añadir el stem
+            stem = self.stemmer.stem(token.lower())
+            terms_to_index.add(stem)
+            
+            # Añadir sinónimos y sus stems
+            for concepto, sinonimos in self.sinonimos.items():
+                if token.lower() in [s.lower() for s in sinonimos] or token.lower() == concepto.lower():
+                    # Añadir el concepto y su stem
+                    terms_to_index.add(concepto.lower())
+                    terms_to_index.add(self.stemmer.stem(concepto))
+                    # Añadir todos los sinónimos y sus stems
+                    for sinonimo in sinonimos:
+                        terms_to_index.add(sinonimo.lower())
+                        terms_to_index.add(self.stemmer.stem(sinonimo))
+        
+        # Indexar todos los términos
+        for term in terms_to_index:
+            if term not in self.inverted_index:
+                self.inverted_index[term] = {}
+            if doc_id not in self.inverted_index[term]:
+                self.inverted_index[term][doc_id] = []
+            if 0 not in self.inverted_index[term][doc_id]:  # Solo añadir la posición si no existe
+                self.inverted_index[term][doc_id].append(0)
         
         # Actualizar total de documentos
         self.total_documents = len(self.document_lengths)
-        
-        # Limpiar términos sin documentos
-        empty_terms = [term for term, docs in self.inverted_index.items() if not docs]
-        for term in empty_terms:
-            del self.inverted_index[term]
         
         # Imprimir estado actual del índice para este documento
         doc_terms = sorted([term for term, docs in self.inverted_index.items() if doc_id in docs])
@@ -147,6 +175,15 @@ class TextProcessor:
         print(f"- Términos indexados: {doc_terms}")
         print(f"- Total términos en índice: {len(self.inverted_index)}")
         print(f"- Total documentos indexados: {self.total_documents}")
+        
+        # Imprimir términos específicos para debug
+        debug_terms = ['auriculares', 'auricular', 'bateria', 'batería', 'duracion', 'duración']
+        print("\nEstado de términos específicos en el índice:")
+        for term in debug_terms:
+            if term in self.inverted_index:
+                print(f"- {term}: {self.inverted_index[term]}")
+            else:
+                print(f"- {term}: No indexado")
     
     def _calculate_tf(self, tokens: List[str]) -> Dict[str, float]:
         """Calcula la frecuencia de términos normalizada usando BM25-inspired weighting"""
@@ -182,28 +219,172 @@ class TextProcessor:
         return boost * math.log(1 + (self.total_documents / (1 + doc_freq)))
     
     def boolean_search(self, query: str, operator: str = 'AND') -> Set[str]:
-        """Realiza una búsqueda booleana"""
-        query_terms = set(self.process_text(query)['stemmed'])
+        """Realiza una búsqueda booleana con operadores AND, OR, NOT"""
+        print(f"\nRealizando búsqueda booleana: {query}")
         
-        if not query_terms:
+        # Normalizar espacios alrededor de operadores y paréntesis
+        query = query.replace('(', ' ( ').replace(')', ' ) ')
+        query = query.replace(' AND ', ' AND ').replace(' OR ', ' OR ').replace(' NOT ', ' NOT ')
+        query = ' '.join(query.split())  # Normalizar espacios múltiples
+        print(f"Query normalizada: {query}")
+        
+        # Primero procesamos los paréntesis
+        if '(' in query and ')' in query:
+            parts = query.split()
+            result_parts = []
+            i = 0
+            while i < len(parts):
+                if parts[i] == '(':
+                    # Encontrar el paréntesis de cierre correspondiente
+                    j = i + 1
+                    count = 1
+                    while j < len(parts) and count > 0:
+                        if parts[j] == '(':
+                            count += 1
+                        elif parts[j] == ')':
+                            count -= 1
+                        j += 1
+                    
+                    # Procesar la subexpresión
+                    subquery = ' '.join(parts[i+1:j-1])
+                    print(f"Procesando subexpresión: {subquery}")
+                    
+                    # Procesar términos separados por OR
+                    subterms = subquery.split(' OR ')
+                    subresult = set()
+                    for term in subterms:
+                        term = term.strip()
+                        if term:
+                            term_result = self._search_single_term(term)
+                            print(f"Resultado OR para '{term}': {term_result}")
+                            subresult |= term_result
+                    
+                    print(f"Resultado de subexpresión: {subresult}")
+                    result_parts.append(subresult)
+                    i = j
+                elif parts[i].upper() in ['AND', 'OR', 'NOT']:
+                    result_parts.append(parts[i].upper())
+                    i += 1
+                else:
+                    result = self._search_single_term(parts[i])
+                    print(f"Resultado para término '{parts[i]}': {result}")
+                    result_parts.append(result)
+                    i += 1
+            
+            # Procesar los resultados con los operadores
+            if not result_parts:
+                return set()
+            
+            final_result = result_parts[0] if isinstance(result_parts[0], set) else set()
+            for i in range(1, len(result_parts), 2):
+                if i + 1 < len(result_parts):
+                    op = result_parts[i]
+                    next_set = result_parts[i + 1]
+                    if op == 'AND':
+                        final_result &= next_set
+                    elif op == 'OR':
+                        final_result |= next_set
+                    elif op == 'NOT':
+                        final_result -= next_set
+            
+            return final_result
+        
+        # Si no hay paréntesis, procesamos normalmente
+        parts = query.split()
+        if not parts:
             return set()
         
-        if operator == 'AND':
-            result = set(self.inverted_index[list(query_terms)[0]].keys())
-            for term in query_terms:
-                result &= set(self.inverted_index[term].keys())
-        elif operator == 'OR':
-            result = set()
-            for term in query_terms:
-                result |= set(self.inverted_index[term].keys())
-        elif operator == 'NOT':
-            all_docs = set(self.document_lengths.keys())
-            docs_with_terms = set()
-            for term in query_terms:
-                docs_with_terms |= set(self.inverted_index[term].keys())
-            result = all_docs - docs_with_terms
+        # Procesar el primer término
+        final_result = self._search_single_term(parts[0])
         
-        return result
+        # Procesar el resto de términos con sus operadores
+        i = 1
+        while i < len(parts):
+            if parts[i].upper() in ['AND', 'OR', 'NOT'] and i + 1 < len(parts):
+                op = parts[i].upper()
+                next_result = self._search_single_term(parts[i + 1])
+                if op == 'AND':
+                    final_result &= next_result
+                elif op == 'OR':
+                    final_result |= next_result
+                elif op == 'NOT':
+                    final_result -= next_result
+                i += 2
+            else:
+                i += 1
+        
+        print(f"Resultado final: {final_result}")
+        return final_result
+
+    def _search_single_term(self, term: str) -> Set[str]:
+        """Busca un término individual en el índice"""
+        print(f"\nBuscando término individual: {term}")
+        
+        # Normalizar el término
+        normalized_term = self.normalize_text(term.lower())
+        print(f"Término normalizado: {normalized_term}")
+        
+        # Buscar coincidencias directas y variantes
+        results = set()
+        
+        # 1. Buscar el término exacto y su forma normalizada
+        if term in self.inverted_index:
+            docs = set(self.inverted_index[term].keys())
+            print(f"Documentos encontrados para término exacto '{term}': {docs}")
+            results |= docs
+        
+        if normalized_term in self.inverted_index:
+            docs = set(self.inverted_index[normalized_term].keys())
+            print(f"Documentos encontrados para término normalizado '{normalized_term}': {docs}")
+            results |= docs
+        
+        # 2. Buscar el stem del término
+        stem = self.stemmer.stem(normalized_term)
+        if stem in self.inverted_index:
+            docs = set(self.inverted_index[stem].keys())
+            print(f"Documentos encontrados para stem '{stem}': {docs}")
+            results |= docs
+        
+        # 3. Buscar en sinónimos
+        for concepto, sinonimos in self.sinonimos.items():
+            # Normalizar concepto y sinónimos para comparación
+            normalized_concepto = self.normalize_text(concepto)
+            normalized_sinonimos = [self.normalize_text(s) for s in sinonimos]
+            
+            if normalized_term in normalized_sinonimos or normalized_term == normalized_concepto:
+                # Buscar por el concepto y su forma normalizada
+                if concepto in self.inverted_index:
+                    docs = set(self.inverted_index[concepto].keys())
+                    print(f"Documentos encontrados para concepto '{concepto}': {docs}")
+                    results |= docs
+                
+                if normalized_concepto in self.inverted_index:
+                    docs = set(self.inverted_index[normalized_concepto].keys())
+                    print(f"Documentos encontrados para concepto normalizado '{normalized_concepto}': {docs}")
+                    results |= docs
+                
+                # Buscar por cada sinónimo y su forma normalizada
+                for sinonimo in sinonimos:
+                    if sinonimo in self.inverted_index:
+                        docs = set(self.inverted_index[sinonimo].keys())
+                        print(f"Documentos encontrados para sinónimo '{sinonimo}': {docs}")
+                        results |= docs
+                    
+                    normalized_sinonimo = self.normalize_text(sinonimo)
+                    if normalized_sinonimo in self.inverted_index:
+                        docs = set(self.inverted_index[normalized_sinonimo].keys())
+                        print(f"Documentos encontrados para sinónimo normalizado '{normalized_sinonimo}': {docs}")
+                        results |= docs
+                    
+                    # Buscar también el stem de cada sinónimo
+                    stem_sinonimo = self.stemmer.stem(normalized_sinonimo)
+                    if stem_sinonimo in self.inverted_index:
+                        docs = set(self.inverted_index[stem_sinonimo].keys())
+                        print(f"Documentos encontrados para stem de sinónimo '{stem_sinonimo}': {docs}")
+                        results |= docs
+        
+        print(f"Resultado final para '{term}': {results}")
+        return results
     
     def tf_idf_search(self, query: str) -> Dict[str, float]:
         """Realiza una búsqueda por similitud usando tf-idf mejorado"""

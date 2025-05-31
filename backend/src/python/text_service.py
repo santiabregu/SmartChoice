@@ -5,6 +5,7 @@ import nltk
 import os
 from text_processor import TextProcessor
 from review_file_handler import ReviewFileHandler
+from evaluator import Evaluator
 
 # Set NLTK data path to a local directory
 nltk.data.path.append(os.path.join(os.path.dirname(__file__), 'nltk_data'))
@@ -16,6 +17,7 @@ app = FastAPI(title="Sistema de Recuperación de Información - Reseñas de Prod
 # Initialize services
 text_processor = TextProcessor()
 review_handler = ReviewFileHandler()
+evaluator = Evaluator()
 
 @app.on_event("startup")
 async def load_reviews():
@@ -49,9 +51,13 @@ class ReviewData(BaseModel):
         }
 
 class SearchQuery(BaseModel):
-    query: str = Field(..., description="Texto de búsqueda (ej: 'auriculares con buena batería')")
-    search_type: str = Field('boolean', description="Tipo de búsqueda: 'boolean' o 'tf_idf'")
-    operator: Optional[str] = Field('AND', description="Operador para búsqueda booleana: 'AND', 'OR', 'NOT'")
+    query: str
+    search_type: str = "boolean"
+    operator: str = "AND"
+
+class EvaluationRequest(BaseModel):
+    necesidad_id: str
+    search_type: str = "boolean"
 
 @app.post("/process_review")
 async def process_review(review: ReviewData):
@@ -62,27 +68,88 @@ async def process_review(review: ReviewData):
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/search")
-async def search_reviews(search_query: SearchQuery):
+async def search(search_query: SearchQuery):
     try:
-        print(f"\n=== Nueva búsqueda ===")
-        print(f"Query: {search_query.query}")
-        print(f"Tipo: {search_query.search_type}")
-        print(f"Operador: {search_query.operator}")
-        
         results = review_handler.search_reviews(
             search_query.query,
             search_query.search_type,
             search_query.operator
         )
-        
-        print(f"Resultados encontrados: {len(results)}")
-        if results:
-            print("IDs encontrados:", [r.get('id') for r in results])
-        print("=== Búsqueda completada ===\n")
-        
         return {"status": "success", "results": results}
     except Exception as e:
-        print(f"Error en búsqueda: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/evaluate_search")
+async def evaluate_search(eval_request: EvaluationRequest):
+    """Evalúa una búsqueda para una necesidad de información específica"""
+    try:
+        # Buscar la necesidad
+        necesidad = None
+        for n in evaluator.necesidades:
+            if n['id'] == eval_request.necesidad_id:
+                necesidad = n
+                break
+        
+        if not necesidad:
+            raise HTTPException(status_code=404, detail="Necesidad no encontrada")
+        
+        # Realizar la búsqueda según el tipo
+        if eval_request.search_type == "boolean":
+            query = necesidad['consulta_booleana']
+            results = review_handler.search_reviews(query, "boolean", "AND")
+            search_results = {necesidad['id']: [r['id'] for r in results]}
+            metrics = evaluator.evaluate_boolean_search(search_results)
+        else:
+            query = necesidad['consulta_libre']
+            results = review_handler.search_reviews(query, "tf_idf")
+            search_results = {necesidad['id']: [r['id'] for r in results]}
+            metrics = evaluator.evaluate_ranked_search(search_results)
+        
+        return {
+            "status": "success",
+            "necesidad": necesidad,
+            "resultados": results,
+            "metricas": metrics['per_query'][necesidad['id']]
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/evaluate_all")
+async def evaluate_all():
+    """Evalúa todas las necesidades de información con ambos sistemas"""
+    try:
+        boolean_results = {}
+        ranked_results = {}
+        
+        # Realizar todas las búsquedas
+        for necesidad in evaluator.necesidades:
+            # Búsqueda booleana
+            bool_results = review_handler.search_reviews(
+                necesidad['consulta_booleana'],
+                "boolean",
+                "AND"
+            )
+            boolean_results[necesidad['id']] = [r['id'] for r in bool_results]
+            
+            # Búsqueda tf-idf
+            tfidf_results = review_handler.search_reviews(
+                necesidad['consulta_libre'],
+                "tf_idf"
+            )
+            ranked_results[necesidad['id']] = [r['id'] for r in tfidf_results]
+        
+        # Evaluar resultados
+        boolean_metrics = evaluator.evaluate_boolean_search(boolean_results)
+        ranked_metrics = evaluator.evaluate_ranked_search(ranked_results)
+        
+        return {
+            "status": "success",
+            "evaluacion_booleana": boolean_metrics,
+            "evaluacion_tfidf": ranked_metrics
+        }
+        
+    except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/statistics")

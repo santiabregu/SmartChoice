@@ -147,8 +147,10 @@ class ReviewFileHandler:
         for filename in review_files:
             try:
                 review = self.load_review(filename)
-                if review and 'resena' in review and 'id' in review:
-                    # Procesar el texto y actualizar el índice invertido
+                if review and 'resena' in review and 'id' in review and 'producto' in review:
+                    # Procesar el título del producto
+                    self.text_processor.process_text(review['producto'], doc_id=review['id'])
+                    # Procesar el texto de la reseña
                     self.text_processor.process_text(review['resena'], doc_id=review['id'])
                     processed_count += 1
                 else:
