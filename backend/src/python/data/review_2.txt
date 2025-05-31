@@ -1,0 +1,11 @@
+{
+    "id": "2",
+    "producto": "Nike Air Zoom Pegasus 38",
+    "categoria": "Ropa",
+    "resena": "Zapatillas muy cómodas y ligeras, perfectas para running. El diseño es moderno y vienen en color blanco que combina con todo. La amortiguación es excelente para carreras largas. La talla es exacta, no hace falta pedir un número más. La transpirabilidad es muy buena.",
+    "puntuacion": 5.0,
+    "website": {
+        "nombre": "AliExpress",
+        "url": "https://www.aliexpress.com/review/456"
+    }
+} 

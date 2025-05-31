@@ -1,0 +1,11 @@
+{
+    "id": "3",
+    "producto": "Samsung Galaxy S23",
+    "categoria": "Tecnología",
+    "resena": "La cámara es espectacular, especialmente en condiciones de poca luz. La batería aguanta todo el día con uso intensivo y la carga rápida es muy útil. La pantalla tiene colores vibrantes y el brillo automático funciona perfectamente. El rendimiento es excelente para juegos y multitarea. El único punto negativo es que se calienta un poco al jugar.",
+    "puntuacion": 4.8,
+    "website": {
+        "nombre": "MediaMarkt",
+        "url": "https://www.mediamarkt.es/review/789"
+    }
+} 

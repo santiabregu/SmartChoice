@@ -18,6 +18,7 @@ def setup_nltk():
         'punkt',
         'stopwords',
         'wordnet',
+        'omw-1.4',  # Open Multilingual Wordnet
         'averaged_perceptron_tagger'
     ]
     

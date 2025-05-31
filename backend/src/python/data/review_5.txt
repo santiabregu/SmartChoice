@@ -1,0 +1,11 @@
+{
+    "id": "5",
+    "producto": "Auriculares Bluetooth JBL Tune 510BT",
+    "categoria": "Tecnología",
+    "resena": "La calidad de sonido es mediocre y la batería dura menos de lo anunciado, apenas 3-4 horas. La conexión Bluetooth es inestable y se desconecta frecuentemente. Los materiales parecen de baja calidad y son incómodos después de una hora de uso. Lo único positivo es que son ligeros y el precio es económico.",
+    "puntuacion": 2.0,
+    "website": {
+        "nombre": "AliExpress",
+        "url": "https://www.aliexpress.com/review/987"
+    }
+} 

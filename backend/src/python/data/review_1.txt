@@ -1,0 +1,11 @@
+{
+    "id": "1",
+    "producto": "Auriculares Sony WH-1000XM4",
+    "categoria": "Tecnología",
+    "resena": "Excelente calidad de sonido y la batería dura más de 20 horas. La cancelación de ruido es impresionante, especialmente en aviones y trenes. El único inconveniente es que son un poco caros, pero vale la pena la inversión. La app es muy útil para personalizar el sonido.",
+    "puntuacion": 4.5,
+    "website": {
+        "nombre": "Amazon",
+        "url": "https://www.amazon.es/review/123"
+    }
+} 

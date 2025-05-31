@@ -1,0 +1,63 @@
+Recuperación de la información
+Universidad de Sevilla
+Dpto. de Ciencias de la Computación e Inteligencia Artificial
+Curso 2024/2025
+
+Grado en Ingeniería Informática – Ingeniería del Software
+Propuesta de trabajo práctico de la asignatura Inteligencia Artificial
+Prof. Álvaro Romero Jiménez
+
+Introducción y objetivos
+La recuperación de información es el proceso de buscar y encontrar material (normalmente documentos) de naturaleza no estructurada (usualmente texto) que satisfaga una necesidad de información, dentro de grandes colecciones de documentos almacenados digitalmente.
+
+Antes era una actividad de especialistas (bibliotecarios, asistentes jurídicos), pero hoy día cientos de millones de personas recuperan información a través de motores de búsqueda o correo electrónico.
+
+El objetivo principal de esta propuesta es la construcción y evaluación de varios sistemas de recuperación de la información que respondan a necesidades sobre un conjunto de documentos.
+
+Objetivos específicos:
+Recopilar un corpus de documentos concreto.
+
+Diseñar una colección de necesidades de información para la evaluación.
+
+Construir y evaluar un sistema basado en el modelo booleano.
+
+Construir y evaluar un sistema de texto libre con ranking de similitud.
+
+Documentar el trabajo como un artículo científico.
+
+Realizar una presentación de los resultados.
+
+Descripción del trabajo
+Corpus
+Se debe recopilar un corpus temático (mín. 50 documentos). Ejemplos de temas: recetas, poesía, fichas deportivas, etc.
+El profesor debe validar el tema.
+
+Necesidades de información
+Diseñar al menos 20 necesidades de información.
+Para cada una, identificar los documentos relevantes y no relevantes.
+
+Sistemas a construir
+1. Sistema booleano
+Construir un índice invertido que relacione términos con los documentos en que aparecen.
+
+Incluir técnicas de normalización: eliminación de palabras vacías, lematización, stemming.
+
+Implementar consultas con operadores AND, OR, NOT.
+
+Evaluar con precisión y sensibilidad (recall).
+
+2. Sistema basado en texto libre
+Implementar un modelo con tf-idf y similitud del coseno.
+
+Generar un ranking de documentos por similitud a la consulta.
+
+Evaluar con MAP (precisión media promedio).
+
+Evaluación
+Se deben derivar consultas adecuadas (booleanas o texto libre) a partir de las necesidades de información.
+Se aplicarán métricas estándar para medir el rendimiento: precisión, sensibilidad, MAP, etc.
+
+Bibliografía principal
+Introduction to Information Retrieval
+https://nlp.stanford.edu/IR-book/information-retrieval-book.html
+

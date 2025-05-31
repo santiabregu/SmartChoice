@@ -1,0 +1,11 @@
+{
+    "id": "4",
+    "producto": "Crema Hidratante La Roche-Posay Effaclar",
+    "categoria": "Cosméticos",
+    "resena": "Excelente para pieles mixtas y con tendencia al acné. No deja la piel grasa y se absorbe rápidamente. He notado una mejora significativa en mi piel después de dos semanas de uso. No tiene perfume, lo cual es perfecto para pieles sensibles. La textura es ligera y un poco va muy lejos.",
+    "puntuacion": 4.7,
+    "website": {
+        "nombre": "Amazon",
+        "url": "https://www.amazon.es/review/321"
+    }
+} 
