@@ -1,184 +1,183 @@
-# Explicación del Código - SmartChoice
+# Explicación del Código
 
 ## Estructura del Proyecto
 
 ```
-SmartChoice/
-├── src/
-│   ├── preprocessing/       # Procesamiento de texto
-│   ├── indexing/           # Sistemas de búsqueda
-│   └── utils/              # Utilidades
-├── backend/                # API REST
-├── data/                   # Datos y corpus
-└── docs/                   # Documentación
-```
-
-## Módulos Principales
-
-### 1. Preprocesamiento (`src/preprocessing/`)
-
-#### `text_cleaner.py`
-- **Propósito**: Limpieza y normalización de texto en español
-- **Funciones principales**:
-  - `normalize_text()`: Elimina acentos y caracteres especiales
-    ```python
-    "México" -> "mexico"
-    "café" -> "cafe"
-    ```
-  - `remove_special_chars()`: Elimina símbolos manteniendo letras y números
-    ```python
-    "¡Hola! ¿Qué tal?" -> "hola que tal"
-    "precio: $299.99" -> "precio 299 99"
-    ```
-  - `clean_text()`: Aplica todas las limpiezas en secuencia
-
-#### `tokenizer.py`
-- **Propósito**: Tokenización específica para español
-- **Funciones principales**:
-  - `expand_contractions()`: Expande contracciones españolas
-    ```python
-    "del" -> "de el"
-    "al" -> "a el"
-    ```
-  - `tokenize()`: Divide texto en tokens y elimina stopwords
-  - `get_ngrams()`: Genera secuencias de n palabras
-  - `analyze_tokens()`: Proporciona estadísticas de tokens
-
-### 2. Sistemas de Búsqueda (`src/indexing/`)
-
-#### `inverted_index.py`
-- **Propósito**: Implementa búsqueda booleana
-- **Características**:
-  - Soporta operadores AND, OR, NOT
-  - Búsqueda de frases exactas
-  - Índice posicional para orden de palabras
-- **Métodos principales**:
-  ```python
-  boolean_query("smartphone AND batería NOT lento")
-  phrase_query("batería excelente")
-  ```
-
-#### `vector_space.py`
-- **Propósito**: Implementa búsqueda por ranking
-- **Características**:
-  - Modelo TF-IDF
-  - Similitud coseno
-  - Ranking de resultados
-- **Métodos principales**:
-  - `build_model()`: Construye vectores TF-IDF
-  - `search()`: Búsqueda por similitud
-
-### 3. Procesamiento de Reseñas (`src/review_processor.py`)
-- **Propósito**: Extracción de información estructurada
-- **Funcionalidades**:
-  ```python
-  {
-    "producto": "Smartphone XYZ",
-    "categoría": "Tecnología",
-    "reseña": "Este smartphone tiene...",
-    "puntuación": 4.0
-  }
-  ```
-- **Métodos principales**:
-  - `extract_review_info()`: Extrae información de reseñas
-  - `_infer_category()`: Detecta categoría por palabras clave
-  - `save_review()`: Guarda en el corpus JSON
-
-### 4. Interfaz CLI (`src/main.py`)
-- **Propósito**: Interfaz de línea de comandos
-- **Opciones**:
-  1. Añadir nuevas reseñas
-  2. Búsqueda booleana
-  3. Búsqueda por texto libre
-  4. Salir
-- **Funciones principales**:
-  - `add_reviews()`: Procesa nuevas reseñas
-  - `boolean_search()`: Búsqueda con operadores
-  - `ranked_search()`: Búsqueda por similitud
-
-## Backend (API REST)
-
-### Estructura
-```
 backend/
-├── src/
-│   ├── models/          # Esquemas de datos
-│   ├── controllers/     # Lógica de negocio
-│   ├── services/        # Servicios externos
-│   └── routes/          # Rutas API
+└── src/
+    └── python/
+        ├── data/               # Datos y recursos
+        │   ├── necesidades_informacion.json
+        │   └── reviews/       # Reseñas en formato JSON
+        ├── nltk_data/         # Datos de NLTK (stopwords, etc.)
+        ├── text_service.py    # Servicio principal (FastAPI)
+        ├── text_processor.py  # Procesamiento de texto y búsqueda
+        ├── review_file_handler.py  # Manejo de archivos
+        ├── evaluator.py       # Evaluación de búsquedas
+        └── run_service.py     # Script de inicio
 ```
 
-### Componentes Principales
+## Componentes Principales
 
-#### 1. Modelos (`models/Review.ts`)
-```typescript
-interface IReview {
-  producto: string;
-  categoria: string;
-  resena: string;
-  puntuacion: number;
-  sentimiento: string;
-  aspectos_clave: string[];
+### 1. TextService (`text_service.py`)
+- **Propósito**: Servicio REST API con FastAPI
+- **Endpoints**:
+  ```python
+  @app.post("/search")              # Búsqueda de reseñas
+  @app.post("/process_review")      # Procesar nueva reseña
+  @app.post("/evaluate_search")     # Evaluar una búsqueda
+  @app.get("/evaluate_all")         # Evaluar todas las necesidades
+  ```
+- **Características**:
+  - Manejo de errores HTTP
+  - Validación de datos con Pydantic
+  - Integración con otros componentes
+
+### 2. TextProcessor (`text_processor.py`)
+- **Propósito**: Núcleo del sistema de procesamiento y búsqueda
+- **Funcionalidades principales**:
+  ```python
+  def process_text(text: str, doc_id: str = None) -> Dict:
+      # Procesa texto y actualiza índice invertido
+  
+  def boolean_search(query: str, operator: str = 'AND') -> Set[str]:
+      # Búsqueda booleana con operadores AND, OR, NOT
+  
+  def tf_idf_search(query: str) -> Dict[str, float]:
+      # Búsqueda por similitud con ranking
+  ```
+- **Características**:
+  - Índice invertido
+  - Stemming español
+  - Sistema de sinónimos
+  - Normalización de texto
+  - Cálculo TF-IDF mejorado
+
+### 3. ReviewFileHandler (`review_file_handler.py`)
+- **Propósito**: Gestión de archivos de reseñas
+- **Métodos principales**:
+  ```python
+  def save_review(review_data: Dict) -> str:
+      # Guarda una reseña en formato JSON
+  
+  def load_review(filename: str) -> Dict:
+      # Carga una reseña desde archivo
+  
+  def search_reviews(query: str, search_type: str) -> List[Dict]:
+      # Busca reseñas usando el sistema especificado
+  ```
+- **Características**:
+  - Almacenamiento en JSON
+  - Manejo de metadatos
+  - Integración con TextProcessor
+
+### 4. Evaluator (`evaluator.py`)
+- **Propósito**: Evaluación del sistema de búsqueda
+- **Métodos principales**:
+  ```python
+  def evaluate_boolean_search(search_results: Dict) -> Dict:
+      # Evalúa búsquedas booleanas
+  
+  def evaluate_ranked_search(search_results: Dict) -> Dict:
+      # Evalúa búsquedas con ranking
+  ```
+- **Métricas implementadas**:
+  - Precisión
+  - Recall
+  - F1-score
+  - MAP (Mean Average Precision)
+  - Métricas por consulta y globales
+
+## Flujo de Trabajo
+
+### 1. Procesamiento de Reseñas
+1. Se recibe una reseña vía API
+2. Se procesa el texto (normalización, stemming)
+3. Se actualiza el índice invertido
+4. Se guarda en archivo JSON
+
+### 2. Búsqueda
+1. Se recibe una consulta vía API
+2. Según el tipo:
+   - **Booleana**: 
+     - Procesa operadores
+     - Busca en índice invertido
+     - Aplica operaciones de conjuntos
+   - **TF-IDF**:
+     - Calcula similitud
+     - Ordena por relevancia
+3. Retorna resultados
+
+### 3. Evaluación
+1. Se carga una necesidad de información
+2. Se ejecuta la búsqueda
+3. Se comparan resultados con documentos relevantes
+4. Se calculan métricas
+5. Se retornan estadísticas
+
+## Características Avanzadas
+
+### 1. Normalización de Texto
+```python
+def normalize_text(self, text: str) -> str:
+    # Minúsculas
+    text = text.lower()
+    # Normalizar caracteres españoles
+    replacements = {
+        'á': 'a', 'é': 'e', 'í': 'i', 'ó': 'o', 'ú': 'u',
+        'ü': 'u', 'ñ': 'n'
+    }
+    # ...
+```
+
+### 2. Sistema de Sinónimos
+```python
+sinonimos = {
+    'auricular': ['auriculares', 'cascos', 'headphones'],
+    'bateria': ['batería', 'pila', 'duración'],
+    # ...
 }
 ```
 
-#### 2. Servicios (`services/deepseek.service.ts`)
-- Integración con Deepseek para:
-  - Procesamiento de reseñas
-  - Análisis de sentimientos
-  - Extracción de aspectos clave
-  - Generación de sugerencias
-- Características:
-  - Modelo de lenguaje open source
-  - Procesamiento local o API
-  - Soporte multilingüe
-  - Sin necesidad de API key
+### 3. Mejoras TF-IDF
+```python
+# Boost por importancia de términos
+term_importance = {
+    'auricular': 2.0,
+    'bateria': 1.5,
+    'bueno': 1.2
+}
 
-#### 3. Controladores (`controllers/review.controller.ts`)
-- **Endpoints**:
-  - `POST /api/reviews/upload`: Sube y procesa reseñas
-  - `GET /api/reviews/search`: Búsqueda de reseñas
-  - `GET /api/reviews/stats`: Estadísticas del corpus
-  - `GET /api/reviews/:productId/suggestions`: Sugerencias de mejora
-
-### Tecnologías Backend
-- Node.js con TypeScript
-- Express para API REST
-- MongoDB para almacenamiento
-- Deepseek para procesamiento de lenguaje natural
-- Multer para manejo de archivos
-
-### Configuración
-```bash
-# Instalación
-npm install
-
-# Variables de entorno (.env)
-MONGODB_URI=mongodb://localhost:27017/smartchoice
-PORT=3000
-
-# Desarrollo
-npm run dev
+# IDF mejorado
+boost = 1.2  # Para términos raros
+idf = boost * math.log(1 + (total_docs / (1 + doc_freq)))
 ```
 
-## Diferencias entre Sistemas de Búsqueda
+## Uso del Sistema
 
-### Índice Invertido (Búsqueda Booleana)
-- Búsquedas exactas con operadores
-- Resultados binarios (coincide/no coincide)
-- Ideal para búsquedas precisas
+### 1. Iniciar el Servicio
+```bash
+python run_service.py
+```
 
-### Modelo Vectorial (Búsqueda por Ranking)
-- Búsquedas por similitud
-- Resultados ordenados por relevancia
-- Ideal para consultas en lenguaje natural
+### 2. Realizar Búsquedas
+```http
+POST http://localhost:8000/search
+Content-Type: application/json
 
-## Ejemplo de Uso
+{
+    "query": "auriculares AND (bateria OR duracion)",
+    "search_type": "boolean"
+}
+```
 
-```python
-# Búsqueda booleana
-results = index.boolean_query("smartphone AND batería NOT lento")
+### 3. Evaluar Resultados
+```http
+POST http://localhost:8000/evaluate_search
+Content-Type: application/json
 
-# Búsqueda por ranking
-results = vector_model.search("busco un smartphone con buena batería")
+{
+    "necesidad_id": "N1",
+    "search_type": "boolean"
+}
 ``` 
