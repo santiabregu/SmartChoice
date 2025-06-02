@@ -1,0 +1,39 @@
+{
+  "indexing": [],
+  "boolean_search": [
+    {
+      "query": "auriculares",
+      "time": 0.003021240234375,
+      "num_results": 2
+    },
+    {
+      "query": "auriculares AND bateria",
+      "time": 0.011390209197998047,
+      "num_results": 2
+    }
+  ],
+  "tfidf_search": [
+    {
+      "query": "auriculares",
+      "time": 0.0165555477142334,
+      "num_results": 5
+    },
+    {
+      "query": "auriculares AND bateria",
+      "time": 0.011651754379272461,
+      "num_results": 5
+    }
+  ],
+  "boolean_search_stats": {
+    "min": 0.003021240234375,
+    "max": 0.011390209197998047,
+    "mean": 0.0072057247161865234,
+    "median": 0.0072057247161865234
+  },
+  "tfidf_search_stats": {
+    "min": 0.011651754379272461,
+    "max": 0.0165555477142334,
+    "mean": 0.01410365104675293,
+    "median": 0.01410365104675293
+  }
+}

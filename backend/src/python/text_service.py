@@ -7,6 +7,7 @@ import json
 from text_processor import TextProcessor
 from review_file_handler import ReviewFileHandler
 from evaluator import Evaluator
+from experiments import ExperimentRunner
 import statistics
 
 # Set NLTK data path to a local directory
@@ -263,6 +264,26 @@ async def get_statistics():
             "status": "success",
             "statistics": review_handler.get_statistics()
         }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/run_experiments")
+async def run_experiments():
+    """Ejecuta experimentos de evaluación del sistema"""
+    try:
+        runner = ExperimentRunner()
+        
+        results = {
+            'timing': runner.run_timing_experiments(),
+            'synonyms': runner.evaluate_synonym_impact(),
+            'thresholds': runner.analyze_thresholds()
+        }
+        
+        return {
+            "status": "success",
+            "results": results
+        }
+        
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

@@ -1,0 +1,121 @@
+{
+  "with_synonyms": [
+    {
+      "query": "auriculares batería",
+      "metrics": {
+        "average_precision": 1.0,
+        "precision": 0.4,
+        "recall": 1.0,
+        "retrieved_count": 5,
+        "relevant_count": 2,
+        "nonrelevant_count": 2,
+        "retrieved_and_relevant": 2
+      }
+    },
+    {
+      "query": "audifonos duración",
+      "metrics": {
+        "average_precision": 1.0,
+        "precision": 0.4,
+        "recall": 1.0,
+        "retrieved_count": 5,
+        "relevant_count": 2,
+        "nonrelevant_count": 2,
+        "retrieved_and_relevant": 2
+      }
+    },
+    {
+      "query": "buenos cascos",
+      "metrics": {
+        "average_precision": 1.0,
+        "precision": 0.4,
+        "recall": 1.0,
+        "retrieved_count": 5,
+        "relevant_count": 2,
+        "nonrelevant_count": 3,
+        "retrieved_and_relevant": 2
+      }
+    },
+    {
+      "query": "buenos auriculares",
+      "metrics": {
+        "average_precision": 1.0,
+        "precision": 0.4,
+        "recall": 1.0,
+        "retrieved_count": 5,
+        "relevant_count": 2,
+        "nonrelevant_count": 3,
+        "retrieved_and_relevant": 2
+      }
+    },
+    {
+      "query": "calidad sonido",
+      "metrics": {
+        "average_precision": 1.0,
+        "precision": 0.4,
+        "recall": 1.0,
+        "retrieved_count": 5,
+        "relevant_count": 2,
+        "nonrelevant_count": 3,
+        "retrieved_and_relevant": 2
+      }
+    },
+    {
+      "query": "calidad audio",
+      "metrics": {
+        "average_precision": 1.0,
+        "precision": 0.4,
+        "recall": 1.0,
+        "retrieved_count": 5,
+        "relevant_count": 2,
+        "nonrelevant_count": 3,
+        "retrieved_and_relevant": 2
+      }
+    }
+  ],
+  "without_synonyms": [],
+  "comparisons": [
+    {
+      "query_pair": [
+        "auriculares batería",
+        "audifonos duración"
+      ],
+      "overlap": 5,
+      "results1_count": 5,
+      "results2_count": 5,
+      "unique_to_1": 0,
+      "unique_to_2": 0,
+      "jaccard_similarity": 1.0
+    },
+    {
+      "query_pair": [
+        "buenos cascos",
+        "buenos auriculares"
+      ],
+      "overlap": 5,
+      "results1_count": 5,
+      "results2_count": 5,
+      "unique_to_1": 0,
+      "unique_to_2": 0,
+      "jaccard_similarity": 1.0
+    },
+    {
+      "query_pair": [
+        "calidad sonido",
+        "calidad audio"
+      ],
+      "overlap": 5,
+      "results1_count": 5,
+      "results2_count": 5,
+      "unique_to_1": 0,
+      "unique_to_2": 0,
+      "jaccard_similarity": 1.0
+    }
+  ],
+  "global_stats": {
+    "mean_precision": 0.4,
+    "mean_recall": 1.0,
+    "mean_overlap": 5,
+    "mean_jaccard": 1.0
+  }
+}

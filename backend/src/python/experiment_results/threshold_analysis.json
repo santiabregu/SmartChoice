@@ -1,0 +1,213 @@
+{
+  "per_threshold": {
+    "0.05": [
+      {
+        "query": "auriculares con buena batería",
+        "metrics": {
+          "average_precision": 1.0,
+          "precision": 0.4,
+          "recall": 1.0,
+          "retrieved_count": 5,
+          "relevant_count": 2,
+          "nonrelevant_count": 2,
+          "retrieved_and_relevant": 2
+        },
+        "score_stats": {
+          "min": 0.028752189659960046,
+          "max": 0.3670778078369774,
+          "mean": 0.16802376727523816,
+          "median": 0.18180849237700553
+        },
+        "num_results": 5,
+        "num_above_threshold": 3
+      },
+      {
+        "query": "productos con buena calidad de sonido",
+        "metrics": {
+          "average_precision": 1.0,
+          "precision": 0.4,
+          "recall": 1.0,
+          "retrieved_count": 5,
+          "relevant_count": 2,
+          "nonrelevant_count": 2,
+          "retrieved_and_relevant": 2
+        },
+        "score_stats": {
+          "min": 0.02604523554016396,
+          "max": 0.28991469686018556,
+          "mean": 0.11961277877057344,
+          "median": 0.0817078464055774
+        },
+        "num_results": 5,
+        "num_above_threshold": 3
+      },
+      {
+        "query": "productos con cancelación de ruido",
+        "metrics": {
+          "average_precision": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "retrieved_count": 5,
+          "relevant_count": 1,
+          "nonrelevant_count": 4,
+          "retrieved_and_relevant": 1
+        },
+        "score_stats": {
+          "min": 0.0,
+          "max": 0.20708227586986347,
+          "mean": 0.041416455173972695,
+          "median": 0.0
+        },
+        "num_results": 5,
+        "num_above_threshold": 1
+      }
+    ],
+    "0.15": [
+      {
+        "query": "auriculares con buena batería",
+        "metrics": {
+          "average_precision": 1.0,
+          "precision": 0.4,
+          "recall": 1.0,
+          "retrieved_count": 5,
+          "relevant_count": 2,
+          "nonrelevant_count": 2,
+          "retrieved_and_relevant": 2
+        },
+        "score_stats": {
+          "min": 0.028752189659960046,
+          "max": 0.3670778078369774,
+          "mean": 0.16802376727523816,
+          "median": 0.18180849237700553
+        },
+        "num_results": 5,
+        "num_above_threshold": 3
+      },
+      {
+        "query": "productos con buena calidad de sonido",
+        "metrics": {
+          "average_precision": 1.0,
+          "precision": 0.4,
+          "recall": 1.0,
+          "retrieved_count": 5,
+          "relevant_count": 2,
+          "nonrelevant_count": 2,
+          "retrieved_and_relevant": 2
+        },
+        "score_stats": {
+          "min": 0.02604523554016396,
+          "max": 0.28991469686018556,
+          "mean": 0.11961277877057344,
+          "median": 0.0817078464055774
+        },
+        "num_results": 5,
+        "num_above_threshold": 2
+      },
+      {
+        "query": "productos con cancelación de ruido",
+        "metrics": {
+          "average_precision": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "retrieved_count": 5,
+          "relevant_count": 1,
+          "nonrelevant_count": 4,
+          "retrieved_and_relevant": 1
+        },
+        "score_stats": {
+          "min": 0.0,
+          "max": 0.20708227586986347,
+          "mean": 0.041416455173972695,
+          "median": 0.0
+        },
+        "num_results": 5,
+        "num_above_threshold": 1
+      }
+    ],
+    "0.3": [
+      {
+        "query": "auriculares con buena batería",
+        "metrics": {
+          "average_precision": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "retrieved_count": 5,
+          "relevant_count": 1,
+          "nonrelevant_count": 2,
+          "retrieved_and_relevant": 1
+        },
+        "score_stats": {
+          "min": 0.028752189659960046,
+          "max": 0.3670778078369774,
+          "mean": 0.16802376727523816,
+          "median": 0.18180849237700553
+        },
+        "num_results": 5,
+        "num_above_threshold": 1
+      },
+      {
+        "query": "productos con buena calidad de sonido",
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "retrieved_count": 5,
+          "relevant_count": 0,
+          "nonrelevant_count": 2,
+          "retrieved_and_relevant": 0
+        },
+        "score_stats": {
+          "min": 0.02604523554016396,
+          "max": 0.28991469686018556,
+          "mean": 0.11961277877057344,
+          "median": 0.0817078464055774
+        },
+        "num_results": 5,
+        "num_above_threshold": 0
+      },
+      {
+        "query": "productos con cancelación de ruido",
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "retrieved_count": 5,
+          "relevant_count": 0,
+          "nonrelevant_count": 4,
+          "retrieved_and_relevant": 0
+        },
+        "score_stats": {
+          "min": 0.0,
+          "max": 0.20708227586986347,
+          "mean": 0.041416455173972695,
+          "median": 0.0
+        },
+        "num_results": 5,
+        "num_above_threshold": 0
+      }
+    ]
+  },
+  "comparisons": [
+    {
+      "threshold": 0.05,
+      "mean_precision": 0.33333333333333337,
+      "mean_recall": 1.0,
+      "mean_results": 5,
+      "mean_above_threshold": 2.3333333333333335
+    },
+    {
+      "threshold": 0.15,
+      "mean_precision": 0.33333333333333337,
+      "mean_recall": 1.0,
+      "mean_results": 5,
+      "mean_above_threshold": 2
+    },
+    {
+      "threshold": 0.3,
+      "mean_precision": 0.06666666666666667,
+      "mean_recall": 0.3333333333333333,
+      "mean_results": 5,
+      "mean_above_threshold": 0.3333333333333333
+    }
+  ]
+}

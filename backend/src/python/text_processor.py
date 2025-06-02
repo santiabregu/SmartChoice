@@ -112,11 +112,17 @@ class TextProcessor:
         
         # Si tenemos un doc_id, actualizamos el índice invertido
         if doc_id:
+            # Actualizar longitud del documento
+            self.document_lengths[doc_id] = len(tokens)  # Longitud original sin expansión
+            self.total_documents = len(self.document_lengths)
+            
             # Indexar tanto los tokens originales como los stems
             all_terms = list(set(expanded_tokens + stemmed_tokens))
             self._update_inverted_index(all_terms, doc_id)
             print(f"Índice invertido actualizado para doc_id: {doc_id}")
             print(f"Tamaño actual del índice: {len(self.inverted_index)} términos")
+            print(f"Longitud del documento: {self.document_lengths[doc_id]}")
+            print(f"Total documentos indexados: {self.total_documents}")
         
         return {
             "tokens": tokens,
@@ -198,11 +204,18 @@ class TextProcessor:
         # Parámetros de BM25
         k1 = 1.2  # Parámetro de saturación de término
         b = 0.75  # Parámetro de normalización de longitud
-        avg_len = sum(self.document_lengths.values()) / max(1, len(self.document_lengths))
-        doc_len = len(tokens)
+        
+        # Calcular longitud promedio del documento de forma segura
+        total_length = sum(self.document_lengths.values())
+        num_docs = len(self.document_lengths)
+        avg_len = total_length / num_docs if num_docs > 0 else 1.0
+        
+        # Longitud del documento actual (o 1 si no hay tokens)
+        doc_len = len(tokens) if tokens else 1.0
         
         # Aplicar fórmula inspirada en BM25 para el peso del término
-        return {term: (freq * (k1 + 1)) / (freq + k1 * (1 - b + b * (doc_len / avg_len)))
+        # Añadir 1 al denominador para evitar división por cero
+        return {term: (freq * (k1 + 1)) / (freq + k1 * (1 - b + b * (doc_len / avg_len)) + 1)
                 for term, freq in tf_dict.items()}
     
     def calculate_idf(self, term: str) -> float:
@@ -216,6 +229,7 @@ class TextProcessor:
             
         # IDF mejorado con factor de boost para términos más discriminativos
         boost = 1.2  # Factor de boost para términos raros
+        # Añadir 1 al numerador y denominador para evitar división por cero
         return boost * math.log(1 + (self.total_documents / (1 + doc_freq)))
     
     def boolean_search(self, query: str, operator: str = 'AND') -> Set[str]:

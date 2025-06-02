@@ -4,17 +4,21 @@ from typing import Dict, List
 from datetime import datetime
 from text_processor import TextProcessor
 import uuid
+from pathlib import Path
 
 class ReviewFileHandler:
     def __init__(self):
-        self.data_dir = os.path.join(os.path.dirname(__file__), 'data')
+        self.data_dir = Path(__file__).parent / 'data'
         print(f"\nReviewFileHandler inicializado")
         print(f"Directorio de datos: {self.data_dir}")
-        print(f"El directorio existe: {os.path.exists(self.data_dir)}")
-        if os.path.exists(self.data_dir):
-            print(f"Contenido del directorio: {os.listdir(self.data_dir)}")
+        print(f"El directorio existe: {self.data_dir.exists()}")
+        if self.data_dir.exists():
+            print(f"Contenido del directorio: {[f.name for f in self.data_dir.glob('*')]}")
         self.text_processor = TextProcessor()
-        os.makedirs(self.data_dir, exist_ok=True)
+        self.data_dir.mkdir(exist_ok=True)
+        
+        # Procesar las reseñas existentes al inicializar
+        self.process_reviews()
     
     def save_review(self, review_data: Dict) -> str:
         # Generar ID único si no existe
@@ -37,19 +41,19 @@ class ReviewFileHandler:
         
         # Guardar todo en un archivo .txt
         filename = f"review_{review_data['id']}.txt"
-        filepath = os.path.join(self.data_dir, filename)
+        filepath = self.data_dir / filename
         
         # Guardar el JSON en formato legible en el archivo .txt
-        with open(filepath, 'w', encoding='utf-8') as f:
+        with filepath.open('w', encoding='utf-8') as f:
             json.dump(review_data, f, ensure_ascii=False, indent=2)
         
         return filename
     
     def load_review(self, filename: str) -> Dict:
         """Carga una reseña desde un archivo"""
-        filepath = os.path.join(self.data_dir, filename)
+        filepath = self.data_dir / filename
         try:
-            with open(filepath, 'r', encoding='utf-8') as f:
+            with filepath.open('r', encoding='utf-8') as f:
                 review = json.load(f)
                 print(f"\nProcesando reseña: {filename}")
                 print(f"ID: {review.get('id', 'No ID')}")
@@ -61,7 +65,7 @@ class ReviewFileHandler:
     
     def list_reviews(self) -> List[str]:
         try:
-            return [f for f in os.listdir(self.data_dir) if f.endswith('.txt')]
+            return [f.name for f in self.data_dir.glob('*.txt')]
         except Exception as e:
             print(f"Error listing reviews: {str(e)}")
             return []
@@ -140,19 +144,36 @@ class ReviewFileHandler:
         """Procesa todas las reseñas y actualiza el índice"""
         print("\n=== Iniciando carga de reseñas ===")
         print(f"Directorio de datos: {self.data_dir}")
+        print(f"El directorio existe: {self.data_dir.exists()}")
         review_files = self.list_reviews()
-        print(f"Archivos encontrados: {review_files}")
+        print(f"Contenido del directorio: {review_files}")
+        
+        # Reiniciar el índice
+        self.text_processor.inverted_index.clear()
+        self.text_processor.document_lengths.clear()
+        self.text_processor.total_documents = 0
         
         processed_count = 0
         for filename in review_files:
             try:
                 review = self.load_review(filename)
                 if review and 'resena' in review and 'id' in review and 'producto' in review:
-                    # Procesar el título del producto
-                    self.text_processor.process_text(review['producto'], doc_id=review['id'])
-                    # Procesar el texto de la reseña
-                    self.text_processor.process_text(review['resena'], doc_id=review['id'])
-                    processed_count += 1
+                    print(f"\nProcesando reseña: {filename}")
+                    print(f"ID: {review['id']}")
+                    print(f"Producto: {review['producto']}")
+                    
+                    # Procesar el título del producto y la reseña como un solo texto
+                    combined_text = f"{review['producto']}. {review['resena']}"
+                    result = self.text_processor.process_text(combined_text, doc_id=review['id'])
+                    
+                    # Verificar que el documento se indexó correctamente
+                    if review['id'] in self.text_processor.document_lengths:
+                        processed_count += 1
+                        print(f"Reseña {review['id']} indexada correctamente")
+                        print(f"Longitud del documento: {self.text_processor.document_lengths[review['id']]}")
+                        print(f"Términos indexados: {len([term for term, docs in self.text_processor.inverted_index.items() if review['id'] in docs])}")
+                    else:
+                        print(f"Error: La reseña {review['id']} no se indexó correctamente")
                 else:
                     print(f"Error: Reseña {filename} no tiene el formato esperado")
             except Exception as e:
