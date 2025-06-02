@@ -4,46 +4,25 @@
             "id": "N1",
             "descripcion": "Encontrar auriculares con buena duración de batería",
             "consulta_booleana": "auriculares AND (bateria OR duracion)",
-            "consulta_libre": "auriculares batería duración autonomía",
-            "documentos_relevantes": ["1"],
-            "documentos_no_relevantes": ["5"],
-            "explicacion": "Doc 1 tiene buena duración (20h), Doc 5 tiene mala duración (3-4h)"
+            "consulta_libre": "auriculares batería duración autonomía"
         },
         {
             "id": "N2",
             "descripcion": "Encontrar productos con buena calidad de sonido",
             "consulta_booleana": "(auriculares OR altavoces) AND (sonido OR audio OR calidad)",
-            "consulta_libre": "calidad sonido audio excelente",
-            "documentos_relevantes": ["1"],
-            "documentos_no_relevantes": ["5"],
-            "explicacion": "Doc 1 menciona excelente calidad, Doc 5 menciona calidad mediocre"
+            "consulta_libre": "calidad sonido audio excelente"
         },
         {
             "id": "N3",
             "descripcion": "Encontrar productos con buena relación calidad-precio",
             "consulta_booleana": "(calidad OR bueno OR excelente) AND (precio OR economico OR barato)",
-            "consulta_libre": "buena calidad buen precio económico",
-            "documentos_relevantes": ["5"],
-            "documentos_no_relevantes": ["1"],
-            "explicacion": "Doc 5 es económico, Doc 1 se menciona como caro"
+            "consulta_libre": "buena calidad buen precio económico"
         },
         {
             "id": "N4",
             "descripcion": "Encontrar productos con cancelación de ruido",
             "consulta_booleana": "cancelacion AND (ruido OR sonido)",
-            "consulta_libre": "cancelación ruido noise cancelling",
-            "documentos_relevantes": ["1"],
-            "documentos_no_relevantes": [],
-            "explicacion": "Doc 1 menciona cancelación de ruido impresionante"
-        },
-        {
-            "id": "N5",
-            "descripcion": "Encontrar productos con problemas de conectividad",
-            "consulta_booleana": "(bluetooth OR conexion OR conectividad) AND (problema OR inestable OR desconecta)",
-            "consulta_libre": "problemas conexión bluetooth inestable desconexión",
-            "documentos_relevantes": ["5"],
-            "documentos_no_relevantes": [],
-            "explicacion": "Doc 5 menciona problemas de conexión Bluetooth"
+            "consulta_libre": "cancelación ruido noise cancelling"
         }
     ],
     "metricas_evaluacion": {

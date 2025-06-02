@@ -3,11 +3,43 @@ from typing import List, Set, Dict
 import math
 
 class Evaluator:
-    def __init__(self, necesidades_file: str = "data/necesidades_informacion.json"):
-        """Inicializa el evaluador cargando las necesidades de información"""
-        with open(necesidades_file, 'r', encoding='utf-8') as f:
-            self.necesidades = json.load(f)['necesidades']
+    def __init__(self, similarity_threshold: float = 0.15):
+        """
+        Inicializa el evaluador con pseudo-relevance feedback
+        Args:
+            similarity_threshold: Score mínimo para considerar un documento como relevante
+        """
+        self.similarity_threshold = similarity_threshold
+        self.top_k = 2  # Reducido a 2 para ser más selectivo
             
+    def get_relevant_docs(self, ranked_results: Dict[str, float]) -> Set[str]:
+        """
+        Determina documentos relevantes usando pseudo-relevance feedback
+        Args:
+            ranked_results: Diccionario de doc_id -> score
+        Returns:
+            Conjunto de IDs de documentos considerados relevantes
+        """
+        # Ordenar documentos por score
+        sorted_docs = sorted(ranked_results.items(), key=lambda x: x[1], reverse=True)
+        
+        relevant_docs = set()
+        
+        # Considerar los top K documentos con score sobre el threshold como relevantes
+        for doc_id, score in sorted_docs[:self.top_k]:
+            if score >= self.similarity_threshold:
+                relevant_docs.add(doc_id)
+                
+        return relevant_docs
+    
+    def get_nonrelevant_docs(self, ranked_results: Dict[str, float], 
+                            low_threshold: float = 0.05) -> Set[str]:  # Bajado a 0.05
+        """
+        Determina documentos no relevantes basado en scores bajos
+        """
+        return {doc_id for doc_id, score in ranked_results.items() 
+                if score < low_threshold}
+    
     def calculate_precision(self, retrieved_docs: Set[str], relevant_docs: Set[str]) -> float:
         """Calcula la precisión: fracción de documentos recuperados que son relevantes"""
         if not retrieved_docs:
@@ -42,64 +74,11 @@ class Evaluator:
         
         return running_precision / len(relevant_docs) if relevant_found > 0 else 0.0
     
-    def evaluate_boolean_search(self, search_results: Dict[str, List[str]]) -> Dict:
+    def evaluate_ranked_search(self, search_results: Dict[str, Dict[str, float]]) -> Dict:
         """
-        Evalúa los resultados de búsquedas booleanas
+        Evalúa los resultados de búsquedas con ranking usando pseudo-relevance feedback
         Args:
-            search_results: Dict[necesidad_id -> List[doc_id]]
-        Returns:
-            Dict con métricas agregadas
-        """
-        metrics = {
-            'per_query': {},
-            'overall': {
-                'precision': 0.0,
-                'recall': 0.0,
-                'f1': 0.0
-            }
-        }
-        
-        total_queries = 0
-        
-        for necesidad in self.necesidades:
-            nid = necesidad['id']
-            if nid not in search_results:
-                continue
-                
-            retrieved = set(search_results[nid])
-            relevant = set(necesidad['documentos_relevantes'])
-            
-            precision = self.calculate_precision(retrieved, relevant)
-            recall = self.calculate_recall(retrieved, relevant)
-            f1 = self.calculate_f1(precision, recall)
-            
-            metrics['per_query'][nid] = {
-                'precision': precision,
-                'recall': recall,
-                'f1': f1,
-                'retrieved_count': len(retrieved),
-                'relevant_count': len(relevant),
-                'retrieved_and_relevant': len(retrieved & relevant)
-            }
-            
-            metrics['overall']['precision'] += precision
-            metrics['overall']['recall'] += recall
-            metrics['overall']['f1'] += f1
-            total_queries += 1
-        
-        # Calcular promedios
-        if total_queries > 0:
-            metrics['overall']['precision'] /= total_queries
-            metrics['overall']['recall'] /= total_queries
-            metrics['overall']['f1'] /= total_queries
-            
-        return metrics
-    
-    def evaluate_ranked_search(self, search_results: Dict[str, List[str]]) -> Dict:
-        """
-        Evalúa los resultados de búsquedas con ranking
-        Args:
-            search_results: Dict[necesidad_id -> List[doc_id]] (documentos ordenados por relevancia)
+            search_results: Dict[query_id -> Dict[doc_id -> score]]
         Returns:
             Dict con métricas incluyendo MAP
         """
@@ -114,26 +93,29 @@ class Evaluator:
         
         total_queries = 0
         
-        for necesidad in self.necesidades:
-            nid = necesidad['id']
-            if nid not in search_results:
-                continue
-                
-            ranked_docs = search_results[nid]
-            relevant = set(necesidad['documentos_relevantes'])
+        for query_id, doc_scores in search_results.items():
+            # Usar pseudo-relevance feedback para determinar documentos relevantes
+            relevant_docs = self.get_relevant_docs(doc_scores)
+            nonrelevant_docs = self.get_nonrelevant_docs(doc_scores)
+            
+            # Convertir scores a lista ordenada de documentos
+            ranked_docs = [doc_id for doc_id, _ in 
+                         sorted(doc_scores.items(), key=lambda x: x[1], reverse=True)]
+            
             retrieved = set(ranked_docs)
             
-            ap = self.calculate_average_precision(ranked_docs, relevant)
-            precision = self.calculate_precision(retrieved, relevant)
-            recall = self.calculate_recall(retrieved, relevant)
+            ap = self.calculate_average_precision(ranked_docs, relevant_docs)
+            precision = self.calculate_precision(retrieved, relevant_docs)
+            recall = self.calculate_recall(retrieved, relevant_docs)
             
-            metrics['per_query'][nid] = {
+            metrics['per_query'][query_id] = {
                 'average_precision': ap,
                 'precision': precision,
                 'recall': recall,
                 'retrieved_count': len(retrieved),
-                'relevant_count': len(relevant),
-                'retrieved_and_relevant': len(retrieved & relevant)
+                'relevant_count': len(relevant_docs),
+                'nonrelevant_count': len(nonrelevant_docs),
+                'retrieved_and_relevant': len(retrieved & relevant_docs)
             }
             
             metrics['overall']['map'] += ap

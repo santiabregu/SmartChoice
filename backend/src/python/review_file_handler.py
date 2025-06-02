@@ -66,7 +66,7 @@ class ReviewFileHandler:
             print(f"Error listing reviews: {str(e)}")
             return []
     
-    def search_reviews(self, query: str, search_type: str = 'boolean', operator: str = 'AND') -> List[Dict]:
+    def search_reviews(self, query: str, search_type: str = 'tf_idf', operator: str = 'AND') -> List[Dict]:
         """
         Busca reseñas usando el sistema especificado
         Args:
@@ -96,7 +96,7 @@ class ReviewFileHandler:
                     results.append(review)
             
             # Ordenar por puntuación
-            results.sort(key=lambda x: x['score'], reverse=True)
+            results.sort(key=lambda x: (x.get('score', 0), x.get('puntuacion', 0)), reverse=True)
         
         return results
     

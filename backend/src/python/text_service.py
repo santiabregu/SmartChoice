@@ -3,9 +3,11 @@ from pydantic import BaseModel, Field, HttpUrl
 from typing import List, Dict, Optional
 import nltk
 import os
+import json
 from text_processor import TextProcessor
 from review_file_handler import ReviewFileHandler
 from evaluator import Evaluator
+import statistics
 
 # Set NLTK data path to a local directory
 nltk.data.path.append(os.path.join(os.path.dirname(__file__), 'nltk_data'))
@@ -17,7 +19,11 @@ app = FastAPI(title="Sistema de Recuperación de Información - Reseñas de Prod
 # Initialize services
 text_processor = TextProcessor()
 review_handler = ReviewFileHandler()
-evaluator = Evaluator()
+evaluator = Evaluator(similarity_threshold=0.15)
+
+# Load information needs
+with open(os.path.join(os.path.dirname(__file__), 'data/necesidades_informacion.json'), 'r', encoding='utf-8') as f:
+    NECESIDADES = json.load(f)['necesidades']
 
 @app.on_event("startup")
 async def load_reviews():
@@ -50,32 +56,116 @@ class ReviewData(BaseModel):
             }
         }
 
-class SearchQuery(BaseModel):
+class SearchRequest(BaseModel):
     query: str
-    search_type: str = "boolean"
-    operator: str = "AND"
+    search_type: str = 'tf_idf'  # 'boolean' o 'tf_idf'
+    operator: Optional[str] = 'AND'
+
+class ScoreStats(BaseModel):
+    min_score: float
+    max_score: float
+    mean_score: float
+    median_score: float
+    score_distribution: Dict[str, int]  # rangos de scores -> cantidad
+    total_matches: int
+    matches_by_category: Dict[str, int]
+
+class SearchResponse(BaseModel):
+    results: List[Dict]
+    metrics: Optional[Dict] = None
+    score_statistics: Optional[ScoreStats] = None
 
 class EvaluationRequest(BaseModel):
     necesidad_id: str
-    search_type: str = "boolean"
+    search_type: str = "tf_idf"
 
-@app.post("/process_review")
-async def process_review(review: ReviewData):
+@app.post("/search")
+async def search(request: SearchRequest) -> SearchResponse:
+    """
+    Busca reseñas que coincidan con la consulta y proporciona estadísticas detalladas
+    Args:
+        request: SearchRequest con query y tipo de búsqueda
+    Returns:
+        SearchResponse con resultados, métricas y estadísticas de scores
+    """
     try:
-        filename = review_handler.save_review(review.dict())
-        return {"status": "success", "filename": filename}
+        # Realizar búsqueda
+        results = review_handler.search_reviews(
+            request.query, 
+            request.search_type, 
+            request.operator
+        )
+        
+        # Calcular estadísticas de scores para tf-idf
+        score_statistics = None
+        if request.search_type == 'tf_idf' and results:
+            scores = [r.get('score', 0.0) for r in results]
+            
+            # Crear rangos de scores para distribución
+            score_ranges = {
+                '0.0-0.1': 0,
+                '0.1-0.2': 0,
+                '0.2-0.3': 0,
+                '0.3-0.4': 0,
+                '0.4-0.5': 0,
+                '0.5+': 0
+            }
+            
+            for score in scores:
+                if score >= 0.5:
+                    score_ranges['0.5+'] += 1
+                elif score >= 0.4:
+                    score_ranges['0.4-0.5'] += 1
+                elif score >= 0.3:
+                    score_ranges['0.3-0.4'] += 1
+                elif score >= 0.2:
+                    score_ranges['0.2-0.3'] += 1
+                elif score >= 0.1:
+                    score_ranges['0.1-0.2'] += 1
+                else:
+                    score_ranges['0.0-0.1'] += 1
+            
+            # Contar matches por categoría
+            category_matches = {}
+            for result in results:
+                category = result.get('categoria', 'Unknown')
+                category_matches[category] = category_matches.get(category, 0) + 1
+            
+            score_statistics = ScoreStats(
+                min_score=min(scores),
+                max_score=max(scores),
+                mean_score=statistics.mean(scores),
+                median_score=statistics.median(scores),
+                score_distribution=score_ranges,
+                total_matches=len(results),
+                matches_by_category=category_matches
+            )
+        
+        # Para búsquedas tf-idf, evaluar usando pseudo-relevance feedback
+        metrics = None
+        if request.search_type == 'tf_idf' and results:
+            # Extraer scores de los resultados
+            scores = {str(r['id']): r.get('score', 0.0) for r in results}
+            
+            # Evaluar usando pseudo-relevance feedback
+            search_results = {request.query: scores}
+            metrics = evaluator.evaluate_ranked_search(search_results)
+        
+        return SearchResponse(
+            results=results,
+            metrics=metrics,
+            score_statistics=score_statistics
+        )
+        
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.post("/search")
-async def search(search_query: SearchQuery):
+@app.post("/process_review")
+async def process_review(review: ReviewData):
+    """Procesa y almacena una nueva reseña"""
     try:
-        results = review_handler.search_reviews(
-            search_query.query,
-            search_query.search_type,
-            search_query.operator
-        )
-        return {"status": "success", "results": results}
+        filename = review_handler.save_review(review.dict())
+        return {"status": "success", "filename": filename}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -84,32 +174,26 @@ async def evaluate_search(eval_request: EvaluationRequest):
     """Evalúa una búsqueda para una necesidad de información específica"""
     try:
         # Buscar la necesidad
-        necesidad = None
-        for n in evaluator.necesidades:
-            if n['id'] == eval_request.necesidad_id:
-                necesidad = n
-                break
-        
+        necesidad = next((n for n in NECESIDADES if n['id'] == eval_request.necesidad_id), None)
         if not necesidad:
             raise HTTPException(status_code=404, detail="Necesidad no encontrada")
         
-        # Realizar la búsqueda según el tipo
-        if eval_request.search_type == "boolean":
-            query = necesidad['consulta_booleana']
-            results = review_handler.search_reviews(query, "boolean", "AND")
-            search_results = {necesidad['id']: [r['id'] for r in results]}
-            metrics = evaluator.evaluate_boolean_search(search_results)
-        else:
-            query = necesidad['consulta_libre']
-            results = review_handler.search_reviews(query, "tf_idf")
-            search_results = {necesidad['id']: [r['id'] for r in results]}
+        # Realizar la búsqueda
+        query = necesidad['consulta_libre'] if eval_request.search_type == 'tf_idf' else necesidad['consulta_booleana']
+        results = review_handler.search_reviews(query, eval_request.search_type)
+        
+        # Evaluar resultados
+        metrics = None
+        if results:
+            scores = {str(r['id']): r.get('score', 0.0) for r in results}
+            search_results = {necesidad['id']: scores}
             metrics = evaluator.evaluate_ranked_search(search_results)
         
         return {
             "status": "success",
             "necesidad": necesidad,
             "resultados": results,
-            "metricas": metrics['per_query'][necesidad['id']]
+            "metricas": metrics['per_query'][necesidad['id']] if metrics else None
         }
         
     except Exception as e:
@@ -117,36 +201,51 @@ async def evaluate_search(eval_request: EvaluationRequest):
 
 @app.get("/evaluate_all")
 async def evaluate_all():
-    """Evalúa todas las necesidades de información con ambos sistemas"""
+    """Evalúa todas las necesidades de información usando tf-idf y pseudo-relevance feedback"""
     try:
-        boolean_results = {}
-        ranked_results = {}
+        all_metrics = {
+            'per_necesidad': {},
+            'overall': {
+                'map': 0.0,
+                'precision': 0.0,
+                'recall': 0.0
+            }
+        }
         
-        # Realizar todas las búsquedas
-        for necesidad in evaluator.necesidades:
-            # Búsqueda booleana
-            bool_results = review_handler.search_reviews(
-                necesidad['consulta_booleana'],
-                "boolean",
-                "AND"
-            )
-            boolean_results[necesidad['id']] = [r['id'] for r in bool_results]
-            
-            # Búsqueda tf-idf
-            tfidf_results = review_handler.search_reviews(
+        # Evaluar cada necesidad
+        for necesidad in NECESIDADES:
+            # Realizar búsqueda tf-idf
+            results = review_handler.search_reviews(
                 necesidad['consulta_libre'],
-                "tf_idf"
+                'tf_idf'
             )
-            ranked_results[necesidad['id']] = [r['id'] for r in tfidf_results]
+            
+            # Calcular métricas si hay resultados
+            if results:
+                scores = {str(r['id']): r.get('score', 0.0) for r in results}
+                search_results = {necesidad['id']: scores}
+                metrics = evaluator.evaluate_ranked_search(search_results)
+                
+                all_metrics['per_necesidad'][necesidad['id']] = {
+                    'descripcion': necesidad['descripcion'],
+                    'metricas': metrics['per_query'][necesidad['id']]
+                }
+                
+                # Actualizar métricas globales
+                all_metrics['overall']['map'] += metrics['overall']['map']
+                all_metrics['overall']['precision'] += metrics['overall']['precision']
+                all_metrics['overall']['recall'] += metrics['overall']['recall']
         
-        # Evaluar resultados
-        boolean_metrics = evaluator.evaluate_boolean_search(boolean_results)
-        ranked_metrics = evaluator.evaluate_ranked_search(ranked_results)
+        # Calcular promedios globales
+        num_necesidades = len(NECESIDADES)
+        if num_necesidades > 0:
+            all_metrics['overall']['map'] /= num_necesidades
+            all_metrics['overall']['precision'] /= num_necesidades
+            all_metrics['overall']['recall'] /= num_necesidades
         
         return {
             "status": "success",
-            "evaluacion_booleana": boolean_metrics,
-            "evaluacion_tfidf": ranked_metrics
+            "evaluacion": all_metrics
         }
         
     except Exception as e:
@@ -154,6 +253,7 @@ async def evaluate_all():
 
 @app.get("/statistics")
 async def get_statistics():
+    """Obtiene estadísticas del sistema"""
     try:
         return {
             "status": "success",
