@@ -12,6 +12,41 @@ class Evaluator:
         self.similarity_threshold = similarity_threshold
         self.top_k = 2  # Reducido a 2 para ser más selectivo
             
+    def get_relevant_docs_boolean(self, results: List[Dict]) -> Set[str]:
+        """
+        Para búsquedas booleanas, consideramos relevantes los documentos que:
+        1. Contienen los términos buscados
+        2. Tienen una puntuación alta o mencionan positivamente los términos
+        """
+        relevant_docs = set()
+        
+        for doc in results:
+            # Consideramos relevante si:
+            # - Tiene puntuación alta (≥ 4.0)
+            # - O menciona positivamente los términos buscados
+            if doc.get('puntuacion', 0) >= 4.0:
+                relevant_docs.add(doc['id'])
+            elif 'resena' in doc:
+                text = doc['resena'].lower()
+                # Buscar menciones positivas
+                positive_patterns = [
+                    'buena batería', 'buena duración', 'dura más',
+                    'excelente batería', 'gran duración', 'larga duración'
+                ]
+                # Buscar menciones negativas
+                negative_patterns = [
+                    'mala batería', 'poca duración', 'dura poco',
+                    'batería corta', 'apenas dura'
+                ]
+                
+                has_positive = any(pattern in text for pattern in positive_patterns)
+                has_negative = any(pattern in text for pattern in negative_patterns)
+                
+                if has_positive and not has_negative:
+                    relevant_docs.add(doc['id'])
+        
+        return relevant_docs
+            
     def get_relevant_docs(self, ranked_results: Dict[str, float]) -> Set[str]:
         """
         Determina documentos relevantes usando pseudo-relevance feedback
@@ -33,12 +68,33 @@ class Evaluator:
         return relevant_docs
     
     def get_nonrelevant_docs(self, ranked_results: Dict[str, float], 
-                            low_threshold: float = 0.05) -> Set[str]:  # Bajado a 0.05
+                            low_threshold: float = 0.05) -> Set[str]:
         """
         Determina documentos no relevantes basado en scores bajos
         """
         return {doc_id for doc_id, score in ranked_results.items() 
                 if score < low_threshold}
+    
+    def get_nonrelevant_docs_boolean(self, results: List[Dict], relevant_docs: Set[str]) -> Set[str]:
+        """
+        Para búsquedas booleanas, los documentos no relevantes son aquellos que:
+        1. No están en el conjunto de relevantes
+        2. Mencionan negativamente los términos buscados
+        """
+        nonrelevant_docs = set()
+        
+        for doc in results:
+            if doc['id'] not in relevant_docs:
+                if 'resena' in doc:
+                    text = doc['resena'].lower()
+                    negative_patterns = [
+                        'mala batería', 'poca duración', 'dura poco',
+                        'batería corta', 'apenas dura'
+                    ]
+                    if any(pattern in text for pattern in negative_patterns):
+                        nonrelevant_docs.add(doc['id'])
+        
+        return nonrelevant_docs
     
     def calculate_precision(self, retrieved_docs: Set[str], relevant_docs: Set[str]) -> float:
         """Calcula la precisión: fracción de documentos recuperados que son relevantes"""
@@ -73,6 +129,39 @@ class Evaluator:
                 running_precision += precision_at_k
         
         return running_precision / len(relevant_docs) if relevant_found > 0 else 0.0
+    
+    def evaluate_boolean_search(self, results: List[Dict]) -> Dict:
+        """
+        Evalúa los resultados de búsquedas booleanas
+        Args:
+            results: Lista de documentos recuperados
+        Returns:
+            Dict con métricas
+        """
+        # Obtener IDs de documentos recuperados
+        retrieved = {doc['id'] for doc in results}
+        
+        # Determinar documentos relevantes basado en contenido y puntuación
+        relevant_docs = self.get_relevant_docs_boolean(results)
+        nonrelevant_docs = self.get_nonrelevant_docs_boolean(results, relevant_docs)
+        
+        # Calcular métricas
+        precision = self.calculate_precision(retrieved, relevant_docs)
+        recall = self.calculate_recall(retrieved, relevant_docs)
+        
+        # Para average precision, usamos el orden en que vienen los resultados
+        ranked_docs = [doc['id'] for doc in results]
+        ap = self.calculate_average_precision(ranked_docs, relevant_docs)
+        
+        return {
+            'average_precision': ap,
+            'precision': precision,
+            'recall': recall,
+            'retrieved_count': len(retrieved),
+            'relevant_count': len(relevant_docs),
+            'nonrelevant_count': len(nonrelevant_docs),
+            'retrieved_and_relevant': len(retrieved & relevant_docs)
+        }
     
     def evaluate_ranked_search(self, search_results: Dict[str, Dict[str, float]]) -> Dict:
         """

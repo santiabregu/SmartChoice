@@ -182,18 +182,22 @@ async def evaluate_search(eval_request: EvaluationRequest):
         query = necesidad['consulta_libre'] if eval_request.search_type == 'tf_idf' else necesidad['consulta_booleana']
         results = review_handler.search_reviews(query, eval_request.search_type)
         
-        # Evaluar resultados
-        metrics = None
-        if results:
-            scores = {str(r['id']): r.get('score', 0.0) for r in results}
-            search_results = {necesidad['id']: scores}
-            metrics = evaluator.evaluate_ranked_search(search_results)
+        # Evaluar resultados según el tipo de búsqueda
+        if eval_request.search_type == 'boolean':
+            metrics = evaluator.evaluate_boolean_search(results)
+        else:  # tf_idf
+            if results:
+                scores = {str(r['id']): r.get('score', 0.0) for r in results}
+                search_results = {necesidad['id']: scores}
+                metrics = evaluator.evaluate_ranked_search(search_results)['per_query'][necesidad['id']]
+            else:
+                metrics = None
         
         return {
             "status": "success",
             "necesidad": necesidad,
             "resultados": results,
-            "metricas": metrics['per_query'][necesidad['id']] if metrics else None
+            "metricas": metrics
         }
         
     except Exception as e:
