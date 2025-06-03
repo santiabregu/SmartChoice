@@ -3,37 +3,37 @@
   "boolean_search": [
     {
       "query": "auriculares",
-      "time": 0.003021240234375,
-      "num_results": 2
+      "time": 0.039795637130737305,
+      "num_results": 6
     },
     {
       "query": "auriculares AND bateria",
-      "time": 0.011390209197998047,
-      "num_results": 2
+      "time": 0.0438995361328125,
+      "num_results": 6
     }
   ],
   "tfidf_search": [
     {
       "query": "auriculares",
-      "time": 0.0165555477142334,
-      "num_results": 5
+      "time": 0.1113429069519043,
+      "num_results": 50
     },
     {
       "query": "auriculares AND bateria",
-      "time": 0.011651754379272461,
-      "num_results": 5
+      "time": 0.1098642349243164,
+      "num_results": 50
     }
   ],
   "boolean_search_stats": {
-    "min": 0.003021240234375,
-    "max": 0.011390209197998047,
-    "mean": 0.0072057247161865234,
-    "median": 0.0072057247161865234
+    "min": 0.039795637130737305,
+    "max": 0.0438995361328125,
+    "mean": 0.0418475866317749,
+    "median": 0.0418475866317749
   },
   "tfidf_search_stats": {
-    "min": 0.011651754379272461,
-    "max": 0.0165555477142334,
-    "mean": 0.01410365104675293,
-    "median": 0.01410365104675293
+    "min": 0.1098642349243164,
+    "max": 0.1113429069519043,
+    "mean": 0.11060357093811035,
+    "median": 0.11060357093811035
   }
 }

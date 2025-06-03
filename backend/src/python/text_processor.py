@@ -6,6 +6,8 @@ from typing import List, Dict, Set
 import math
 from collections import defaultdict
 import re
+import json
+from pathlib import Path
 
 class TextProcessor:
     def __init__(self):
@@ -14,16 +16,24 @@ class TextProcessor:
         self.inverted_index = defaultdict(dict)  # term -> {doc_id -> positions}
         self.document_lengths = {}  # doc_id -> length
         self.total_documents = 0
-        self.sinonimos = {
-            'auricular': ['auriculares', 'cascos', 'headphones', 'audifonos'],
-            'bateria': ['batería', 'pila', 'duración', 'autonomía', 'dura'],
-            'bueno': ['buena', 'excelente', 'genial', 'impresionante', 'útil', 'perfecto'],
-            'sonido': ['audio', 'acústica', 'calidad'],
-            'precio': ['costo', 'valor', 'económico'],
-            'comodidad': ['cómodo', 'ergonómico', 'confortable'],
-            'tecnologia': ['tecnología', 'tech', 'dispositivo', 'electrónico']
-        }
+        self.sinonimos = self._load_sinonimos()
         
+    def _load_sinonimos(self) -> Dict[str, List[str]]:
+        """Carga el diccionario de sinónimos desde el archivo JSON"""
+        try:
+            sinonimos_path = Path(__file__).parent / "data" / "sinonimos.json"
+            with open(sinonimos_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                # Combinar sinónimos y categorías en un solo diccionario
+                sinonimos_dict = data.get("sinonimos", {})
+                categorias_dict = data.get("categorias", {})
+                # Añadir categorías al diccionario de sinónimos
+                sinonimos_dict.update(categorias_dict)
+                return sinonimos_dict
+        except FileNotFoundError:
+            print("Archivo sinonimos.json no encontrado, usando diccionario vacío")
+            return {}
+
     def normalize_text(self, text: str) -> str:
         """Normaliza el texto aplicando reglas específicas para español"""
         # Convertir a minúsculas

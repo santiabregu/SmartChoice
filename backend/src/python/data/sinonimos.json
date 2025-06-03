@@ -1,0 +1,37 @@
+{
+    "sinonimos": {
+        "auriculares": ["cascos", "audífonos", "headphones", "earbuds"],
+        "batería": ["autonomía", "duración", "pila"],
+        "sonido": ["audio", "acústica", "reproducción"],
+        "calidad": ["excelente", "superior", "premium", "buena"],
+        "cancelación": ["aislamiento", "reducción", "eliminación"],
+        "ruido": ["sonido ambiente", "ruido ambiente", "ruido externo"],
+        "gaming": ["juegos", "videojuegos", "gamer"],
+        "pantalla": ["display", "monitor", "screen"],
+        "rendimiento": ["desempeño", "performance", "velocidad"],
+        "ergonomía": ["comodidad", "confort", "comfort"],
+        "transpirable": ["ventilado", "respirable", "aireado"],
+        "conectividad": ["conexión", "conectividad inalámbrica", "wireless"],
+        "deportivo": ["sport", "atlético", "fitness"],
+        "inteligente": ["smart", "automatizado", "conectado"],
+        "profesional": ["pro", "avanzado", "experto"],
+        "premium": ["alta gama", "lujo", "exclusivo"],
+        "carga": ["carga rápida", "fast charging", "carga inalámbrica"],
+        "diseño": ["estética", "apariencia", "acabado"],
+        "construcción": ["build", "fabricación", "manufactura"],
+        "monitorización": ["seguimiento", "tracking", "medición"],
+        "salud": ["health", "bienestar", "fitness"],
+        "precisión": ["exactitud", "accuracy", "fidelidad"],
+        "rápido": ["veloz", "ágil", "instantáneo"],
+        "duradero": ["resistente", "robusto", "fiable"],
+        "innovador": ["novedoso", "revolucionario", "vanguardista"]
+    },
+    "categorias": {
+        "Tecnología": ["tech", "electrónica", "gadgets", "dispositivos"],
+        "Cosméticos": ["belleza", "skincare", "maquillaje", "cosmética"],
+        "Calzado Deportivo": ["zapatillas", "tenis", "sneakers", "deportivas"],
+        "Ropa Deportiva": ["sportswear", "ropa fitness", "athletic wear"],
+        "Mobiliario": ["muebles", "furniture", "equipamiento"],
+        "Fotografía": ["photo", "imagen", "cámara", "óptica"]
+    }
+} 

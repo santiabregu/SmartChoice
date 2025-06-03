@@ -4,72 +4,84 @@
       "query": "auriculares batería",
       "metrics": {
         "average_precision": 1.0,
-        "precision": 0.4,
+        "precision": 0.04,
         "recall": 1.0,
-        "retrieved_count": 5,
+        "f1_score": 0.07692307692307693,
+        "retrieved_count": 50,
         "relevant_count": 2,
-        "nonrelevant_count": 2,
-        "retrieved_and_relevant": 2
+        "nonrelevant_count": 31,
+        "retrieved_and_relevant": 2,
+        "expanded_terms": []
       }
     },
     {
       "query": "audifonos duración",
       "metrics": {
         "average_precision": 1.0,
-        "precision": 0.4,
+        "precision": 0.04,
         "recall": 1.0,
-        "retrieved_count": 5,
+        "f1_score": 0.07692307692307693,
+        "retrieved_count": 50,
         "relevant_count": 2,
-        "nonrelevant_count": 2,
-        "retrieved_and_relevant": 2
+        "nonrelevant_count": 33,
+        "retrieved_and_relevant": 2,
+        "expanded_terms": []
       }
     },
     {
       "query": "buenos cascos",
       "metrics": {
         "average_precision": 1.0,
-        "precision": 0.4,
+        "precision": 0.04,
         "recall": 1.0,
-        "retrieved_count": 5,
+        "f1_score": 0.07692307692307693,
+        "retrieved_count": 50,
         "relevant_count": 2,
-        "nonrelevant_count": 3,
-        "retrieved_and_relevant": 2
+        "nonrelevant_count": 44,
+        "retrieved_and_relevant": 2,
+        "expanded_terms": []
       }
     },
     {
       "query": "buenos auriculares",
       "metrics": {
         "average_precision": 1.0,
-        "precision": 0.4,
+        "precision": 0.04,
         "recall": 1.0,
-        "retrieved_count": 5,
+        "f1_score": 0.07692307692307693,
+        "retrieved_count": 50,
         "relevant_count": 2,
-        "nonrelevant_count": 3,
-        "retrieved_and_relevant": 2
+        "nonrelevant_count": 44,
+        "retrieved_and_relevant": 2,
+        "expanded_terms": []
       }
     },
     {
       "query": "calidad sonido",
       "metrics": {
         "average_precision": 1.0,
-        "precision": 0.4,
+        "precision": 0.04,
         "recall": 1.0,
-        "retrieved_count": 5,
+        "f1_score": 0.07692307692307693,
+        "retrieved_count": 50,
         "relevant_count": 2,
-        "nonrelevant_count": 3,
-        "retrieved_and_relevant": 2
+        "nonrelevant_count": 36,
+        "retrieved_and_relevant": 2,
+        "expanded_terms": []
       }
     },
     {
       "query": "calidad audio",
       "metrics": {
         "average_precision": 1.0,
-        "precision": 0.4,
+        "precision": 0.04,
         "recall": 1.0,
-        "retrieved_count": 5,
+        "f1_score": 0.07692307692307693,
+        "retrieved_count": 50,
         "relevant_count": 2,
-        "nonrelevant_count": 3,
-        "retrieved_and_relevant": 2
+        "nonrelevant_count": 36,
+        "retrieved_and_relevant": 2,
+        "expanded_terms": []
       }
     }
   ],
@@ -80,9 +92,9 @@
         "auriculares batería",
         "audifonos duración"
       ],
-      "overlap": 5,
-      "results1_count": 5,
-      "results2_count": 5,
+      "overlap": 50,
+      "results1_count": 50,
+      "results2_count": 50,
       "unique_to_1": 0,
       "unique_to_2": 0,
       "jaccard_similarity": 1.0
@@ -92,9 +104,9 @@
         "buenos cascos",
         "buenos auriculares"
       ],
-      "overlap": 5,
-      "results1_count": 5,
-      "results2_count": 5,
+      "overlap": 50,
+      "results1_count": 50,
+      "results2_count": 50,
       "unique_to_1": 0,
       "unique_to_2": 0,
       "jaccard_similarity": 1.0
@@ -104,18 +116,18 @@
         "calidad sonido",
         "calidad audio"
       ],
-      "overlap": 5,
-      "results1_count": 5,
-      "results2_count": 5,
+      "overlap": 50,
+      "results1_count": 50,
+      "results2_count": 50,
       "unique_to_1": 0,
       "unique_to_2": 0,
       "jaccard_similarity": 1.0
     }
   ],
   "global_stats": {
-    "mean_precision": 0.4,
+    "mean_precision": 0.04,
     "mean_recall": 1.0,
-    "mean_overlap": 5,
+    "mean_overlap": 50,
     "mean_jaccard": 1.0
   }
 }

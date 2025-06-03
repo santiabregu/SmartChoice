@@ -70,13 +70,14 @@ class ReviewFileHandler:
             print(f"Error listing reviews: {str(e)}")
             return []
     
-    def search_reviews(self, query: str, search_type: str = 'tf_idf', operator: str = 'AND') -> List[Dict]:
+    def search_reviews(self, query: str, search_type: str = 'tf_idf', operator: str = 'AND', min_score: float = 0.05) -> List[Dict]:
         """
         Busca reseñas usando el sistema especificado
         Args:
             query: Texto de búsqueda
             search_type: 'boolean' o 'tf_idf'
             operator: 'AND', 'OR', 'NOT' (solo para búsqueda booleana)
+            min_score: Score mínimo para incluir un resultado (solo para tf_idf)
         Returns:
             Lista de reseñas ordenadas por relevancia
         """
@@ -96,8 +97,10 @@ class ReviewFileHandler:
             for filename in self.list_reviews():
                 review = self.load_review(filename)
                 if review and review['id'] in scores:
-                    review['score'] = scores[review['id']]
-                    results.append(review)
+                    score = scores[review['id']]
+                    if score >= min_score:  # Solo incluir resultados que superen el umbral
+                        review['score'] = score
+                        results.append(review)
             
             # Ordenar por puntuación
             results.sort(key=lambda x: (x.get('score', 0), x.get('puntuacion', 0)), reverse=True)
