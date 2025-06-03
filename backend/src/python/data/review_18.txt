@@ -1,0 +1,11 @@
+{
+    "id": "18",
+    "producto": "Nothing Ear (2)",
+    "categoria": "Tecnología",
+    "resena": "Auriculares TWS con un diseño único y transparente. La calidad de sonido es excelente para su precio, con buenos graves y agudos claros. La cancelación de ruido activa funciona bien en la mayoría de situaciones. La app permite personalizar el ecualizador y los controles táctiles. La conexión Bluetooth es estable y soporta códec LHDC. La batería dura unas 4 horas con ANC activado. El estuche de carga es compacto y admite carga inalámbrica.",
+    "puntuacion": 4.5,
+    "website": {
+        "nombre": "Amazon",
+        "url": "https://www.amazon.es/nothing-ear-2"
+    }
+}

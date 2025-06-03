@@ -1,0 +1,11 @@
+{
+    "id": "11",
+    "producto": "Cafetera Nespresso Vertuo Next",
+    "categoria": "Electrodomésticos",
+    "resena": "Una cafetera versátil que hace tanto café largo como espresso. El sistema de cápsulas Vertuo produce un café con una crema excepcional. La máquina es compacta y tiene un diseño moderno que ocupa poco espacio. El depósito de agua es fácil de rellenar y la limpieza es sencilla. Lo único negativo es que solo funciona con cápsulas Vertuo, que son más caras que las originales.",
+    "puntuacion": 4.4,
+    "website": {
+        "nombre": "El Corte Inglés",
+        "url": "https://www.elcorteingles.es/electrodomesticos/nespresso-vertuo"
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "id": "7",
+    "producto": "Tablet Lenovo Tab M10 Plus",
+    "categoria": "Tecnología",
+    "resena": "Buena calidad de imagen y sonido. Ideal para ver series o navegar. Va fluida aunque a veces se nota lenta con apps pesadas.",
+    "puntuacion": 4.1,
+    "website": {
+      "nombre": "Amazon",
+      "url": "https://www.amazon.es/dp/B09SVD95KX"
+    }
+}

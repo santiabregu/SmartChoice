@@ -1,0 +1,11 @@
+{
+    "id": "16",
+    "producto": "Logitech G Pro X",
+    "categoria": "Tecnología",
+    "resena": "Teclado mecánico de alta gama con switches intercambiables. La construcción es sólida y el diseño minimalista es muy atractivo. La iluminación RGB es personalizable y el software Logitech G HUB funciona bien. Los switches GX Blue son táctiles y con un click satisfactorio, aunque pueden resultar ruidosos para algunos. El cable USB-C desmontable es de buena calidad. El precio es alto, pero la calidad lo justifica.",
+    "puntuacion": 4.8,
+    "website": {
+        "nombre": "PcComponentes",
+        "url": "https://www.pccomponentes.com/logitech-g-pro-x"
+    }
+}

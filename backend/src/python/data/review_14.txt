@@ -1,0 +1,11 @@
+{
+    "id": "14",
+    "producto": "Cecotec Conga 2290 Ultra",
+    "categoria": "Electrodomésticos",
+    "resena": "Robot aspirador con buena relación calidad-precio. La navegación láser funciona bien y mapea la casa con precisión. La app es completa y permite programar limpiezas, crear zonas restringidas y controlar el robot remotamente. La potencia de succión es adecuada y la batería dura aproximadamente 130 minutos. El depósito podría ser más grande y a veces se enreda con cables, pero por el precio es una excelente opción.",
+    "puntuacion": 4.3,
+    "website": {
+        "nombre": "MediaMarkt",
+        "url": "https://www.mediamarkt.es/cecotec-conga-2290-ultra"
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "id": "29",
+    "producto": "Herman Miller Aeron",
+    "categoria": "Mobiliario",
+    "resena": "Silla ergonómica de oficina de máxima calidad. El diseño icónico viene respaldado por años de investigación en ergonomía. La malla Pellicle es transpirable y se adapta perfectamente al cuerpo. Los ajustes de tensión, altura, inclinación y soporte lumbar PostureFit SL son precisos. Los materiales son de primera calidad y la garantía de 12 años demuestra su durabilidad. El único inconveniente real es su elevado precio inicial.",
+    "puntuacion": 4.9,
+    "website": {
+        "nombre": "Herman Miller",
+        "url": "https://www.hermanmiller.com/es_es/products/seating/office-chairs/aeron-chairs"
+    }
+} 

@@ -1,0 +1,11 @@
+{
+    "id": "21",
+    "producto": "Teka MWE 225 G",
+    "categoria": "Electrodomésticos",
+    "resena": "Microondas con grill de 20L con buena relación calidad-precio. El panel digital es intuitivo y fácil de usar. La potencia de 800W es suficiente para la mayoría de tareas y el grill de 1000W funciona muy bien para gratinar. El interior es fácil de limpiar gracias al recubrimiento. Incluye 8 programas automáticos muy útiles. El plato giratorio es amplio y estable. Como punto negativo, el pitido de finalización es algo ruidoso y no se puede desactivar.",
+    "puntuacion": 4.4,
+    "website": {
+        "nombre": "El Corte Inglés",
+        "url": "https://www.elcorteingles.es/electrodomesticos/teka-mwe-225"
+    }
+} 

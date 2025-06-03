@@ -1,0 +1,11 @@
+{
+    "id": "22",
+    "producto": "Sony ZV-1 II",
+    "categoria": "Tecnología",
+    "resena": "Cámara compacta perfecta para vloggers y creadores de contenido. El sensor de 1 pulgada ofrece una calidad de imagen excelente. El autofocus es rápido y preciso, con seguimiento de ojos en tiempo real. La pantalla lateral articulada es muy útil para grabar vlogs. La estabilización de imagen funciona bien para grabación en movimiento. El micrófono incorporado es de buena calidad y viene con protector de viento. El único inconveniente es que la batería dura poco, recomendable llevar repuesto.",
+    "puntuacion": 4.6,
+    "website": {
+        "nombre": "Amazon",
+        "url": "https://www.amazon.es/sony-zv1-ii"
+    }
+} 

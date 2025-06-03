@@ -1,0 +1,11 @@
+{
+    "id": "30",
+    "producto": "Vitamix A3500 Ascent",
+    "categoria": "Electrodomésticos",
+    "resena": "Batidora de vaso profesional de altísima gama. El motor de 1400W es potentísimo y puede con cualquier ingrediente. Los 5 programas automáticos funcionan perfectamente y la pantalla táctil es muy intuitiva. El vaso de 2L es amplio y el sistema de detección automática ajusta los tiempos de mezclado. La calidad de construcción es excepcional y viene con 10 años de garantía. El precio es muy elevado, pero es una inversión a largo plazo para usuarios exigentes.",
+    "puntuacion": 4.8,
+    "website": {
+        "nombre": "El Corte Inglés",
+        "url": "https://www.elcorteingles.es/electrodomesticos/vitamix-a3500"
+    }
+} 

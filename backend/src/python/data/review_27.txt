@@ -1,0 +1,11 @@
+{
+    "id": "27",
+    "producto": "Philips Hue White and Color Ambiance Starter Kit",
+    "categoria": "Hogar Inteligente",
+    "resena": "Kit de inicio excelente para iluminación inteligente. Incluye el puente Hue y 3 bombillas LED RGB. Los colores son vibrantes y la luz blanca tiene buenos ajustes de temperatura. La app es intuitiva y permite crear rutinas y ambientes. Compatible con Alexa, Google Assistant y Apple HomeKit. La instalación es sencilla. El precio es elevado comparado con otras marcas, pero la calidad y fiabilidad lo compensan.",
+    "puntuacion": 4.7,
+    "website": {
+        "nombre": "Philips",
+        "url": "https://www.philips-hue.com/es-es/starter-kits"
+    }
+} 

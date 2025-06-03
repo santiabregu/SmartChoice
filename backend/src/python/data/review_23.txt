@@ -1,0 +1,11 @@
+{
+    "id": "23",
+    "producto": "The North Face Borealis",
+    "categoria": "Accesorios",
+    "resena": "Mochila versátil y duradera de 28L. El material es resistente al agua y de alta calidad. La organización interna es excelente, con compartimento para portátil de hasta 15\", bolsillos para tablet y múltiples organizadores. El sistema de ventilación en la espalda es muy efectivo. Las correas son cómodas y ajustables, ideal para uso diario o pequeñas excursiones. Los bolsillos laterales para botellas son algo ajustados para botellas grandes.",
+    "puntuacion": 4.7,
+    "website": {
+        "nombre": "The North Face",
+        "url": "https://www.thenorthface.es/borealis-classic"
+    }
+} 

@@ -1,0 +1,11 @@
+{
+    "id": "26",
+    "producto": "Baratza Encore",
+    "categoria": "Electrodomésticos",
+    "resena": "Molinillo de café de calidad para principiantes y entusiastas. Las muelas cónicas ofrecen una molienda consistente con 40 ajustes diferentes. El motor es potente pero silencioso. La construcción es robusta y duradera. Fácil de limpiar y mantener. Ideal para métodos de filtrado y french press, aunque puede quedarse algo corto para espresso. El contenedor de granos podría ser más hermético para mantener mejor el aroma.",
+    "puntuacion": 4.6,
+    "website": {
+        "nombre": "MaxCoffee",
+        "url": "https://maxcoffee.com/baratza-encore"
+    }
+} 

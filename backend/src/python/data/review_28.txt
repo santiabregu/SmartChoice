@@ -1,0 +1,11 @@
+{
+    "id": "28",
+    "producto": "Roborock S8 Pro Ultra",
+    "categoria": "Electrodomésticos",
+    "resena": "Robot aspirador y friegasuelos de gama alta con estación de autovaciado y autolimpieza. La potencia de succión de 6000Pa es impresionante. El sistema de fregado con dos mopas giratorias limpia eficazmente. La navegación láser y 3D evita obstáculos con precisión. La app es completa y permite configurar zonas prohibidas y rutinas. La estación base es grande pero automatiza todo el mantenimiento. El precio es elevado, pero el nivel de automatización lo justifica.",
+    "puntuacion": 4.9,
+    "website": {
+        "nombre": "Amazon",
+        "url": "https://www.amazon.es/roborock-s8-pro-ultra"
+    }
+} 

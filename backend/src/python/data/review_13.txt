@@ -1,0 +1,11 @@
+{
+    "id": "13",
+    "producto": "Newskill Takamikura",
+    "categoria": "Mobiliario",
+    "resena": "Silla gaming de calidad media-alta. El montaje es sencillo y viene con instrucciones claras. Los materiales son resistentes y la espuma tiene buena densidad. Los reposabrazos 4D son ajustables y útiles. El respaldo se reclina hasta 180 grados. Como aspectos negativos, los ruedas podrían ser de mejor calidad y el apoyo lumbar podría ser más firme. En general, buena compra para su rango de precio.",
+    "puntuacion": 4.2,
+    "website": {
+        "nombre": "PcComponentes",
+        "url": "https://www.pccomponentes.com/newskill-takamikura"
+    }
+}

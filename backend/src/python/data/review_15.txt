@@ -1,0 +1,11 @@
+{
+    "id": "15",
+    "producto": "AOC Gaming 27G2U",
+    "categoria": "Tecnología",
+    "resena": "Monitor gaming de 27 pulgadas con excelente rendimiento. Panel IPS con colores vibrantes y buenos ángulos de visión. 144Hz reales y 1ms de respuesta hacen que sea perfecto para juegos competitivos. El soporte es robusto y permite ajustes de altura, rotación e inclinación. FreeSync funciona perfectamente con tarjetas AMD. Los altavoces integrados son básicos, pero suficientes para uso ocasional.",
+    "puntuacion": 4.6,
+    "website": {
+        "nombre": "Amazon",
+        "url": "https://www.amazon.es/aoc-27g2u-gaming"
+    }
+}

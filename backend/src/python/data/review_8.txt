@@ -1,0 +1,11 @@
+{
+    "id": "8",
+    "producto": "Auriculares inalámbricos QCY T13",
+    "categoria": "Tecnología",
+    "resena": "Muy cómodos y con buena batería. El sonido es nítido, aunque no tienen cancelación de ruido real. Por el precio, valen la pena.",
+    "puntuacion": 4.3,
+    "website": {
+      "nombre": "AliExpress",
+      "url": "https://www.aliexpress.com/item/1005003270041495.html"
+    }
+  }

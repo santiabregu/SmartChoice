@@ -1,0 +1,11 @@
+{
+    "id": "25",
+    "producto": "PlayStation 5 Digital Edition",
+    "categoria": "Tecnología",
+    "resena": "La PS5 Digital ofrece la misma potencia que la versión con disco pero en formato más compacto. Los tiempos de carga son prácticamente instantáneos gracias al SSD. El mando DualSense es revolucionario con su retroalimentación háptica y gatillos adaptativos. La calidad gráfica en 4K es impresionante. El sistema de audio 3D Tempest es inmersivo. Los únicos inconvenientes son el precio de los juegos digitales y que no puedes usar juegos en formato físico.",
+    "puntuacion": 4.8,
+    "website": {
+        "nombre": "MediaMarkt",
+        "url": "https://www.mediamarkt.es/ps5-digital"
+    }
+} 

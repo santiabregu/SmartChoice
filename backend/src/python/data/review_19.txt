@@ -1,0 +1,11 @@
+{
+    "id": "19",
+    "producto": "Lenovo IdeaPad Gaming 3",
+    "categoria": "Tecnología",
+    "resena": "Portátil gaming de gama media con buena relación calidad-precio. El procesador AMD Ryzen 5 y la RTX 3050 manejan bien juegos actuales a 1080p con ajustes medios-altos. La pantalla IPS de 15.6\" y 120Hz ofrece buena calidad de imagen y fluidez. El teclado es cómodo para gaming y trabajo. El sistema de refrigeración es efectivo aunque ruidoso bajo carga. La batería dura unas 4-5 horas en uso normal. Como punto negativo, la webcam es solo 720p.",
+    "puntuacion": 4.3,
+    "website": {
+        "nombre": "PcComponentes",
+        "url": "https://www.pccomponentes.com/lenovo-ideapad-gaming-3"
+    }
+}

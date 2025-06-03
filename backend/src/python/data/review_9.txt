@@ -1,0 +1,11 @@
+{
+    "id": "9",
+    "producto": "Google Pixel 8",
+    "categoria": "Tecnología",
+    "resena": "El Pixel 8 es una excelente opción en la gama alta. La cámara es excepcional, especialmente en modo nocturno y el procesamiento de IA para las fotos es impresionante. La pantalla de 6.2 pulgadas es nítida y brillante, con una tasa de refresco adaptativa que funciona muy bien. El rendimiento es fluido gracias al chip Tensor G3. Las actualizaciones de Android son rápidas y la integración con IA es muy útil. Como punto negativo, la batería podría durar más con uso intensivo.",
+    "puntuacion": 4.6,
+    "website": {
+        "nombre": "MediaMarkt",
+        "url": "https://www.mediamarkt.es/es/product/google-pixel-8-128gb-obsidian"
+    }
+}

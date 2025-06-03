@@ -1,0 +1,11 @@
+{
+    "id": "17",
+    "producto": "Samsung Galaxy Watch 6",
+    "categoria": "Tecnología",
+    "resena": "Smartwatch premium con WearOS. La pantalla Super AMOLED es brillante y nítida, perfecta para uso en exteriores. La duración de la batería es de unos 2 días con uso moderado. El seguimiento de actividad física y salud es muy preciso, especialmente el monitor cardíaco y el análisis del sueño. La integración con teléfonos Android es excelente. El único punto negativo es que algunas funciones de salud solo funcionan con teléfonos Samsung.",
+    "puntuacion": 4.7,
+    "website": {
+        "nombre": "Samsung",
+        "url": "https://www.samsung.com/es/galaxy-watch6"
+    }
+}

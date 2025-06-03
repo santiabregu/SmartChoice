@@ -1,0 +1,11 @@
+{
+    "id": "12",
+    "producto": "Xiaomi Smart Band 8",
+    "categoria": "Tecnología",
+    "resena": "Excelente relación calidad-precio. La pantalla AMOLED es brillante y nítida, perfecta para uso en exteriores. La batería dura aproximadamente 10 días con uso normal. El seguimiento de actividad física y sueño es preciso, y las nuevas funciones de ejercicio son muy útiles. La app es intuitiva aunque algunas traducciones podrían mejorar. La correa es cómoda para uso prolongado.",
+    "puntuacion": 4.5,
+    "website": {
+        "nombre": "PcComponentes",
+        "url": "https://www.pccomponentes.com/xiaomi-smart-band-8"
+    }
+}

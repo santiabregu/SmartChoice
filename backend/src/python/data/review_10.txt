@@ -1,0 +1,11 @@
+{
+    "id": "10",
+    "producto": "Nintendo Switch OLED",
+    "categoria": "Tecnología",
+    "resena": "La Nintendo Switch OLED es una notable mejora respecto al modelo original. La pantalla OLED de 7 pulgadas ofrece colores más vibrantes y negros más profundos, lo que mejora significativamente la experiencia de juego en modo portátil. El soporte ajustable es más robusto y los altavoces tienen mejor calidad de sonido. Los 64GB de almacenamiento son útiles, aunque probablemente necesitarás una tarjeta SD para más juegos. El dock con puerto ethernet es un plus para juego online. El único inconveniente es que no hay mejoras en el rendimiento respecto al modelo base.",
+    "puntuacion": 4.7,
+    "website": {
+        "nombre": "GAME",
+        "url": "https://www.game.es/nintendo-switch-oled"
+    }
+}

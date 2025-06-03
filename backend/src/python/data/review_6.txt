@@ -1,0 +1,11 @@
+{
+    "id": "6",
+    "producto": "Airpods 2ª generación",
+    "categoria": "Tecnología",
+    "resena": "No estoy satisfecho con este producto. La calidad es inferior a lo que se mostraba en las fotos. La batería dura muy poco y el servicio de atención al cliente no fue de ayuda. No lo recomiendo.",
+    "puntuacion": 2.0,
+    "website": {
+        "nombre": "AliExpress",
+        "url": "https://www.aliexpress.com/review/983"
+    }
+} 

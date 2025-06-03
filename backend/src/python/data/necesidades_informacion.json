@@ -23,6 +23,54 @@
             "descripcion": "Encontrar productos con cancelación de ruido",
             "consulta_booleana": "cancelacion AND (ruido OR sonido)",
             "consulta_libre": "cancelación ruido noise cancelling"
+        },
+        {
+            "id": "N5",
+            "descripcion": "Encontrar electrodomésticos con buena eficiencia energética",
+            "consulta_booleana": "(electrodomesticos OR hogar) AND (eficiencia OR consumo OR ahorro)",
+            "consulta_libre": "electrodomésticos eficientes bajo consumo ahorro energético"
+        },
+        {
+            "id": "N6",
+            "descripcion": "Buscar mobiliario ergonómico para oficina",
+            "consulta_booleana": "(silla OR escritorio) AND (ergonomico OR comfort OR ajustable)",
+            "consulta_libre": "mobiliario ergonómico oficina comodidad ajustable"
+        },
+        {
+            "id": "N7",
+            "descripcion": "Encontrar dispositivos de hogar inteligente compatibles con Alexa",
+            "consulta_booleana": "(hogar inteligente OR domotica) AND (alexa OR amazon)",
+            "consulta_libre": "dispositivos smart home alexa compatibles"
+        },
+        {
+            "id": "N8",
+            "descripcion": "Buscar robots aspiradores con función de fregado",
+            "consulta_booleana": "robot AND (aspirador OR limpieza) AND (fregado OR mopa)",
+            "consulta_libre": "robot aspirador friegasuelos mopa"
+        },
+        {
+            "id": "N9",
+            "descripcion": "Encontrar electrodomésticos de cocina profesionales",
+            "consulta_booleana": "(cocina OR gastronomia) AND (profesional OR alta gama)",
+            "consulta_libre": "electrodomésticos cocina profesional alta gama"
+        },
+        {
+            "id": "N10",
+            "descripcion": "Buscar productos con garantía extendida",
+            "consulta_booleana": "garantia AND (extendida OR anos OR durabilidad)",
+            "consulta_libre": "garantía larga duración calidad construcción"
+        },
+        {
+            "id": "N11",
+            "descripcion": "Encontrar dispositivos con control por aplicación móvil",
+            "consulta_booleana": "(app OR aplicacion) AND (control OR configuracion)",
+            "consulta_libre": "control app móvil configuración remota"
+        },
+        {
+            "id": "N12",
+            "descripcion": "Buscar productos con sistema de autolavado o autolimpieza",
+            "consulta_booleana": "(auto OR automatico) AND (limpieza OR mantenimiento)",
+            "consulta_libre": "autolimpieza automático mantenimiento fácil"
         }
     ],
     "metricas_evaluacion": {

@@ -1,0 +1,11 @@
+{
+    "id": "20",
+    "producto": "OnePlus 12",
+    "categoria": "Tecnología",
+    "resena": "Smartphone flagship con especificaciones de primera. El Snapdragon 8 Gen 3 ofrece un rendimiento excepcional. La pantalla AMOLED LTPO de 6.82\" es brillante y fluida con sus 120Hz. La carga rápida de 100W es impresionante, de 1 a 100% en 25 minutos. Las cámaras Hasselblad han mejorado notablemente, especialmente en condiciones de poca luz. OxygenOS 14 es rápido y personalizable. El único inconveniente es que es un teléfono algo grande y pesado para algunos usuarios.",
+    "puntuacion": 4.8,
+    "website": {
+        "nombre": "OnePlus",
+        "url": "https://www.oneplus.com/es/12"
+    }
+}

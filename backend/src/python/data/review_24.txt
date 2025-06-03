@@ -1,0 +1,11 @@
+{
+    "id": "24",
+    "producto": "Amazon Echo Show 8 (2ª gen)",
+    "categoria": "Tecnología",
+    "resena": "Pantalla inteligente con Alexa de 8 pulgadas. La calidad de imagen es nítida y los altavoces ofrecen un sonido envolvente con buenos bajos. La cámara de 13MP con seguimiento automático es perfecta para videollamadas. El hub domótico integrado facilita el control de dispositivos compatibles. La pantalla adaptativa ajusta el brillo según la luz ambiente. Como aspecto mejorable, el procesador podría ser más rápido en algunas tareas.",
+    "puntuacion": 4.5,
+    "website": {
+        "nombre": "Amazon",
+        "url": "https://www.amazon.es/echo-show-8"
+    }
+} 
