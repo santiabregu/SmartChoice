@@ -71,6 +71,84 @@
             "descripcion": "Buscar productos con sistema de autolavado o autolimpieza",
             "consulta_booleana": "(auto OR automatico) AND (limpieza OR mantenimiento)",
             "consulta_libre": "autolimpieza automático mantenimiento fácil"
+        },
+        {
+            "id": "N13",
+            "descripcion": "Encontrar productos cosméticos para piel sensible",
+            "consulta_booleana": "(cosmetico OR crema) AND (sensible OR irritacion)",
+            "consulta_libre": "cosmético piel sensible hidratante sin irritación"
+        },
+        {
+            "id": "N14",
+            "descripcion": "Encontrar equipamiento deportivo transpirable",
+            "consulta_booleana": "deportivo AND (transpirable OR ventilacion)",
+            "consulta_libre": "ropa deportiva transpirable running calor"
+        },
+        {
+            "id": "N15",
+            "descripcion": "Encontrar dispositivos con cancelación de ruido efectiva",
+            "consulta_booleana": "(auriculares OR cascos) AND cancelacion AND ruido",
+            "consulta_libre": "cancelación ruido auriculares sonido aislamiento"
+        },
+        {
+            "id": "N16",
+            "descripcion": "Encontrar productos gaming de alta precisión",
+            "consulta_booleana": "gaming AND (precision OR respuesta OR rapido)",
+            "consulta_libre": "gaming precisión respuesta rápida competitivo profesional"
+        },
+        {
+            "id": "N17",
+            "descripcion": "Encontrar dispositivos Apple con chip M2",
+            "consulta_booleana": "apple AND m2 AND (macbook OR ipad)",
+            "consulta_libre": "apple m2 rendimiento potencia velocidad"
+        },
+        {
+            "id": "N18",
+            "descripcion": "Encontrar productos con pantalla AMOLED",
+            "consulta_booleana": "(pantalla OR display) AND (amoled OR oled)",
+            "consulta_libre": "pantalla amoled brillante nítida calidad"
+        },
+        {
+            "id": "N19",
+            "descripcion": "Encontrar productos para fotografía profesional",
+            "consulta_booleana": "(fotografia OR camara) AND (profesional OR calidad)",
+            "consulta_libre": "fotografía profesional calidad imagen nitidez"
+        },
+        {
+            "id": "N20",
+            "descripcion": "Encontrar dispositivos inteligentes para el hogar",
+            "consulta_booleana": "(smart OR inteligente) AND (hogar OR casa OR alexa)",
+            "consulta_libre": "smart home inteligente asistente automatización"
+        },
+        {
+            "id": "N21",
+            "descripcion": "Encontrar productos con carga rápida",
+            "consulta_booleana": "carga AND (rapida OR inalambrica OR velocidad)",
+            "consulta_libre": "carga rápida inalámbrica velocidad batería"
+        },
+        {
+            "id": "N22",
+            "descripcion": "Encontrar dispositivos para creación de contenido",
+            "consulta_booleana": "(creacion OR edicion) AND (contenido OR digital)",
+            "consulta_libre": "creación contenido digital edición profesional"
+        },
+        {
+            "id": "N23",
+            "descripcion": "Encontrar productos con conectividad avanzada",
+            "consulta_booleana": "(bluetooth OR wifi) AND (conectividad OR conexion)",
+            "consulta_libre": "conectividad bluetooth wifi conexión inalámbrico"
+        },
+        {
+            "id": "N24",
+            "descripcion": "Encontrar productos con diseño premium",
+            "consulta_booleana": "(premium OR calidad) AND (diseno OR construccion)",
+            "consulta_libre": "diseño premium construcción calidad materiales"
+        },
+        {
+            "id": "N25",
+            "descripcion": "Encontrar dispositivos para monitorización de salud",
+            "consulta_booleana": "(salud OR actividad) AND (seguimiento OR monitorizacion)",
+            "consulta_libre": "salud actividad seguimiento monitorización fitness"
         }
     ],
     "metricas_evaluacion": {

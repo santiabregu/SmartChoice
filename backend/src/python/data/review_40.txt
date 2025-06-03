@@ -1,0 +1,11 @@
+{
+    "id": "40",
+    "producto": "LG UltraGear 27GP850",
+    "categoria": "Tecnología",
+    "resena": "Monitor gaming espectacular. Panel IPS de 165Hz con tiempo de respuesta de 1ms real. Los colores son vibrantes y precisos. Compatible con G-Sync y FreeSync Premium. El soporte es ajustable en altura y rotación. Perfecto para gaming competitivo y trabajo de diseño. La configuración HDR es decente para el precio.",
+    "puntuacion": 4.8,
+    "website": {
+        "nombre": "LG",
+        "url": "https://www.lg.com/es/review/27gp850"
+    }
+} 

@@ -1,0 +1,11 @@
+{
+    "id": "48",
+    "producto": "Amazon Echo Show 10",
+    "categoria": "Tecnología",
+    "resena": "Altavoz inteligente con pantalla giratoria muy útil. El seguimiento de movimiento funciona bien durante videollamadas. El sonido es potente y equilibrado. La integración con dispositivos smart home es perfecta. La pantalla HD es nítida y el modo ambiente es elegante. Alexa entiende bien el español.",
+    "puntuacion": 4.6,
+    "website": {
+        "nombre": "Amazon",
+        "url": "https://www.amazon.es/review/echo-show-10"
+    }
+} 

@@ -1,0 +1,11 @@
+{
+    "id": "37",
+    "producto": "Samsung Galaxy Buds Pro",
+    "categoria": "Tecnología",
+    "resena": "Estos auriculares inalámbricos son una maravilla. La cancelación de ruido activa funciona muy bien en el metro y oficina. El sonido es equilibrado con buenos bajos. La batería dura unas 5 horas con ANC activado. La conexión Bluetooth es estable y el estuche de carga es compacto. El modo ambiente es muy natural.",
+    "puntuacion": 4.6,
+    "website": {
+        "nombre": "Samsung",
+        "url": "https://www.samsung.com/es/review/buds-pro"
+    }
+} 

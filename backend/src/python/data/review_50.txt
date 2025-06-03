@@ -1,0 +1,11 @@
+{
+    "id": "50",
+    "producto": "iPad Pro 12.9 (2022)",
+    "categoria": "Tecnología",
+    "resena": "Una tablet increíblemente potente. La pantalla Mini-LED es espectacular para consumo de contenido y edición de fotos. El chip M2 maneja cualquier tarea sin esfuerzo. El Apple Pencil 2 es muy preciso para dibujo y notas. La duración de la batería es excelente y el Face ID funciona perfectamente en cualquier orientación.",
+    "puntuacion": 4.9,
+    "website": {
+        "nombre": "Apple",
+        "url": "https://www.apple.com/es/review/ipad-pro"
+    }
+} 

@@ -1,0 +1,11 @@
+{
+    "id": "31",
+    "producto": "Logitech G502 HERO",
+    "categoria": "Tecnología",
+    "resena": "Un ratón gaming excepcional. Los botones programables son muy útiles y responden perfectamente. El sensor es preciso y la rueda de desplazamiento tiene dos modos que son geniales. El software permite personalizar todo y los pesos ajustables son un plus. La ergonomía es perfecta para sesiones largas.",
+    "puntuacion": 4.8,
+    "website": {
+        "nombre": "PCComponentes",
+        "url": "https://www.pccomponentes.com/review/g502"
+    }
+} 

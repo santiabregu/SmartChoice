@@ -1,0 +1,11 @@
+{
+    "id": "47",
+    "producto": "Sony 24-70mm f/2.8 GM",
+    "categoria": "Fotografía",
+    "resena": "Un objetivo versátil y profesional. La nitidez es excepcional en todo el rango focal. El enfoque automático es rápido y silencioso. La construcción es robusta y resistente al clima. El bokeh es suave y agradable. Perfecto para bodas y eventos, aunque el peso es considerable.",
+    "puntuacion": 4.8,
+    "website": {
+        "nombre": "Sony",
+        "url": "https://www.sony.es/review/24-70gm"
+    }
+} 

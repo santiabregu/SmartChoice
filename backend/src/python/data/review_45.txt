@@ -1,0 +1,11 @@
+{
+    "id": "45",
+    "producto": "Fitbit Charge 5",
+    "categoria": "Tecnología",
+    "resena": "Excelente pulsera de actividad con GPS integrado. El seguimiento del sueño es muy preciso y detallado. La pantalla AMOLED es brillante y fácil de leer al sol. La batería dura una semana completa. El sensor ECG y la medición de estrés son características útiles. La app es intuitiva y llena de datos.",
+    "puntuacion": 4.7,
+    "website": {
+        "nombre": "Fitbit",
+        "url": "https://www.fitbit.com/es/review/charge5"
+    }
+} 

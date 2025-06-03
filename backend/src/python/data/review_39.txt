@@ -1,0 +1,11 @@
+{
+    "id": "39",
+    "producto": "Razer BlackWidow V3",
+    "categoria": "Tecnología",
+    "resena": "Teclado mecánico gaming de primera calidad. Los switches verdes son táctiles y con un click satisfactorio, perfectos para gaming. La retroiluminación RGB es personalizable y brillante. El reposamuñecas es muy cómodo para sesiones largas. La construcción es sólida y los keycaps son duraderos.",
+    "puntuacion": 4.5,
+    "website": {
+        "nombre": "Razer",
+        "url": "https://www.razer.com/es/review/blackwidow"
+    }
+} 

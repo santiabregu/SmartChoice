@@ -1,0 +1,11 @@
+{
+    "id": "46",
+    "producto": "PlayStation 5",
+    "categoria": "Tecnología",
+    "resena": "Una consola de nueva generación impresionante. Los tiempos de carga son prácticamente instantáneos gracias al SSD. El DualSense es revolucionario con su retroalimentación háptica. Los gráficos en 4K son espectaculares y el ray tracing añade mucho realismo. El sistema de audio 3D es inmersivo.",
+    "puntuacion": 4.9,
+    "website": {
+        "nombre": "PlayStation",
+        "url": "https://www.playstation.com/es/review/ps5"
+    }
+} 

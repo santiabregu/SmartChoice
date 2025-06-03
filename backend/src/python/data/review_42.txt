@@ -1,0 +1,11 @@
+{
+    "id": "42",
+    "producto": "La Roche-Posay Effaclar Mat",
+    "categoria": "Cosméticos",
+    "resena": "Excelente hidratante para piel grasa. Controla el exceso de grasa durante todo el día y minimiza los poros visiblemente. La textura es ligera y se absorbe rápidamente sin dejar residuo. No provoca brotes y funciona bien bajo el maquillaje. El envase con dosificador es muy higiénico.",
+    "puntuacion": 4.6,
+    "website": {
+        "nombre": "La Roche-Posay",
+        "url": "https://www.laroche-posay.es/review/effaclar"
+    }
+} 

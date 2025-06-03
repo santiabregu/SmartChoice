@@ -1,0 +1,11 @@
+{
+    "id": "43",
+    "producto": "Bose QuietComfort 45",
+    "categoria": "Tecnología",
+    "resena": "Auriculares con cancelación de ruido superiores. La calidad de sonido es cristalina con graves profundos y agudos nítidos. La batería dura más de 24 horas y la carga rápida es muy útil. Muy cómodos para uso prolongado, las almohadillas son suaves y no presionan. La app permite personalizar el ecualizador.",
+    "puntuacion": 4.9,
+    "website": {
+        "nombre": "Bose",
+        "url": "https://www.bose.es/review/qc45"
+    }
+} 

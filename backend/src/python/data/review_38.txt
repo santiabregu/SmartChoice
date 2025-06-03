@@ -1,0 +1,11 @@
+{
+    "id": "38",
+    "producto": "Apple Watch Series 8",
+    "categoria": "Tecnología",
+    "resena": "Un reloj inteligente completo y versátil. El seguimiento de actividad física es muy preciso, especialmente para natación y running. La pantalla siempre encendida es brillante y responsive. La batería dura casi dos días con uso moderado. Las notificaciones funcionan perfectamente y la integración con iPhone es excelente.",
+    "puntuacion": 4.7,
+    "website": {
+        "nombre": "Apple",
+        "url": "https://www.apple.com/es/review/watch-8"
+    }
+} 

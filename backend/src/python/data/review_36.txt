@@ -1,0 +1,11 @@
+{
+    "id": "36",
+    "producto": "Base de Maquillaje Fenty Beauty",
+    "categoria": "Cosméticos",
+    "resena": "La mejor base que he probado. La cobertura es buildable, desde media hasta total, y queda muy natural. Dura todo el día sin transferencia y no oxida. Perfecta para piel mixta y viene en una amplia gama de tonos. No resalta los poros ni las líneas finas. El acabado es semi-mate pero no reseca.",
+    "puntuacion": 4.8,
+    "website": {
+        "nombre": "Sephora",
+        "url": "https://www.sephora.es/review/fenty-base"
+    }
+} 

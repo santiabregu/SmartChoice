@@ -1,0 +1,11 @@
+{
+    "id": "44",
+    "producto": "Secretlab Titan Evo 2022",
+    "categoria": "Mobiliario",
+    "resena": "La mejor silla gaming que he probado. El soporte lumbar magnético es ajustable y muy efectivo. La espuma es firme pero cómoda, perfecta para sesiones largas. Los reposabrazos 4D son muy versátiles. La calidad de construcción es excelente y el tapizado en tela es duradero y transpirable.",
+    "puntuacion": 4.8,
+    "website": {
+        "nombre": "Secretlab",
+        "url": "https://www.secretlab.eu/review/titan-evo"
+    }
+} 

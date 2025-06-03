@@ -1,0 +1,11 @@
+{
+    "id": "35",
+    "producto": "MacBook Air M2",
+    "categoria": "Tecnología",
+    "resena": "Increíble portátil para trabajo y uso diario. La duración de la batería es excepcional, más de 12 horas de uso real. El teclado es muy cómodo y el trackpad es el mejor del mercado. El rendimiento con el chip M2 es sobresaliente y no hace ruido ni se calienta. La pantalla Retina es perfecta para edición de fotos.",
+    "puntuacion": 4.9,
+    "website": {
+        "nombre": "Apple",
+        "url": "https://www.apple.com/es/review/macbook-air"
+    }
+} 

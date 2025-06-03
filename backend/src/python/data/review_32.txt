@@ -1,0 +1,11 @@
+{
+    "id": "32",
+    "producto": "Crema Hidratante CeraVe",
+    "categoria": "Cosméticos",
+    "resena": "Esta crema hidratante es perfecta para piel sensible. No causa irritación y mantiene la piel hidratada durante todo el día. La textura es ligera y se absorbe rápidamente. Los ceramidas y el ácido hialurónico hacen maravillas. Uso diario mañana y noche con excelentes resultados.",
+    "puntuacion": 4.7,
+    "website": {
+        "nombre": "Sephora",
+        "url": "https://www.sephora.es/review/cerave-32"
+    }
+} 

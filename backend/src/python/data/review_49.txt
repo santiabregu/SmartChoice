@@ -1,0 +1,11 @@
+{
+    "id": "49",
+    "producto": "Chanel Bleu de Chanel EDP",
+    "categoria": "Cosméticos",
+    "resena": "Una fragancia masculina moderna y elegante. La proyección es moderada pero duradera, perfecta para el día a día. Las notas de salida son frescas y cítricas, evolucionando a un corazón amaderado. La fijación es excelente, dura más de 8 horas. El frasco es muy elegante y el atomizador distribuye bien.",
+    "puntuacion": 4.8,
+    "website": {
+        "nombre": "Chanel",
+        "url": "https://www.chanel.com/es/review/bleu"
+    }
+} 

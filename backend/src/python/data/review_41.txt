@@ -1,0 +1,11 @@
+{
+    "id": "41",
+    "producto": "Nike Flex Stride",
+    "categoria": "Ropa Deportiva",
+    "resena": "Shorts perfectos para running. El tejido es ligero y muy transpirable, ideal para días calurosos. El forro interior previene rozaduras y es muy cómodo. Los bolsillos son suficientes y el de atrás tiene cierre para las llaves. La cintura elástica se ajusta bien y no se mueve durante la carrera.",
+    "puntuacion": 4.7,
+    "website": {
+        "nombre": "Nike",
+        "url": "https://www.nike.com/es/review/flex-stride"
+    }
+} 

@@ -1,0 +1,11 @@
+{
+    "id": "33",
+    "producto": "Nike Air Zoom Pegasus 38",
+    "categoria": "Calzado Deportivo",
+    "resena": "Estas zapatillas son increíbles para correr. La amortiguación es perfecta para carreras largas y el ajuste es muy cómodo. La parte superior es transpirable y evita el sobrecalentamiento. He notado menos fatiga en las piernas después de correr. La durabilidad es excelente después de 3 meses de uso intensivo.",
+    "puntuacion": 4.6,
+    "website": {
+        "nombre": "Nike",
+        "url": "https://www.nike.com/es/review/pegasus-38"
+    }
+} 
