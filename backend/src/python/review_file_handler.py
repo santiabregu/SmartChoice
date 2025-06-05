@@ -70,7 +70,7 @@ class ReviewFileHandler:
             print(f"Error listing reviews: {str(e)}")
             return []
     
-    def search_reviews(self, query: str, search_type: str = 'tf_idf', operator: str = 'AND', min_score: float = 0.05) -> List[Dict]:
+    def search_reviews(self, query: str, search_type: str = 'tf_idf', operator: str = 'AND', min_score: float = 0.01) -> List[Dict]:
         """
         Busca reseñas usando el sistema especificado
         Args:

@@ -18,6 +18,106 @@ class TextProcessor:
         self.total_documents = 0
         self.sinonimos = self._load_sinonimos()
         
+        # Configuración de pesos para términos
+        self.term_importance = {
+            # Términos de calidad y valoración (peso alto)
+            'calidad': 2.5,
+            'excelente': 2.3,
+            'premium': 2.3,
+            'profesional': 2.2,
+            'bueno': 2.0,
+            'alta gama': 2.0,
+
+            # Características técnicas principales (peso alto)
+            'bateria': 2.0,
+            'duracion': 2.0,
+            'autonomia': 2.0,
+            'cancelacion': 2.0,
+            'sonido': 2.0,
+            'audio': 2.0,
+
+            # Categorías de producto (peso medio-alto)
+            'auricular': 1.8,
+            'altavoz': 1.8,
+            'smartphone': 1.8,
+            'tablet': 1.8,
+            'electrodomestico': 1.8,
+
+            # Características específicas (peso medio)
+            'bluetooth': 1.5,
+            'wifi': 1.5,
+            'inalambrico': 1.5,
+            'ergonomico': 1.5,
+            'ajustable': 1.5,
+            'smart': 1.5,
+            'inteligente': 1.5,
+
+            # Características de rendimiento (peso medio)
+            'velocidad': 1.5,
+            'rendimiento': 1.5,
+            'potencia': 1.5,
+            'precision': 1.5,
+            'eficiencia': 1.5,
+
+            # Características de diseño (peso medio)
+            'diseno': 1.4,
+            'construccion': 1.4,
+            'materiales': 1.4,
+            'pantalla': 1.4,
+            'amoled': 1.4,
+
+            # Características de uso (peso medio-bajo)
+            'configuracion': 1.3,
+            'control': 1.3,
+            'app': 1.3,
+            'aplicacion': 1.3,
+            'compatible': 1.3,
+
+            # Términos de mantenimiento (peso medio-bajo)
+            'garantia': 1.3,
+            'durabilidad': 1.3,
+            'mantenimiento': 1.3,
+            'limpieza': 1.3,
+            'automatico': 1.3,
+
+            # Términos económicos (peso medio-bajo)
+            'precio': 1.2,
+            'economico': 1.2,
+            'barato': 1.2,
+            'ahorro': 1.2,
+
+            # Términos específicos de nicho (peso variable según contexto)
+            'gaming': 1.8,
+            'fitness': 1.5,
+            'deportivo': 1.5,
+            'salud': 1.5,
+            'cosmetico': 1.5,
+            'cocina': 1.4,
+            'hogar': 1.3
+        }
+        
+        # Boost adicional para combinaciones específicas
+        self.compound_terms = {
+            'calidad sonido': 2.8,
+            'duracion bateria': 2.8,
+            'buena bateria': 2.5,
+            'cancelacion ruido': 2.8,
+            'alta gama': 2.5,
+            'smart home': 2.3,
+            'carga rapida': 2.2,
+            'bajo consumo': 2.0
+        }
+        
+        # Factores de penalización
+        self.penalty_terms = {
+            'malo': 0.5,
+            'defectuoso': 0.5,
+            'roto': 0.5,
+            'fallo': 0.5,
+            'problema': 0.6,
+            'negativo': 0.6
+        }
+        
     def _load_sinonimos(self) -> Dict[str, List[str]]:
         """Carga el diccionario de sinónimos desde el archivo JSON"""
         try:
@@ -229,19 +329,25 @@ class TextProcessor:
                 for term, freq in tf_dict.items()}
     
     def calculate_idf(self, term: str) -> float:
-        """Calcula el IDF de un término con peso mejorado"""
-        if not self.total_documents:
+        """Calcula el IDF de un término con boost por importancia"""
+        if term not in self.inverted_index:
             return 0.0
         
-        doc_freq = len(self.inverted_index.get(term, {}))
-        if doc_freq == 0:
-            return 0.0
-            
-        # IDF mejorado con factor de boost para términos más discriminativos
-        boost = 1.2  # Factor de boost para términos raros
-        # Añadir 1 al numerador y denominador para evitar división por cero
-        return boost * math.log(1 + (self.total_documents / (1 + doc_freq)))
-    
+        # Obtener el número de documentos que contienen el término
+        doc_freq = len(self.inverted_index[term])
+        
+        # Calcular IDF base
+        idf = math.log(1 + (self.total_documents / (1 + doc_freq)))
+        
+        # Aplicar boost por importancia del término
+        term_boost = self.term_importance.get(term.lower(), 1.0)
+        
+        # Aplicar penalización si es un término negativo
+        term_penalty = self.penalty_terms.get(term.lower(), 1.0)
+        
+        # El IDF final es el producto del IDF base, el boost y la penalización
+        return idf * term_boost * term_penalty
+
     def boolean_search(self, query: str, operator: str = 'AND') -> Set[str]:
         """Realiza una búsqueda booleana con operadores AND, OR, NOT"""
         print(f"\nRealizando búsqueda booleana: {query}")
@@ -411,100 +517,44 @@ class TextProcessor:
         return results
     
     def tf_idf_search(self, query: str) -> Dict[str, float]:
-        """Realiza una búsqueda por similitud usando tf-idf mejorado"""
-        print(f"\nRealizando búsqueda tf-idf para query: {query}")
+        """Realiza una búsqueda por similitud usando TF-IDF con pesos mejorados"""
+        print(f"\nRealizando búsqueda TF-IDF para: {query}")
         
         # Procesar la consulta
-        processed_query = self.process_text(query)
-        query_terms = processed_query['stemmed']
+        query_terms = self.process_text(query)
+        query_vector = query_terms['tf_vector']
         
-        if not query_terms:
-            print("No hay términos válidos en la consulta")
-            return {}
+        # Buscar términos compuestos en la consulta normalizada
+        query_normalized = ' '.join(query_terms['tokens']).lower()
+        compound_boost = 1.0
+        for compound, boost in self.compound_terms.items():
+            if compound.lower() in query_normalized:
+                compound_boost *= boost
+                print(f"Aplicando boost de término compuesto '{compound}': {boost}")
         
-        # Calcular tf-idf para la consulta con pesos mejorados
-        query_tf = self._calculate_tf(query_terms)
-        query_vector = {}
-        
-        print("\nPesos tf-idf para términos de la consulta:")
-        for term, tf in query_tf.items():
-            idf = self.calculate_idf(term)
-            # Dar más peso a términos que aparecen múltiples veces en la consulta
-            boost = math.sqrt(query_terms.count(term))
-            
-            # Boost adicional para términos clave de la consulta
-            term_importance = {
-                'auricular': 2.0,  # Término principal del producto
-                'bateria': 1.5,    # Característica importante
-                'bueno': 1.2,      # Calificador de calidad
-                'tecnologia': 1.1  # Categoría relevante
-            }
-            
-            extra_boost = 1.0
-            for key_term, importance in term_importance.items():
-                if self.stemmer.stem(key_term) == term:
-                    extra_boost = importance
-                    break
-            
-            print(f"- {term}: tf={tf:.4f}, idf={idf:.4f}, boost={boost:.2f}, extra_boost={extra_boost:.2f}")
-            if idf > 0:
-                query_vector[term] = tf * idf * boost * extra_boost
-        
-        print(f"\nVector de la consulta: {query_vector}")
-        
-        if not query_vector:
-            print("No hay términos con peso en la consulta")
-            return {}
-        
-        # Normalizar vector de consulta
-        query_magnitude = math.sqrt(sum(w * w for w in query_vector.values()))
-        if query_magnitude == 0:
-            return {}
-        
-        query_vector = {term: weight/query_magnitude for term, weight in query_vector.items()}
-        
-        # Calcular scores para cada documento
-        print("\nProcesando documentos:")
+        # Calcular similitud para cada documento
         scores = {}
         for doc_id in self.document_lengths:
-            doc_vector = {}
+            score = 0.0
             doc_length = self.document_lengths[doc_id]
             
-            # Calcular vector del documento con pesos mejorados
-            for term in set(query_vector.keys()) | set(self.inverted_index.keys()):
-                if term in self.inverted_index and doc_id in self.inverted_index[term]:
-                    term_freq = len(self.inverted_index[term][doc_id])
-                    tf = (term_freq * (1.2 + 1)) / (term_freq + 1.2)
+            # Calcular similitud coseno con boost por términos importantes
+            for term, query_tf in query_vector.items():
+                if doc_id in self.inverted_index.get(term, {}):
+                    # Calcular TF-IDF para el documento con boost por importancia
+                    doc_tf = len(self.inverted_index[term][doc_id]) / doc_length
                     idf = self.calculate_idf(term)
-                    doc_vector[term] = tf * idf
+                    term_boost = self.term_importance.get(term.lower(), 1.0)
+                    term_score = query_tf * doc_tf * idf * term_boost
+                    score += term_score
+                    
+                    print(f"Término '{term}': TF={doc_tf:.4f}, IDF={idf:.4f}, Boost={term_boost:.1f}, Score={term_score:.4f}")
             
-            if not doc_vector:
-                continue
-            
-            # Normalizar vector del documento
-            doc_magnitude = math.sqrt(sum(w * w for w in doc_vector.values()))
-            if doc_magnitude == 0:
-                continue
-            
-            doc_vector = {term: weight/doc_magnitude for term, weight in doc_vector.items()}
-            
-            # Calcular similitud con términos comunes
-            similarity = sum(query_vector.get(term, 0) * doc_vector.get(term, 0)
-                           for term in set(query_vector.keys()) & set(doc_vector.keys()))
-            
-            # Penalización por categoría no relacionada
-            categoria_penalty = 1.0
-            if doc_id in ["2", "4"]:  # IDs de productos que no son tecnología
-                categoria_penalty = 0.3
-            
-            similarity *= categoria_penalty
-            
-            print(f"\nDoc {doc_id}:")
-            print(f"- Longitud: {doc_length}")
-            print(f"- Penalización por categoría: {categoria_penalty:.4f}")
-            print(f"- Similitud final: {similarity:.4f}")
-            
-            scores[doc_id] = similarity
+            # Normalizar por longitud del documento y aplicar boost de términos compuestos
+            if score > 0:
+                score = (score / math.sqrt(doc_length)) * compound_boost
+                scores[doc_id] = score
+                print(f"Doc {doc_id}: Score final={score:.4f}")
         
-        print(f"\nScores finales: {scores}")
+        # Ordenar por score descendente
         return dict(sorted(scores.items(), key=lambda x: x[1], reverse=True)) 

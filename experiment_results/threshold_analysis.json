@@ -1,0 +1,1481 @@
+{
+  "per_threshold": {
+    "0.05": {
+      "precision": 0.02461788617886179,
+      "recall": 0.16,
+      "f1": 0.0,
+      "num_results": 201
+    },
+    "0.15": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "num_results": 201
+    },
+    "0.3": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "num_results": 201
+    },
+    "0.5": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "num_results": 201
+    }
+  },
+  "per_need": {
+    "N1": {
+      "0.05": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 12,
+          "relevant_count": 0,
+          "nonrelevant_count": 12,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 12
+      },
+      "0.15": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 12,
+          "relevant_count": 0,
+          "nonrelevant_count": 12,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 12
+      },
+      "0.3": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 12,
+          "relevant_count": 0,
+          "nonrelevant_count": 12,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 12
+      },
+      "0.5": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 12,
+          "relevant_count": 0,
+          "nonrelevant_count": 12,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 12
+      }
+    },
+    "N2": {
+      "0.05": {
+        "metrics": {
+          "average_precision": 1.0,
+          "precision": 0.04878048780487805,
+          "recall": 1.0,
+          "f1_score": 0.09302325581395349,
+          "retrieved_count": 41,
+          "relevant_count": 2,
+          "nonrelevant_count": 38,
+          "retrieved_and_relevant": 2,
+          "expanded_terms": []
+        },
+        "num_results": 41
+      },
+      "0.15": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 41,
+          "relevant_count": 0,
+          "nonrelevant_count": 38,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 41
+      },
+      "0.3": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 41,
+          "relevant_count": 0,
+          "nonrelevant_count": 38,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 41
+      },
+      "0.5": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 41,
+          "relevant_count": 0,
+          "nonrelevant_count": 38,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 41
+      }
+    },
+    "N3": {
+      "0.05": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 10,
+          "relevant_count": 0,
+          "nonrelevant_count": 10,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 10
+      },
+      "0.15": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 10,
+          "relevant_count": 0,
+          "nonrelevant_count": 10,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 10
+      },
+      "0.3": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 10,
+          "relevant_count": 0,
+          "nonrelevant_count": 10,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 10
+      },
+      "0.5": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 10,
+          "relevant_count": 0,
+          "nonrelevant_count": 10,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 10
+      }
+    },
+    "N4": {
+      "0.05": {
+        "metrics": {
+          "average_precision": 1.0,
+          "precision": 0.16666666666666666,
+          "recall": 1.0,
+          "f1_score": 0.2857142857142857,
+          "retrieved_count": 6,
+          "relevant_count": 1,
+          "nonrelevant_count": 5,
+          "retrieved_and_relevant": 1,
+          "expanded_terms": []
+        },
+        "num_results": 6
+      },
+      "0.15": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 6,
+          "relevant_count": 0,
+          "nonrelevant_count": 5,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 6
+      },
+      "0.3": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 6,
+          "relevant_count": 0,
+          "nonrelevant_count": 5,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 6
+      },
+      "0.5": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 6,
+          "relevant_count": 0,
+          "nonrelevant_count": 5,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 6
+      }
+    },
+    "N5": {
+      "0.05": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 0,
+          "relevant_count": 0,
+          "nonrelevant_count": 0,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 0
+      },
+      "0.15": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 0,
+          "relevant_count": 0,
+          "nonrelevant_count": 0,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 0
+      },
+      "0.3": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 0,
+          "relevant_count": 0,
+          "nonrelevant_count": 0,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 0
+      },
+      "0.5": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 0,
+          "relevant_count": 0,
+          "nonrelevant_count": 0,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 0
+      }
+    },
+    "N6": {
+      "0.05": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 1,
+          "relevant_count": 0,
+          "nonrelevant_count": 1,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 1
+      },
+      "0.15": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 1,
+          "relevant_count": 0,
+          "nonrelevant_count": 1,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 1
+      },
+      "0.3": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 1,
+          "relevant_count": 0,
+          "nonrelevant_count": 1,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 1
+      },
+      "0.5": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 1,
+          "relevant_count": 0,
+          "nonrelevant_count": 1,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 1
+      }
+    },
+    "N7": {
+      "0.05": {
+        "metrics": {
+          "average_precision": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "f1_score": 0.33333333333333337,
+          "retrieved_count": 5,
+          "relevant_count": 1,
+          "nonrelevant_count": 4,
+          "retrieved_and_relevant": 1,
+          "expanded_terms": []
+        },
+        "num_results": 5
+      },
+      "0.15": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 5,
+          "relevant_count": 0,
+          "nonrelevant_count": 4,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 5
+      },
+      "0.3": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 5,
+          "relevant_count": 0,
+          "nonrelevant_count": 4,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 5
+      },
+      "0.5": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 5,
+          "relevant_count": 0,
+          "nonrelevant_count": 4,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 5
+      }
+    },
+    "N8": {
+      "0.05": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 0,
+          "relevant_count": 0,
+          "nonrelevant_count": 0,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 0
+      },
+      "0.15": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 0,
+          "relevant_count": 0,
+          "nonrelevant_count": 0,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 0
+      },
+      "0.3": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 0,
+          "relevant_count": 0,
+          "nonrelevant_count": 0,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 0
+      },
+      "0.5": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 0,
+          "relevant_count": 0,
+          "nonrelevant_count": 0,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 0
+      }
+    },
+    "N9": {
+      "0.05": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 6,
+          "relevant_count": 0,
+          "nonrelevant_count": 6,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 6
+      },
+      "0.15": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 6,
+          "relevant_count": 0,
+          "nonrelevant_count": 6,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 6
+      },
+      "0.3": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 6,
+          "relevant_count": 0,
+          "nonrelevant_count": 6,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 6
+      },
+      "0.5": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 6,
+          "relevant_count": 0,
+          "nonrelevant_count": 6,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 6
+      }
+    },
+    "N10": {
+      "0.05": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 18,
+          "relevant_count": 0,
+          "nonrelevant_count": 18,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 18
+      },
+      "0.15": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 18,
+          "relevant_count": 0,
+          "nonrelevant_count": 18,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 18
+      },
+      "0.3": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 18,
+          "relevant_count": 0,
+          "nonrelevant_count": 18,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 18
+      },
+      "0.5": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 18,
+          "relevant_count": 0,
+          "nonrelevant_count": 18,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 18
+      }
+    },
+    "N11": {
+      "0.05": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 0,
+          "relevant_count": 0,
+          "nonrelevant_count": 0,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 0
+      },
+      "0.15": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 0,
+          "relevant_count": 0,
+          "nonrelevant_count": 0,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 0
+      },
+      "0.3": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 0,
+          "relevant_count": 0,
+          "nonrelevant_count": 0,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 0
+      },
+      "0.5": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 0,
+          "relevant_count": 0,
+          "nonrelevant_count": 0,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 0
+      }
+    },
+    "N12": {
+      "0.05": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 0,
+          "relevant_count": 0,
+          "nonrelevant_count": 0,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 0
+      },
+      "0.15": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 0,
+          "relevant_count": 0,
+          "nonrelevant_count": 0,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 0
+      },
+      "0.3": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 0,
+          "relevant_count": 0,
+          "nonrelevant_count": 0,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 0
+      },
+      "0.5": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 0,
+          "relevant_count": 0,
+          "nonrelevant_count": 0,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 0
+      }
+    },
+    "N13": {
+      "0.05": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 1,
+          "relevant_count": 0,
+          "nonrelevant_count": 1,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 1
+      },
+      "0.15": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 1,
+          "relevant_count": 0,
+          "nonrelevant_count": 1,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 1
+      },
+      "0.3": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 1,
+          "relevant_count": 0,
+          "nonrelevant_count": 1,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 1
+      },
+      "0.5": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 1,
+          "relevant_count": 0,
+          "nonrelevant_count": 1,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 1
+      }
+    },
+    "N14": {
+      "0.05": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 2,
+          "relevant_count": 0,
+          "nonrelevant_count": 2,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 2
+      },
+      "0.15": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 2,
+          "relevant_count": 0,
+          "nonrelevant_count": 2,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 2
+      },
+      "0.3": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 2,
+          "relevant_count": 0,
+          "nonrelevant_count": 2,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 2
+      },
+      "0.5": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 2,
+          "relevant_count": 0,
+          "nonrelevant_count": 2,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 2
+      }
+    },
+    "N15": {
+      "0.05": {
+        "metrics": {
+          "average_precision": 1.0,
+          "precision": 0.2,
+          "recall": 1.0,
+          "f1_score": 0.33333333333333337,
+          "retrieved_count": 10,
+          "relevant_count": 2,
+          "nonrelevant_count": 6,
+          "retrieved_and_relevant": 2,
+          "expanded_terms": []
+        },
+        "num_results": 10
+      },
+      "0.15": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 10,
+          "relevant_count": 0,
+          "nonrelevant_count": 6,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 10
+      },
+      "0.3": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 10,
+          "relevant_count": 0,
+          "nonrelevant_count": 6,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 10
+      },
+      "0.5": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 10,
+          "relevant_count": 0,
+          "nonrelevant_count": 6,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 10
+      }
+    },
+    "N16": {
+      "0.05": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 8,
+          "relevant_count": 0,
+          "nonrelevant_count": 8,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 8
+      },
+      "0.15": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 8,
+          "relevant_count": 0,
+          "nonrelevant_count": 8,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 8
+      },
+      "0.3": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 8,
+          "relevant_count": 0,
+          "nonrelevant_count": 8,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 8
+      },
+      "0.5": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 8,
+          "relevant_count": 0,
+          "nonrelevant_count": 8,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 8
+      }
+    },
+    "N17": {
+      "0.05": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 1,
+          "relevant_count": 0,
+          "nonrelevant_count": 1,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 1
+      },
+      "0.15": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 1,
+          "relevant_count": 0,
+          "nonrelevant_count": 1,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 1
+      },
+      "0.3": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 1,
+          "relevant_count": 0,
+          "nonrelevant_count": 1,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 1
+      },
+      "0.5": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 1,
+          "relevant_count": 0,
+          "nonrelevant_count": 1,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 1
+      }
+    },
+    "N18": {
+      "0.05": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 10,
+          "relevant_count": 0,
+          "nonrelevant_count": 10,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 10
+      },
+      "0.15": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 10,
+          "relevant_count": 0,
+          "nonrelevant_count": 10,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 10
+      },
+      "0.3": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 10,
+          "relevant_count": 0,
+          "nonrelevant_count": 10,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 10
+      },
+      "0.5": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 10,
+          "relevant_count": 0,
+          "nonrelevant_count": 10,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 10
+      }
+    },
+    "N19": {
+      "0.05": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 10,
+          "relevant_count": 0,
+          "nonrelevant_count": 10,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 10
+      },
+      "0.15": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 10,
+          "relevant_count": 0,
+          "nonrelevant_count": 10,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 10
+      },
+      "0.3": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 10,
+          "relevant_count": 0,
+          "nonrelevant_count": 10,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 10
+      },
+      "0.5": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 10,
+          "relevant_count": 0,
+          "nonrelevant_count": 10,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 10
+      }
+    },
+    "N20": {
+      "0.05": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 5,
+          "relevant_count": 0,
+          "nonrelevant_count": 5,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 5
+      },
+      "0.15": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 5,
+          "relevant_count": 0,
+          "nonrelevant_count": 5,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 5
+      },
+      "0.3": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 5,
+          "relevant_count": 0,
+          "nonrelevant_count": 5,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 5
+      },
+      "0.5": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 5,
+          "relevant_count": 0,
+          "nonrelevant_count": 5,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 5
+      }
+    },
+    "N21": {
+      "0.05": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 22,
+          "relevant_count": 0,
+          "nonrelevant_count": 22,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 22
+      },
+      "0.15": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 22,
+          "relevant_count": 0,
+          "nonrelevant_count": 22,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 22
+      },
+      "0.3": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 22,
+          "relevant_count": 0,
+          "nonrelevant_count": 22,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 22
+      },
+      "0.5": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 22,
+          "relevant_count": 0,
+          "nonrelevant_count": 22,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 22
+      }
+    },
+    "N22": {
+      "0.05": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 5,
+          "relevant_count": 0,
+          "nonrelevant_count": 5,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 5
+      },
+      "0.15": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 5,
+          "relevant_count": 0,
+          "nonrelevant_count": 5,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 5
+      },
+      "0.3": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 5,
+          "relevant_count": 0,
+          "nonrelevant_count": 5,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 5
+      },
+      "0.5": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 5,
+          "relevant_count": 0,
+          "nonrelevant_count": 5,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 5
+      }
+    },
+    "N23": {
+      "0.05": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 2,
+          "relevant_count": 0,
+          "nonrelevant_count": 2,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 2
+      },
+      "0.15": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 2,
+          "relevant_count": 0,
+          "nonrelevant_count": 2,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 2
+      },
+      "0.3": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 2,
+          "relevant_count": 0,
+          "nonrelevant_count": 2,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 2
+      },
+      "0.5": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 2,
+          "relevant_count": 0,
+          "nonrelevant_count": 2,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 2
+      }
+    },
+    "N24": {
+      "0.05": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 23,
+          "relevant_count": 0,
+          "nonrelevant_count": 23,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 23
+      },
+      "0.15": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 23,
+          "relevant_count": 0,
+          "nonrelevant_count": 23,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 23
+      },
+      "0.3": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 23,
+          "relevant_count": 0,
+          "nonrelevant_count": 23,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 23
+      },
+      "0.5": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 23,
+          "relevant_count": 0,
+          "nonrelevant_count": 23,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 23
+      }
+    },
+    "N25": {
+      "0.05": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 3,
+          "relevant_count": 0,
+          "nonrelevant_count": 3,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 3
+      },
+      "0.15": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 3,
+          "relevant_count": 0,
+          "nonrelevant_count": 3,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 3
+      },
+      "0.3": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 3,
+          "relevant_count": 0,
+          "nonrelevant_count": 3,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 3
+      },
+      "0.5": {
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 3,
+          "relevant_count": 0,
+          "nonrelevant_count": 3,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        },
+        "num_results": 3
+      }
+    }
+  },
+  "overall": {}
+}

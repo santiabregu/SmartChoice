@@ -21,43 +21,6 @@ class ExperimentRunner:
     def verify_data(self):
         """Verifica que hay datos cargados en el sistema"""
         try:
-            # Cargar algunas reseñas de ejemplo si no hay
-            example_reviews = [
-                {
-                    "id": "1",
-                    "producto": "Auriculares Sony WH-1000XM4",
-                    "categoria": "Tecnología",
-                    "resena": "Excelente calidad de sonido y la batería dura más de 20 horas. La cancelación de ruido es impresionante.",
-                    "puntuacion": 4.5,
-                    "website": {
-                        "nombre": "Amazon",
-                        "url": "https://www.amazon.es/review/123"
-                    }
-                },
-                {
-                    "id": "2",
-                    "producto": "Auriculares Bose QC35",
-                    "categoria": "Tecnología",
-                    "resena": "Buena batería y cancelación de ruido efectiva. Audio de calidad.",
-                    "puntuacion": 4.0,
-                    "website": {
-                        "nombre": "Amazon",
-                        "url": "https://www.amazon.es/review/456"
-                    }
-                }
-            ]
-            
-            # Verificar si hay reseñas y cargar ejemplos si no hay
-            if not self.review_handler.list_reviews():
-                print("No se encontraron reseñas. Cargando ejemplos...")
-                for review in example_reviews:
-                    self.review_handler.save_review(review)
-                print(f"Se cargaron {len(example_reviews)} reseñas de ejemplo")
-                
-                # Procesar las reseñas para actualizar el índice
-                print("Procesando reseñas...")
-                self.review_handler.process_reviews()
-            
             # Verificar que el procesador de texto está funcionando
             test_query = "auriculares"
             results = self.review_handler.search_reviews(test_query, 'tf_idf')
@@ -141,261 +104,188 @@ class ExperimentRunner:
             print(f"Error procesando resultados: {str(e)}")
             return []
 
-    def run_timing_experiments(self) -> Dict:
+    def run_timing_experiments(self, queries: List[str], search_type: str = 'tf_idf') -> Dict:
         """
         Ejecuta experimentos de medición de tiempos para diferentes operaciones
+        Args:
+            queries: Lista de consultas a probar
+            search_type: Tipo de búsqueda ('boolean' o 'tf_idf')
         """
-        print("\nIniciando experimentos de tiempo...")
+        print(f"\nIniciando experimentos de tiempo para {search_type}...")
         
         timing_results = {
-            'indexing': [],
             'boolean_search': [],
             'tfidf_search': []
         }
         
-        test_queries = [
-            "auriculares",
-            "auriculares AND bateria",
-            "auriculares AND (bateria OR duracion) AND NOT malo"
-        ]
-        
-        for query in test_queries:
+        for query in queries:
             try:
                 print(f"\nProcesando query: {query}")
                 
-                # Búsqueda booleana
-                results_bool, time_bool = self.measure_execution_time(
+                # Ejecutar búsqueda
+                results, time_taken = self.measure_execution_time(
                     self.review_handler.search_reviews,
-                    query, 'boolean'
+                    query, search_type
                 )
-                bool_results = self.process_search_results(results_bool)
-                print(f"- Resultados booleanos: {len(bool_results)}")
+                processed_results = self.process_search_results(results)
+                print(f"- Resultados {search_type}: {len(processed_results)}")
                 
-                timing_results['boolean_search'].append({
+                timing_results[f'{search_type}_search'].append({
                     'query': query,
-                    'time': time_bool,
-                    'num_results': len(bool_results)
+                    'time': time_taken,
+                    'num_results': len(processed_results)
                 })
                 
-                # Búsqueda TF-IDF
-                results_tfidf, time_tfidf = self.measure_execution_time(
-                    self.review_handler.search_reviews,
-                    query, 'tf_idf'
-                )
-                tfidf_results = self.process_search_results(results_tfidf)
-                print(f"- Resultados TF-IDF: {len(tfidf_results)}")
-                
-                timing_results['tfidf_search'].append({
-                    'query': query,
-                    'time': time_tfidf,
-                    'num_results': len(tfidf_results)
-                })
             except Exception as e:
                 print(f"Error en query '{query}': {str(e)}")
                 continue
         
-        # Calcular estadísticas en una copia del diccionario
-        timing_copy = copy.deepcopy(timing_results)
-        stats_results = {}
-        
-        for operation in timing_copy:
-            if timing_copy[operation]:
-                times = [r['time'] for r in timing_copy[operation]]
-                stats_results[f"{operation}_stats"] = self.safe_stats(times)
-        
-        # Crear un nuevo diccionario con los resultados combinados
-        final_results = {**timing_results, **stats_results}
-        
-        self._save_results('timing_experiments.json', final_results)
-        return final_results
+        return timing_results
 
-    def evaluate_synonym_impact(self) -> Dict:
+    def evaluate_synonym_impact(self, necesidades: List[Dict]) -> Dict:
         """
-        Evalúa el impacto de usar sinónimos en la búsqueda
+        Evalúa el impacto de los sinónimos en las búsquedas
+        Args:
+            necesidades: Lista de necesidades de información
         """
-        test_pairs = [
-            ("auriculares batería", "audifonos duración"),
-            ("buenos cascos", "buenos auriculares"),
-            ("calidad sonido", "calidad audio")
-        ]
-        
         results = {
-            'with_synonyms': [],
-            'without_synonyms': [],
-            'comparisons': []
+            'per_need': {},
+            'overall': {
+                'with_synonyms': {'precision': 0.0, 'recall': 0.0, 'f1': 0.0},
+                'without_synonyms': {'precision': 0.0, 'recall': 0.0, 'f1': 0.0}
+            }
         }
         
-        for query1, query2 in test_pairs:
-            try:
-                # Procesar resultados de manera segura
-                results1 = self.process_search_results(
-                    self.review_handler.search_reviews(query1, 'tf_idf')
-                )
-                results2 = self.process_search_results(
-                    self.review_handler.search_reviews(query2, 'tf_idf')
-                )
-                
-                # Usar conjuntos de IDs estables
-                docs1 = {r['id'] for r in results1}
-                docs2 = {r['id'] for r in results2}
-                overlap = len(docs1 & docs2)
-                union_size = len(docs1 | docs2)
-                
-                comparison = {
-                    'query_pair': (query1, query2),
-                    'overlap': overlap,
-                    'results1_count': len(results1),
-                    'results2_count': len(results2),
-                    'unique_to_1': len(docs1 - docs2),
-                    'unique_to_2': len(docs2 - docs1),
-                    'jaccard_similarity': overlap / union_size if union_size > 0 else 0.0
+        for need in necesidades:
+            need_id = need['id']
+            print(f"\nEvaluando necesidad {need_id}: {need['descripcion']}")
+            
+            # Búsqueda con sinónimos (por defecto)
+            results_with_syn = self.review_handler.search_reviews(
+                need['consulta_libre'], 
+                'tf_idf'
+            )
+            processed_with_syn = self.process_search_results(results_with_syn)
+            
+            # Búsqueda sin sinónimos
+            self.review_handler.text_processor.use_synonyms = False
+            results_without_syn = self.review_handler.search_reviews(
+                need['consulta_libre'], 
+                'tf_idf'
+            )
+            processed_without_syn = self.process_search_results(results_without_syn)
+            self.review_handler.text_processor.use_synonyms = True
+            
+            # Evaluar resultados
+            scores_with_syn = {str(r['id']): r['score'] for r in processed_with_syn}
+            scores_without_syn = {str(r['id']): r['score'] for r in processed_without_syn}
+            
+            metrics_with_syn = self.evaluator.evaluate_ranked_search({need_id: scores_with_syn})['per_query'].get(need_id, {})
+            metrics_without_syn = self.evaluator.evaluate_ranked_search({need_id: scores_without_syn})['per_query'].get(need_id, {})
+            
+            results['per_need'][need_id] = {
+                'descripcion': need['descripcion'],
+                'with_synonyms': {
+                    'num_results': len(processed_with_syn),
+                    'metrics': metrics_with_syn
+                },
+                'without_synonyms': {
+                    'num_results': len(processed_without_syn),
+                    'metrics': metrics_without_syn
                 }
-                
-                results['comparisons'].append(comparison)
-                
-                # Evaluar cada consulta por separado
-                for query, res in [(query1, results1), (query2, results2)]:
-                    if res:
-                        scores = {r['id']: r['score'] for r in res}
-                        metrics = self.evaluator.evaluate_ranked_search({query: scores})
-                        if query in metrics.get('per_query', {}):
-                            results['with_synonyms'].append({
-                                'query': query,
-                                'metrics': copy.deepcopy(metrics['per_query'][query])
-                            })
-            except Exception as e:
-                print(f"Error en par de consultas '{query1}' - '{query2}': {str(e)}")
-                continue
+            }
+            
+            # Actualizar métricas globales
+            for metric in ['precision', 'recall', 'f1']:
+                results['overall']['with_synonyms'][metric] += metrics_with_syn.get(metric, 0.0)
+                results['overall']['without_synonyms'][metric] += metrics_without_syn.get(metric, 0.0)
         
-        # Calcular estadísticas globales en una copia
-        results_copy = copy.deepcopy(results)
-        if results_copy['with_synonyms']:
-            try:
-                precisions = []
-                recalls = []
-                overlaps = []
-                jaccards = []
-                
-                for r in results_copy['with_synonyms']:
-                    if 'metrics' in r:
-                        precisions.append(r['metrics'].get('precision', 0.0))
-                        recalls.append(r['metrics'].get('recall', 0.0))
-                
-                for c in results_copy['comparisons']:
-                    overlaps.append(c.get('overlap', 0))
-                    jaccards.append(c.get('jaccard_similarity', 0.0))
-                
-                results['global_stats'] = {
-                    'mean_precision': self.safe_mean(precisions),
-                    'mean_recall': self.safe_mean(recalls),
-                    'mean_overlap': self.safe_mean(overlaps),
-                    'mean_jaccard': self.safe_mean(jaccards)
-                }
-            except Exception as e:
-                print(f"Error calculando estadísticas globales: {str(e)}")
-                results['global_stats'] = {
-                    'mean_precision': 0.0,
-                    'mean_recall': 0.0,
-                    'mean_overlap': 0.0,
-                    'mean_jaccard': 0.0
-                }
+        # Calcular promedios globales
+        num_needs = len(necesidades)
+        if num_needs > 0:
+            for metric_type in results['overall']:
+                for metric in results['overall'][metric_type]:
+                    results['overall'][metric_type][metric] /= num_needs
         
-        self._save_results('synonym_impact.json', results)
         return results
 
-    def analyze_thresholds(self) -> Dict:
+    def analyze_thresholds(self, necesidades: List[Dict]) -> Dict:
         """
-        Analiza el impacto de diferentes umbrales de relevancia
+        Analiza el impacto de diferentes umbrales de similitud
+        Args:
+            necesidades: Lista de necesidades de información
         """
-        thresholds = [0.05, 0.15, 0.30]
-        test_queries = [
-            "auriculares con buena batería",
-            "productos con buena calidad de sonido",
-            "productos con cancelación de ruido"
-        ]
-        
+        thresholds = [0.05, 0.07, 0.09, 0.11, 0.15, 0.30, 0.50]
         results = {
             'per_threshold': {},
-            'comparisons': []
+            'per_need': {},
+            'overall': {}
         }
         
         for threshold in thresholds:
-            try:
-                evaluator = Evaluator(similarity_threshold=threshold)
-                threshold_results = []
+            print(f"\nEvaluando umbral {threshold}")
+            self.evaluator.similarity_threshold = threshold
+            
+            threshold_metrics = {
+                'precision': 0.0,
+                'recall': 0.0,
+                'f1': 0.0,
+                'num_results': 0
+            }
+            
+            for need in necesidades:
+                need_id = need['id']
+                print(f"- Procesando necesidad {need_id}")
                 
-                for query in test_queries:
-                    try:
-                        # Procesar resultados de manera segura
-                        search_results = self.process_search_results(
-                            self.review_handler.search_reviews(query, 'tf_idf')
-                        )
-                        
-                        if search_results:
-                            scores = {r['id']: r['score'] for r in search_results}
-                            metrics = evaluator.evaluate_ranked_search({query: scores})
-                            
-                            if query in metrics.get('per_query', {}):
-                                all_scores = [r['score'] for r in search_results]
-                                score_stats = self.safe_stats(all_scores)
-                                
-                                threshold_results.append({
-                                    'query': query,
-                                    'metrics': copy.deepcopy(metrics['per_query'][query]),
-                                    'score_stats': score_stats,
-                                    'num_results': len(search_results),
-                                    'num_above_threshold': len([s for s in all_scores if s >= threshold])
-                                })
-                    except Exception as e:
-                        print(f"Error en query '{query}' con umbral {threshold}: {str(e)}")
-                        continue
+                # Realizar búsqueda
+                search_results = self.review_handler.search_reviews(
+                    need['consulta_libre'],
+                    'tf_idf'
+                )
+                processed_results = self.process_search_results(search_results)
                 
-                results['per_threshold'][str(threshold)] = threshold_results
+                # Evaluar resultados
+                scores = {str(r['id']): r['score'] for r in processed_results}
+                metrics = self.evaluator.evaluate_ranked_search({need_id: scores})['per_query'].get(need_id, {})
                 
-                # Calcular estadísticas globales para este umbral
-                if threshold_results:
-                    try:
-                        threshold_copy = copy.deepcopy(threshold_results)
-                        
-                        precisions = []
-                        recalls = []
-                        num_results = []
-                        above_threshold = []
-                        
-                        for r in threshold_copy:
-                            if 'metrics' in r:
-                                precisions.append(r['metrics'].get('precision', 0.0))
-                                recalls.append(r['metrics'].get('recall', 0.0))
-                            num_results.append(r.get('num_results', 0))
-                            above_threshold.append(r.get('num_above_threshold', 0))
-                        
-                        results['comparisons'].append({
-                            'threshold': threshold,
-                            'mean_precision': self.safe_mean(precisions),
-                            'mean_recall': self.safe_mean(recalls),
-                            'mean_results': self.safe_mean(num_results),
-                            'mean_above_threshold': self.safe_mean(above_threshold)
-                        })
-                    except Exception as e:
-                        print(f"Error calculando estadísticas para umbral {threshold}: {str(e)}")
-                        continue
-                        
-            except Exception as e:
-                print(f"Error general con umbral {threshold}: {str(e)}")
-                continue
+                # Guardar resultados por necesidad
+                if need_id not in results['per_need']:
+                    results['per_need'][need_id] = {}
+                
+                results['per_need'][need_id][str(threshold)] = {
+                    'metrics': metrics,
+                    'num_results': len(processed_results)
+                }
+                
+                # Actualizar métricas del umbral
+                threshold_metrics['precision'] += metrics.get('precision', 0.0)
+                threshold_metrics['recall'] += metrics.get('recall', 0.0)
+                threshold_metrics['f1'] += metrics.get('f1', 0.0)
+                threshold_metrics['num_results'] += len(processed_results)
+            
+            # Calcular promedios para el umbral
+            num_needs = len(necesidades)
+            if num_needs > 0:
+                for metric in threshold_metrics:
+                    if metric != 'num_results':
+                        threshold_metrics[metric] /= num_needs
+            
+            results['per_threshold'][str(threshold)] = threshold_metrics
         
-        self._save_results('threshold_analysis.json', results)
+        # Restaurar umbral original
+        self.evaluator.similarity_threshold = 0.15
+        
         return results
 
     def _save_results(self, filename: str, results: Dict):
-        """Guarda resultados de experimentos en JSON"""
+        """Guarda resultados en un archivo JSON"""
         try:
-            # Crear una copia profunda antes de guardar
-            results_copy = copy.deepcopy(results)
-            with open(self.results_dir / filename, 'w', encoding='utf-8') as f:
-                json.dump(results_copy, f, indent=2, ensure_ascii=False)
+            filepath = self.results_dir / filename
+            with open(filepath, 'w', encoding='utf-8') as f:
+                json.dump(results, f, indent=2, ensure_ascii=False)
+            print(f"\nResultados guardados en {filepath}")
         except Exception as e:
-            print(f"Error guardando resultados en {filename}: {str(e)}")
+            print(f"Error guardando resultados: {str(e)}")
 
 def run_all_experiments():
     """
@@ -406,13 +296,21 @@ def run_all_experiments():
         runner = ExperimentRunner()
         
         print("\n1. Ejecutando experimentos de tiempo...")
-        timing_results = runner.run_timing_experiments()
+        timing_results = runner.run_timing_experiments(["auriculares", "auriculares AND bateria", "auriculares AND (bateria OR duracion) AND NOT malo"])
         
         print("\n2. Evaluando impacto de sinónimos...")
-        synonym_results = runner.evaluate_synonym_impact()
+        synonym_results = runner.evaluate_synonym_impact([
+            {"id": "1", "descripcion": "auriculares batería", "consulta_libre": "auriculares batería"},
+            {"id": "2", "descripcion": "buenos cascos", "consulta_libre": "buenos cascos"},
+            {"id": "3", "descripcion": "calidad sonido", "consulta_libre": "calidad sonido"}
+        ])
         
         print("\n3. Analizando umbrales de relevancia...")
-        threshold_results = runner.analyze_thresholds()
+        threshold_results = runner.analyze_thresholds([
+            {"id": "1", "descripcion": "auriculares con buena batería", "consulta_libre": "auriculares con buena batería"},
+            {"id": "2", "descripcion": "productos con buena calidad de sonido", "consulta_libre": "productos con buena calidad de sonido"},
+            {"id": "3", "descripcion": "productos con cancelación de ruido", "consulta_libre": "productos con cancelación de ruido"}
+        ])
         
         print("\nTodos los experimentos completados. Resultados guardados en /experiment_results/")
         
