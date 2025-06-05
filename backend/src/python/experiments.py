@@ -104,43 +104,47 @@ class ExperimentRunner:
             print(f"Error procesando resultados: {str(e)}")
             return []
 
-    def run_timing_experiments(self, queries: List[str], search_type: str = 'tf_idf') -> Dict:
+    def run_timing_experiments(self, queries: List[str], search_type: str = 'boolean') -> Dict:
         """
-        Ejecuta experimentos de medición de tiempos para diferentes operaciones
+        Ejecuta experimentos de tiempo para una lista de consultas
         Args:
             queries: Lista de consultas a probar
-            search_type: Tipo de búsqueda ('boolean' o 'tf_idf')
+            search_type: 'boolean' o 'tf_idf'
+        Returns:
+            Dict con resultados y tiempos
         """
-        print(f"\nIniciando experimentos de tiempo para {search_type}...")
-        
-        timing_results = {
+        results = {
             'boolean_search': [],
             'tfidf_search': []
         }
         
         for query in queries:
-            try:
-                print(f"\nProcesando query: {query}")
-                
-                # Ejecutar búsqueda
-                results, time_taken = self.measure_execution_time(
+            if search_type == 'boolean':
+                # Medir tiempo de búsqueda booleana
+                search_results, execution_time = self.measure_execution_time(
                     self.review_handler.search_reviews,
-                    query, search_type
+                    query,
+                    'boolean'
                 )
-                processed_results = self.process_search_results(results)
-                print(f"- Resultados {search_type}: {len(processed_results)}")
-                
-                timing_results[f'{search_type}_search'].append({
+                results['boolean_search'].append({
                     'query': query,
-                    'time': time_taken,
-                    'num_results': len(processed_results)
+                    'time': execution_time,
+                    'num_results': len(search_results)
                 })
-                
-            except Exception as e:
-                print(f"Error en query '{query}': {str(e)}")
-                continue
+            elif search_type == 'tf_idf':
+                # Medir tiempo de búsqueda TF-IDF
+                search_results, execution_time = self.measure_execution_time(
+                    self.review_handler.search_reviews,
+                    query,
+                    'tf_idf'
+                )
+                results['tfidf_search'].append({
+                    'query': query,
+                    'time': execution_time,
+                    'num_results': len(search_results)
+                })
         
-        return timing_results
+        return results
 
     def evaluate_synonym_impact(self, necesidades: List[Dict]) -> Dict:
         """
@@ -215,7 +219,7 @@ class ExperimentRunner:
         Args:
             necesidades: Lista de necesidades de información
         """
-        thresholds = [0.05, 0.07, 0.09, 0.11, 0.15, 0.30, 0.50]
+        thresholds = [0.05, 0.07, 0.09, 0.13, 0.50]
         results = {
             'per_threshold': {},
             'per_need': {},

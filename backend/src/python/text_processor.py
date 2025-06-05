@@ -17,9 +17,18 @@ class TextProcessor:
         self.document_lengths = {}  # doc_id -> length
         self.total_documents = 0
         self.sinonimos = self._load_sinonimos()
+        self.use_synonyms = True  # Flag to control synonym expansion
         
         # Configuración de pesos para términos
         self.term_importance = {
+            # Términos de batería y duración (peso muy alto)
+            'bateria': 3.0,
+            'duracion': 3.0,
+            'autonomia': 3.0,
+            'horas': 2.5,
+            'aguanta': 2.5,
+            'dura': 2.5,
+
             # Términos de calidad y valoración (peso alto)
             'calidad': 2.5,
             'excelente': 2.3,
@@ -29,9 +38,6 @@ class TextProcessor:
             'alta gama': 2.0,
 
             # Características técnicas principales (peso alto)
-            'bateria': 2.0,
-            'duracion': 2.0,
-            'autonomia': 2.0,
             'cancelacion': 2.0,
             'sonido': 2.0,
             'audio': 2.0,
@@ -98,9 +104,11 @@ class TextProcessor:
         
         # Boost adicional para combinaciones específicas
         self.compound_terms = {
+            'duracion bateria': 3.5,
+            'buena bateria': 3.5,
+            'larga duracion': 3.5,
+            'autonomia bateria': 3.5,
             'calidad sonido': 2.8,
-            'duracion bateria': 2.8,
-            'buena bateria': 2.5,
             'cancelacion ruido': 2.8,
             'alta gama': 2.5,
             'smart home': 2.3,
@@ -187,25 +195,27 @@ class TextProcessor:
         # Expandir con sinónimos y aplicar stemming
         expanded_tokens = []
         stemmed_tokens = []
-        stem_map = {}  # Para mantener registro de qué palabras generaron cada stem
+        stem_map = {}
         
         # Procesar cada token
         for token in tokens:
             # Añadir el token original
             expanded_tokens.append(token)
             
-            # Buscar sinónimos (usando token normalizado)
-            normalized_token = self.normalize_text(token)
-            for concepto, sinonimos_list in self.sinonimos.items():
-                # Normalizar concepto y sinónimos para comparación
-                normalized_concepto = self.normalize_text(concepto)
-                normalized_sinonimos = [self.normalize_text(s) for s in sinonimos_list]
-                
-                if normalized_token in normalized_sinonimos or normalized_token == normalized_concepto:
-                    # Añadir sinónimos y concepto principal
-                    expanded_tokens.extend([s for s in sinonimos_list if self.normalize_text(s) != normalized_token])
-                    if normalized_concepto != normalized_token:
-                        expanded_tokens.append(concepto)
+            # Buscar sinónimos solo si use_synonyms es True
+            if self.use_synonyms:
+                # Buscar sinónimos (usando token normalizado)
+                normalized_token = self.normalize_text(token)
+                for concepto, sinonimos_list in self.sinonimos.items():
+                    # Normalizar concepto y sinónimos para comparación
+                    normalized_concepto = self.normalize_text(concepto)
+                    normalized_sinonimos = [self.normalize_text(s) for s in sinonimos_list]
+                    
+                    if normalized_token in normalized_sinonimos or normalized_token == normalized_concepto:
+                        # Añadir sinónimos y concepto principal
+                        expanded_tokens.extend([s for s in sinonimos_list if self.normalize_text(s) != normalized_token])
+                        if normalized_concepto != normalized_token:
+                            expanded_tokens.append(concepto)
         
         # Aplicar stemming a tokens expandidos
         for token in expanded_tokens:

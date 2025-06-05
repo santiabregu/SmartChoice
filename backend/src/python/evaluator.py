@@ -2,9 +2,10 @@ import json
 from typing import List, Set, Dict
 import math
 from pathlib import Path
+import re
 
 class Evaluator:
-    def __init__(self, similarity_threshold: float = 0.15):
+    def __init__(self, similarity_threshold: float = 0.05):
         """
         Inicializa el evaluador con pseudo-relevance feedback y soporte de sinónimos
         Args:
@@ -13,8 +14,22 @@ class Evaluator:
         self.similarity_threshold = similarity_threshold
         self.top_k = 2  # Reducido a 2 para ser más selectivo
         self.sinonimos = self._load_sinonimos()
-        self.positive_patterns = self._generate_positive_patterns()
-        self.negative_patterns = self._generate_negative_patterns()
+        
+        # Palabras positivas generales
+        self.positive_words = {
+            'buena', 'bueno', 'excelente', 'gran', 'larga', 'perfecta', 'increíble',
+            'impresionante', 'superior', 'magnífica', 'sobresaliente', 'útil',
+            'eficiente', 'eficaz', 'dura', 'aguanta', 'funciona', 'recomendable',
+            'satisfecho', 'satisfactoria', 'vale la pena', 'potente', 'estable'
+        }
+        
+        # Palabras negativas generales
+        self.negative_words = {
+            'mala', 'malo', 'poca', 'poco', 'corta', 'corto', 'deficiente', 'pobre',
+            'débil', 'insuficiente', 'mediocre', 'regular', 'limitada', 'limitado',
+            'decepcionante', 'falla', 'problema', 'error', 'defecto', 'no recomendable',
+            'insatisfecho', 'inestable'
+        }
             
     def _load_sinonimos(self) -> Dict:
         """Carga el diccionario de sinónimos"""
@@ -34,21 +49,33 @@ class Evaluator:
             'impresionante', 'superior', 'magnífica', 'sobresaliente'
         ]
         
+        # Patrones específicos para duración
+        duration_patterns = [
+            'dura más de', 'dura hasta', 'autonomía de',
+            'duración de', 'aguanta', 'larga duración'
+        ]
+        
         features = [
             'batería', 'duración', 'calidad', 'sonido', 'pantalla', 'rendimiento',
             'comodidad', 'diseño', 'construcción'
         ]
         
         patterns = []
+        # Añadir patrones base
         for pattern in base_patterns:
             for feature in features:
-                # Añadir patrón base
                 patterns.append(f"{pattern} {feature}")
-                
-                # Añadir variantes con sinónimos
                 if feature in self.sinonimos:
                     for sinonimo in self.sinonimos[feature]:
                         patterns.append(f"{pattern} {sinonimo}")
+        
+        # Añadir patrones específicos de duración
+        for pattern in duration_patterns:
+            patterns.append(pattern)
+            # Añadir variantes con números
+            patterns.append(f"{pattern} [0-9]+ horas")
+            patterns.append(f"{pattern} un día")
+            patterns.append(f"{pattern} varios días")
         
         return patterns
     
@@ -61,7 +88,7 @@ class Evaluator:
         
         features = [
             'batería', 'duración', 'calidad', 'sonido', 'pantalla', 'rendimiento',
-            'comodidad', 'diseño', 'construcción'
+            'comodidad', 'diseño', 'construcción' 
         ]
         
         patterns = []
@@ -93,40 +120,6 @@ class Evaluator:
         
         return expanded_terms
 
-    def get_relevant_docs_boolean(self, results: List[Dict], query_terms: List[str] = None) -> Set[str]:
-        """
-        Para búsquedas booleanas, consideramos relevantes los documentos que:
-        1. Contienen los términos buscados o sus sinónimos
-        2. Tienen una puntuación alta o mencionan positivamente los términos
-        Args:
-            results: Lista de documentos
-            query_terms: Términos de búsqueda originales
-        """
-        relevant_docs = set()
-        expanded_terms = self.expand_query_terms(query_terms) if query_terms else set()
-        
-        for doc in results:
-            # Consideramos relevante si:
-            # - Tiene puntuación alta (≥ 4.0)
-            # - O menciona positivamente los términos buscados
-            if doc.get('puntuacion', 0) >= 4.0:
-                relevant_docs.add(doc['id'])
-            elif 'resena' in doc:
-                text = doc['resena'].lower()
-                
-                # Verificar términos expandidos
-                terms_found = any(term.lower() in text for term in expanded_terms)
-                
-                # Buscar menciones positivas
-                has_positive = any(pattern in text for pattern in self.positive_patterns)
-                # Buscar menciones negativas
-                has_negative = any(pattern in text for pattern in self.negative_patterns)
-                
-                if (terms_found or has_positive) and not has_negative:
-                    relevant_docs.add(doc['id'])
-        
-        return relevant_docs
-            
     def get_relevant_docs(self, ranked_results: Dict[str, float]) -> Set[str]:
         """
         Determina documentos relevantes usando pseudo-relevance feedback
@@ -140,13 +133,59 @@ class Evaluator:
         
         relevant_docs = set()
         
-        # Considerar los top K documentos con score sobre el threshold como relevantes
-        for doc_id, score in sorted_docs[:self.top_k]:
-            if score >= self.similarity_threshold:
+        # Considerar documentos relevantes si:
+        # 1. Están en el top K y superan el threshold
+        # 2. O tienen un score muy alto (1.5x threshold)
+        high_score_threshold = self.similarity_threshold * 1.5
+        
+        for doc_id, score in sorted_docs:
+            if len(relevant_docs) < self.top_k and score >= self.similarity_threshold:
+                relevant_docs.add(doc_id)
+            elif score >= high_score_threshold:
                 relevant_docs.add(doc_id)
                 
         return relevant_docs
-    
+
+    def get_relevant_docs_boolean(self, results: List[Dict], query_terms: List[str] = None) -> Set[str]:
+        """
+        Para búsquedas booleanas, consideramos relevantes los documentos que:
+        1. Tienen una puntuación decente (≥ 3)
+        2. O contienen términos buscados con menciones positivas
+        3. Y no tienen menciones negativas de los términos
+        """
+        relevant_docs = set()
+        expanded_terms = self.expand_query_terms(query_terms) if query_terms else set()
+        
+        for doc in results:
+            review_text = doc.get('resena', '').lower()
+            rating = float(doc.get('puntuacion', 0))
+            
+            # Contar términos que coinciden
+            matching_terms = sum(1 for term in expanded_terms if term.lower() in review_text)
+            
+            # Buscar palabras positivas cerca de los términos buscados
+            has_positive = False
+            has_negative = False
+            
+            # Dividir el texto en palabras
+            words = review_text.split()
+            
+            # Buscar términos de búsqueda y palabras positivas/negativas cercanas
+            for i, word in enumerate(words):
+                if word in expanded_terms:
+                    # Mirar 5 palabras antes y después
+                    context = words[max(0, i-5):min(len(words), i+6)]
+                    has_positive = has_positive or any(pos in context for pos in self.positive_words)
+                    has_negative = has_negative or any(neg in context for neg in self.negative_words)
+            
+            # Un documento es relevante si:
+            # - Has good rating (≥ 3) OR has positive mentions OR has multiple query terms
+            # - AND doesn't have negative mentions
+            if (rating >= 3 or has_positive or matching_terms >= 2) and not has_negative:
+                relevant_docs.add(doc['review_id'])
+                
+        return relevant_docs
+
     def get_nonrelevant_docs(self, ranked_results: Dict[str, float], 
                             low_threshold: float = 0.05) -> Set[str]:
         """
