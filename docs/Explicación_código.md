@@ -92,30 +92,89 @@ def tf_idf_search(query: str) -> Dict[str, float]:
 
 #### Sistema de Pesos:
 ```python
-# Términos de calidad y valoración
+# Sistema de pesos actualizado
 term_importance = {
+    # Términos de batería y duración (peso muy alto)
+    'bateria': 3.0,
+    'duracion': 3.0,
+    'autonomia': 3.0,
+    'horas': 2.5,
+    'aguanta': 2.5,
+    'dura': 2.5,
+    
+    # Términos de calidad y valoración
     'calidad': 2.5,
     'excelente': 2.3,
     'premium': 2.3,
-    'bueno': 2.0
+    'profesional': 2.2,
+    'bueno': 2.0,
+    'alta gama': 2.0,
+    
+    # Características técnicas y de producto
+    'cancelacion': 2.0,
+    'sonido': 2.0,
+    'audio': 2.0,
+    'auricular': 1.8,
+    'altavoz': 1.8,
+    'smartphone': 1.8
 }
 
-# Términos compuestos
+# Términos compuestos con boost mejorado
 compound_terms = {
+    'duracion bateria': 3.5,
+    'buena bateria': 3.5,
+    'larga duracion': 3.5,
+    'autonomia bateria': 3.5,
     'calidad sonido': 2.8,
-    'duracion bateria': 2.8,
-    'buena bateria': 2.5,
-    'cancelacion ruido': 2.8
+    'cancelacion ruido': 2.8,
+    'alta gama': 2.5,
+    'smart home': 2.3,
+    'carga rapida': 2.2
 }
 
-# Penalizaciones
+# Penalizaciones actualizadas
 penalty_terms = {
     'malo': 0.5,
     'defectuoso': 0.5,
     'roto': 0.5,
-    'problema': 0.6
+    'fallo': 0.5,
+    'problema': 0.6,
+    'negativo': 0.6
 }
 ```
+
+#### Parámetros de Evaluación:
+```python
+# Umbrales optimizados
+similarity_threshold = 0.05  # Umbral mínimo de score
+high_threshold = 0.20       # Umbral para documentos muy relevantes
+feedback_threshold = 0.07   # Umbral para pseudo-relevance feedback
+
+# Parámetros de evaluación
+top_k = 2                  # Número de documentos top para relevancia
+expansion_enabled = True    # Control de expansión de sinónimos
+```
+
+#### Nuevas Características:
+- **Sistema de pesos mejorado**:
+  - Categorización detallada de términos
+  - Pesos optimizados por tipo de característica
+  - Mayor énfasis en términos de batería y duración
+  
+- **Mejoras en búsqueda**:
+  - Umbrales optimizados basados en experimentos
+  - Control granular de expansión de sinónimos
+  - Detección mejorada de términos compuestos
+  
+- **Evaluación refinada**:
+  - Nuevo sistema de pseudo-relevance feedback
+  - Umbrales adaptativos según tipo de consulta
+  - Métricas expandidas de evaluación
+
+- **Categorías expandidas**:
+  - Nuevas categorías de productos
+  - Características específicas por nicho
+  - Términos técnicos especializados
 
 ### 3. ReviewFileHandler (review_file_handler.py)
 

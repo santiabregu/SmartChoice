@@ -36,21 +36,83 @@ Donde:
 ### 1.4 Valores de Pesos (term_importance)
 
 ```python
-# Términos de calidad (2.0-2.5)
-'calidad': 2.5
-'excelente': 2.3
-'premium': 2.3
-'bueno': 2.0
+# Términos de batería y duración (peso muy alto: 3.0)
+'bateria': 3.0,
+'duracion': 3.0,
+'autonomia': 3.0,
+'horas': 2.5,
+'aguanta': 2.5,
+'dura': 2.5,
 
-# Características técnicas (2.0)
-'bateria': 2.0
-'sonido': 2.0
-'audio': 2.0
+# Términos de calidad y valoración (2.0-2.5)
+'calidad': 2.5,
+'excelente': 2.3,
+'premium': 2.3,
+'profesional': 2.2,
+'bueno': 2.0,
+'alta gama': 2.0,
+
+# Características técnicas principales (2.0)
+'cancelacion': 2.0,
+'sonido': 2.0,
+'audio': 2.0,
 
 # Categorías de producto (1.8)
-'auricular': 1.8
-'altavoz': 1.8
-'smartphone': 1.8
+'auricular': 1.8,
+'altavoz': 1.8,
+'smartphone': 1.8,
+'tablet': 1.8,
+'electrodomestico': 1.8,
+
+# Características específicas (1.5)
+'bluetooth': 1.5,
+'wifi': 1.5,
+'inalambrico': 1.5,
+'ergonomico': 1.5,
+'ajustable': 1.5,
+'smart': 1.5,
+'inteligente': 1.5,
+
+# Características de rendimiento (1.5)
+'velocidad': 1.5,
+'rendimiento': 1.5,
+'potencia': 1.5,
+'precision': 1.5,
+'eficiencia': 1.5,
+
+# Características de diseño (1.4)
+'diseno': 1.4,
+'construccion': 1.4,
+'materiales': 1.4,
+'pantalla': 1.4,
+'amoled': 1.4,
+
+# Características de uso y mantenimiento (1.3)
+'configuracion': 1.3,
+'control': 1.3,
+'app': 1.3,
+'aplicacion': 1.3,
+'compatible': 1.3,
+'garantia': 1.3,
+'durabilidad': 1.3,
+'mantenimiento': 1.3,
+'limpieza': 1.3,
+'automatico': 1.3,
+
+# Términos económicos (1.2)
+'precio': 1.2,
+'economico': 1.2,
+'barato': 1.2,
+'ahorro': 1.2,
+
+# Términos específicos de nicho (peso variable)
+'gaming': 1.8,
+'fitness': 1.5,
+'deportivo': 1.5,
+'salud': 1.5,
+'cosmetico': 1.5,
+'cocina': 1.4,
+'hogar': 1.3
 ```
 
 ### 1.5 Términos Compuestos (compound_terms)
@@ -59,10 +121,16 @@ $$ boost_{compound}(t_1,t_2) = w_{t1,t2} $$
 
 Valores:
 ```python
-'calidad sonido': 2.8
-'duracion bateria': 2.8
-'buena bateria': 2.5
-'cancelacion ruido': 2.8
+'duracion bateria': 3.5,
+'buena bateria': 3.5,
+'larga duracion': 3.5,
+'autonomia bateria': 3.5,
+'calidad sonido': 2.8,
+'cancelacion ruido': 2.8,
+'alta gama': 2.5,
+'smart home': 2.3,
+'carga rapida': 2.2,
+'bajo consumo': 2.0
 ```
 
 ### 1.6 Factores de Penalización (penalty_terms)
@@ -178,8 +246,16 @@ AP = (1/1 + 2/3 + 3/4) / 4 = 0.76
 ## 4. Parámetros del Sistema
 
 ### 4.1 Umbrales
-- Umbral mínimo de score: 0.01
+- Umbral mínimo de score: 0.05 (optimizado para mejor balance entre precisión y recall)
 - Umbral de similitud para evaluación: 0.15
+- Umbral alto para documentos muy relevantes: 0.20
+- Umbral para pseudo-relevance feedback: 0.07
+
+Los umbrales han sido optimizados basándose en experimentos que muestran:
+- Umbrales muy bajos (<0.05) producen demasiado ruido
+- Umbrales muy altos (>0.20) pierden documentos relevantes
+- El rango 0.05-0.15 ofrece el mejor balance entre precisión y recall
+- Para algunas consultas específicas, umbrales más altos (0.20) pueden mejorar la precisión
 
 ### 4.2 Normalización de Texto
 - Conversión a minúsculas
