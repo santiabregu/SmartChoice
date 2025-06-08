@@ -2,255 +2,255 @@
   "boolean_search": [
     {
       "query": "auriculares AND (bateria OR duracion)",
-      "time": 0.0382533073425293,
+      "time": 0.049338579177856445,
       "num_results": 6
     },
     {
       "query": "(auriculares OR altavoces) AND (sonido OR audio OR calidad)",
-      "time": 0.04185795783996582,
+      "time": 0.14571642875671387,
       "num_results": 9
     },
     {
       "query": "(calidad OR bueno OR excelente) AND (precio OR economico OR barato)",
-      "time": 0.04948115348815918,
+      "time": 0.0590512752532959,
       "num_results": 14
     },
     {
       "query": "cancelacion AND (ruido OR sonido)",
-      "time": 0.03492879867553711,
+      "time": 0.0609889030456543,
       "num_results": 5
     },
     {
       "query": "(electrodomesticos OR hogar) AND (eficiencia OR consumo OR ahorro)",
-      "time": 0.03510570526123047,
+      "time": 0.040749549865722656,
       "num_results": 0
     },
     {
       "query": "(silla OR escritorio) AND (ergonomico OR comfort OR ajustable)",
-      "time": 0.041588544845581055,
+      "time": 0.0438382625579834,
       "num_results": 3
     },
     {
       "query": "(hogar inteligente OR domotica) AND (alexa OR amazon)",
-      "time": 0.03460979461669922,
+      "time": 0.04408884048461914,
       "num_results": 1
     },
     {
       "query": "robot AND (aspirador OR limpieza) AND (fregado OR mopa)",
-      "time": 0.041142940521240234,
+      "time": 0.04732084274291992,
       "num_results": 1
     },
     {
       "query": "(cocina OR gastronomia) AND (profesional OR alta gama)",
-      "time": 0.036873579025268555,
+      "time": 0.06271719932556152,
       "num_results": 0
     },
     {
       "query": "garantia AND (extendida OR anos OR durabilidad)",
-      "time": 0.03401446342468262,
+      "time": 0.03994917869567871,
       "num_results": 2
     },
     {
       "query": "(app OR aplicacion) AND (control OR configuracion)",
-      "time": 0.03261828422546387,
+      "time": 0.04229736328125,
       "num_results": 3
     },
     {
       "query": "(auto OR automatico) AND (limpieza OR mantenimiento)",
-      "time": 0.035248517990112305,
+      "time": 0.04404115676879883,
       "num_results": 0
     },
     {
       "query": "(cosmetico OR crema) AND (sensible OR irritacion)",
-      "time": 0.03488469123840332,
+      "time": 0.03761696815490723,
       "num_results": 2
     },
     {
       "query": "deportivo AND (transpirable OR ventilacion)",
-      "time": 0.03271126747131348,
+      "time": 0.03969287872314453,
       "num_results": 2
     },
     {
       "query": "(auriculares OR cascos) AND cancelacion AND ruido",
-      "time": 0.04178214073181152,
+      "time": 0.051371097564697266,
       "num_results": 5
     },
     {
       "query": "gaming AND (precision OR respuesta OR rapido)",
-      "time": 0.03327059745788574,
+      "time": 0.05475282669067383,
       "num_results": 6
     },
     {
       "query": "apple AND m2 AND (macbook OR ipad)",
-      "time": 0.03631591796875,
+      "time": 0.04382205009460449,
       "num_results": 0
     },
     {
       "query": "(pantalla OR display) AND (amoled OR oled)",
-      "time": 0.037949323654174805,
+      "time": 0.05175042152404785,
       "num_results": 6
     },
     {
       "query": "(fotografia OR camara) AND (profesional OR calidad)",
-      "time": 0.04148983955383301,
+      "time": 0.05003857612609863,
       "num_results": 7
     },
     {
       "query": "(smart OR inteligente) AND (hogar OR casa OR alexa)",
-      "time": 0.04412674903869629,
+      "time": 0.04680275917053223,
       "num_results": 3
     },
     {
       "query": "carga AND (rapida OR inalambrica OR velocidad)",
-      "time": 0.0432431697845459,
+      "time": 0.04994654655456543,
       "num_results": 5
     },
     {
       "query": "(creacion OR edicion) AND (contenido OR digital)",
-      "time": 0.03667593002319336,
+      "time": 0.04131913185119629,
       "num_results": 1
     },
     {
       "query": "(bluetooth OR wifi) AND (conectividad OR conexion)",
-      "time": 0.036881446838378906,
+      "time": 0.0749056339263916,
       "num_results": 3
     },
     {
       "query": "(premium OR calidad) AND (diseno OR construccion)",
-      "time": 0.045061588287353516,
+      "time": 0.06343460083007812,
       "num_results": 9
     },
     {
       "query": "(salud OR actividad) AND (seguimiento OR monitorizacion)",
-      "time": 0.03922009468078613,
+      "time": 0.05665898323059082,
       "num_results": 4
     }
   ],
   "tfidf_search": [
     {
       "query": "auriculares batería duración autonomía",
-      "time": 0.05560708045959473,
-      "num_results": 19
+      "time": 0.06430411338806152,
+      "num_results": 16
     },
     {
       "query": "calidad sonido audio excelente",
-      "time": 0.07231855392456055,
-      "num_results": 41
+      "time": 0.09150147438049316,
+      "num_results": 39
     },
     {
       "query": "buena calidad buen precio económico",
-      "time": 0.05826878547668457,
-      "num_results": 10
+      "time": 0.09257888793945312,
+      "num_results": 6
     },
     {
       "query": "cancelación ruido noise cancelling",
-      "time": 0.03964424133300781,
+      "time": 0.04965353012084961,
       "num_results": 6
     },
     {
       "query": "electrodomésticos eficientes bajo consumo ahorro energético",
-      "time": 0.030392885208129883,
+      "time": 0.04638028144836426,
       "num_results": 0
     },
     {
       "query": "mobiliario ergonómico oficina comodidad ajustable",
-      "time": 0.039582252502441406,
+      "time": 0.048987627029418945,
       "num_results": 1
     },
     {
       "query": "dispositivos smart home alexa compatibles",
-      "time": 0.040233612060546875,
+      "time": 0.05071687698364258,
       "num_results": 5
     },
     {
       "query": "robot aspirador friegasuelos mopa",
-      "time": 0.03237152099609375,
+      "time": 0.039348602294921875,
       "num_results": 0
     },
     {
       "query": "electrodomésticos cocina profesional alta gama",
-      "time": 0.0409541130065918,
+      "time": 0.04624176025390625,
       "num_results": 6
     },
     {
       "query": "garantía larga duración calidad construcción",
-      "time": 0.06835818290710449,
-      "num_results": 41
+      "time": 0.08443522453308105,
+      "num_results": 37
     },
     {
       "query": "control app móvil configuración remota",
-      "time": 0.033016204833984375,
+      "time": 0.045517683029174805,
       "num_results": 0
     },
     {
       "query": "autolimpieza automático mantenimiento fácil",
-      "time": 0.03499174118041992,
+      "time": 0.0437464714050293,
       "num_results": 0
     },
     {
       "query": "cosmético piel sensible hidratante sin irritación",
-      "time": 0.03270292282104492,
+      "time": 0.04736828804016113,
       "num_results": 1
     },
     {
       "query": "ropa deportiva transpirable running calor",
-      "time": 0.04115128517150879,
-      "num_results": 2
-    },
-    {
-      "query": "cancelación ruido auriculares sonido aislamiento",
-      "time": 0.050153493881225586,
-      "num_results": 10
-    },
-    {
-      "query": "gaming precisión respuesta rápida competitivo profesional",
-      "time": 0.05629467964172363,
-      "num_results": 8
-    },
-    {
-      "query": "apple m2 rendimiento potencia velocidad",
-      "time": 0.0403437614440918,
+      "time": 0.04376578330993652,
       "num_results": 1
     },
     {
+      "query": "cancelación ruido auriculares sonido aislamiento",
+      "time": 0.06336402893066406,
+      "num_results": 9
+    },
+    {
+      "query": "gaming precisión respuesta rápida competitivo profesional",
+      "time": 0.06345629692077637,
+      "num_results": 7
+    },
+    {
+      "query": "apple m2 rendimiento potencia velocidad",
+      "time": 0.05133199691772461,
+      "num_results": 0
+    },
+    {
       "query": "pantalla amoled brillante nítida calidad",
-      "time": 0.06986856460571289,
-      "num_results": 10
+      "time": 0.08477401733398438,
+      "num_results": 4
     },
     {
       "query": "fotografía profesional calidad imagen nitidez",
-      "time": 0.06532597541809082,
-      "num_results": 10
+      "time": 0.08165812492370605,
+      "num_results": 7
     },
     {
       "query": "smart home inteligente asistente automatización",
-      "time": 0.036382198333740234,
+      "time": 0.045575857162475586,
       "num_results": 5
     },
     {
       "query": "carga rápida inalámbrica velocidad batería",
-      "time": 0.04884028434753418,
-      "num_results": 22
+      "time": 0.07006096839904785,
+      "num_results": 19
     },
     {
       "query": "creación contenido digital edición profesional",
-      "time": 0.03531217575073242,
-      "num_results": 5
+      "time": 0.04751944541931152,
+      "num_results": 4
     },
     {
       "query": "conectividad bluetooth wifi conexión inalámbrico",
-      "time": 0.03233695030212402,
-      "num_results": 2
+      "time": 0.041625261306762695,
+      "num_results": 1
     },
     {
       "query": "diseño premium construcción calidad materiales",
-      "time": 0.07557821273803711,
-      "num_results": 23
+      "time": 0.1366715431213379,
+      "num_results": 17
     },
     {
       "query": "salud actividad seguimiento monitorización fitness",
-      "time": 0.039638519287109375,
-      "num_results": 3
+      "time": 0.046361446380615234,
+      "num_results": 2
     }
   ]
 }

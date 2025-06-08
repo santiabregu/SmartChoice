@@ -97,13 +97,25 @@ class ReviewFileHandler:
             for filename in self.list_reviews():
                 review = self.load_review(filename)
                 if review and review['id'] in scores:
-                    score = scores[review['id']]
-                    if score >= min_score:  # Solo incluir resultados que superen el umbral
-                        review['score'] = score
+                    base_score = scores[review['id']]
+                    
+                    # Aplicar factor de rating de forma más agresiva
+                    rating = float(review.get('puntuacion', 3.0))
+                    rating_factor = (rating / 5.0) ** 2  # Factor exponencial
+                    
+                    # Penalizar más fuertemente las reviews negativas
+                    if rating < 3.0:
+                        rating_factor *= 0.3  # Penalización extra para ratings bajos
+                    
+                    # Calcular score final
+                    final_score = base_score * rating_factor
+                    
+                    if final_score >= min_score:  # Solo incluir resultados que superen el umbral
+                        review['score'] = final_score
                         results.append(review)
             
             # Ordenar por puntuación
-            results.sort(key=lambda x: (x.get('score', 0), x.get('puntuacion', 0)), reverse=True)
+            results.sort(key=lambda x: x.get('score', 0), reverse=True)
         
         return results
     

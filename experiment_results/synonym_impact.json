@@ -3,29 +3,29 @@
     "N1": {
       "descripcion": "Encontrar auriculares con buena duración de batería",
       "with_synonyms": {
-        "num_results": 19,
-        "metrics": {
-          "average_precision": 1.0,
-          "precision": 0.10526315789473684,
-          "recall": 1.0,
-          "f1_score": 0.1904761904761905,
-          "retrieved_count": 19,
-          "relevant_count": 2,
-          "nonrelevant_count": 17,
-          "retrieved_and_relevant": 2,
-          "expanded_terms": []
-        }
-      },
-      "without_synonyms": {
-        "num_results": 9,
+        "num_results": 16,
         "metrics": {
           "average_precision": 0.0,
           "precision": 0.0,
           "recall": 0.0,
           "f1_score": 0.0,
-          "retrieved_count": 9,
+          "retrieved_count": 16,
           "relevant_count": 0,
-          "nonrelevant_count": 9,
+          "nonrelevant_count": 16,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        }
+      },
+      "without_synonyms": {
+        "num_results": 5,
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 5,
+          "relevant_count": 0,
+          "nonrelevant_count": 5,
           "retrieved_and_relevant": 0,
           "expanded_terms": []
         }
@@ -34,20 +34,37 @@
     "N2": {
       "descripcion": "Encontrar productos con buena calidad de sonido",
       "with_synonyms": {
-        "num_results": 41,
+        "num_results": 39,
         "metrics": {
           "average_precision": 1.0,
-          "precision": 0.04878048780487805,
+          "precision": 0.05128205128205128,
           "recall": 1.0,
-          "f1_score": 0.09302325581395349,
-          "retrieved_count": 41,
+          "f1_score": 0.09756097560975609,
+          "retrieved_count": 39,
           "relevant_count": 2,
-          "nonrelevant_count": 38,
+          "nonrelevant_count": 37,
           "retrieved_and_relevant": 2,
           "expanded_terms": []
         }
       },
       "without_synonyms": {
+        "num_results": 3,
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 3,
+          "relevant_count": 0,
+          "nonrelevant_count": 3,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        }
+      }
+    },
+    "N3": {
+      "descripcion": "Encontrar productos con buena relación calidad-precio",
+      "with_synonyms": {
         "num_results": 6,
         "metrics": {
           "average_precision": 0.0,
@@ -57,23 +74,6 @@
           "retrieved_count": 6,
           "relevant_count": 0,
           "nonrelevant_count": 6,
-          "retrieved_and_relevant": 0,
-          "expanded_terms": []
-        }
-      }
-    },
-    "N3": {
-      "descripcion": "Encontrar productos con buena relación calidad-precio",
-      "with_synonyms": {
-        "num_results": 10,
-        "metrics": {
-          "average_precision": 0.0,
-          "precision": 0.0,
-          "recall": 0.0,
-          "f1_score": 0.0,
-          "retrieved_count": 10,
-          "relevant_count": 0,
-          "nonrelevant_count": 10,
           "retrieved_and_relevant": 0,
           "expanded_terms": []
         }
@@ -98,14 +98,14 @@
       "with_synonyms": {
         "num_results": 6,
         "metrics": {
-          "average_precision": 1.0,
-          "precision": 0.16666666666666666,
-          "recall": 1.0,
-          "f1_score": 0.2857142857142857,
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
           "retrieved_count": 6,
-          "relevant_count": 1,
-          "nonrelevant_count": 5,
-          "retrieved_and_relevant": 1,
+          "relevant_count": 0,
+          "nonrelevant_count": 6,
+          "retrieved_and_relevant": 0,
           "expanded_terms": []
         }
       },
@@ -282,30 +282,30 @@
     "N10": {
       "descripcion": "Buscar productos con garantía extendida",
       "with_synonyms": {
-        "num_results": 41,
+        "num_results": 37,
         "metrics": {
           "average_precision": 1.0,
-          "precision": 0.07317073170731707,
+          "precision": 0.05405405405405406,
           "recall": 1.0,
-          "f1_score": 0.13636363636363635,
-          "retrieved_count": 41,
-          "relevant_count": 3,
+          "f1_score": 0.10256410256410257,
+          "retrieved_count": 37,
+          "relevant_count": 2,
           "nonrelevant_count": 29,
-          "retrieved_and_relevant": 3,
+          "retrieved_and_relevant": 2,
           "expanded_terms": []
         }
       },
       "without_synonyms": {
-        "num_results": 25,
+        "num_results": 22,
         "metrics": {
-          "average_precision": 1.0,
-          "precision": 0.08,
-          "recall": 1.0,
-          "f1_score": 0.14814814814814814,
-          "retrieved_count": 25,
-          "relevant_count": 2,
-          "nonrelevant_count": 23,
-          "retrieved_and_relevant": 2,
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 22,
+          "relevant_count": 0,
+          "nonrelevant_count": 22,
+          "retrieved_and_relevant": 0,
           "expanded_terms": []
         }
       }
@@ -406,99 +406,6 @@
     "N14": {
       "descripcion": "Encontrar equipamiento deportivo transpirable",
       "with_synonyms": {
-        "num_results": 2,
-        "metrics": {
-          "average_precision": 0.0,
-          "precision": 0.0,
-          "recall": 0.0,
-          "f1_score": 0.0,
-          "retrieved_count": 2,
-          "relevant_count": 0,
-          "nonrelevant_count": 2,
-          "retrieved_and_relevant": 0,
-          "expanded_terms": []
-        }
-      },
-      "without_synonyms": {
-        "num_results": 0,
-        "metrics": {
-          "average_precision": 0.0,
-          "precision": 0.0,
-          "recall": 0.0,
-          "f1_score": 0.0,
-          "retrieved_count": 0,
-          "relevant_count": 0,
-          "nonrelevant_count": 0,
-          "retrieved_and_relevant": 0,
-          "expanded_terms": []
-        }
-      }
-    },
-    "N15": {
-      "descripcion": "Encontrar dispositivos con cancelación de ruido efectiva",
-      "with_synonyms": {
-        "num_results": 10,
-        "metrics": {
-          "average_precision": 1.0,
-          "precision": 0.2,
-          "recall": 1.0,
-          "f1_score": 0.33333333333333337,
-          "retrieved_count": 10,
-          "relevant_count": 2,
-          "nonrelevant_count": 6,
-          "retrieved_and_relevant": 2,
-          "expanded_terms": []
-        }
-      },
-      "without_synonyms": {
-        "num_results": 6,
-        "metrics": {
-          "average_precision": 1.0,
-          "precision": 0.16666666666666666,
-          "recall": 1.0,
-          "f1_score": 0.2857142857142857,
-          "retrieved_count": 6,
-          "relevant_count": 1,
-          "nonrelevant_count": 5,
-          "retrieved_and_relevant": 1,
-          "expanded_terms": []
-        }
-      }
-    },
-    "N16": {
-      "descripcion": "Encontrar productos gaming de alta precisión",
-      "with_synonyms": {
-        "num_results": 8,
-        "metrics": {
-          "average_precision": 0.0,
-          "precision": 0.0,
-          "recall": 0.0,
-          "f1_score": 0.0,
-          "retrieved_count": 8,
-          "relevant_count": 0,
-          "nonrelevant_count": 8,
-          "retrieved_and_relevant": 0,
-          "expanded_terms": []
-        }
-      },
-      "without_synonyms": {
-        "num_results": 2,
-        "metrics": {
-          "average_precision": 0.0,
-          "precision": 0.0,
-          "recall": 0.0,
-          "f1_score": 0.0,
-          "retrieved_count": 2,
-          "relevant_count": 0,
-          "nonrelevant_count": 2,
-          "retrieved_and_relevant": 0,
-          "expanded_terms": []
-        }
-      }
-    },
-    "N17": {
-      "descripcion": "Encontrar dispositivos Apple con chip M2",
-      "with_synonyms": {
         "num_results": 1,
         "metrics": {
           "average_precision": 0.0,
@@ -527,18 +434,111 @@
         }
       }
     },
-    "N18": {
-      "descripcion": "Encontrar productos con pantalla AMOLED",
+    "N15": {
+      "descripcion": "Encontrar dispositivos con cancelación de ruido efectiva",
       "with_synonyms": {
-        "num_results": 10,
+        "num_results": 9,
+        "metrics": {
+          "average_precision": 1.0,
+          "precision": 0.2222222222222222,
+          "recall": 1.0,
+          "f1_score": 0.3636363636363636,
+          "retrieved_count": 9,
+          "relevant_count": 2,
+          "nonrelevant_count": 5,
+          "retrieved_and_relevant": 2,
+          "expanded_terms": []
+        }
+      },
+      "without_synonyms": {
+        "num_results": 5,
         "metrics": {
           "average_precision": 0.0,
           "precision": 0.0,
           "recall": 0.0,
           "f1_score": 0.0,
-          "retrieved_count": 10,
+          "retrieved_count": 5,
           "relevant_count": 0,
-          "nonrelevant_count": 10,
+          "nonrelevant_count": 5,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        }
+      }
+    },
+    "N16": {
+      "descripcion": "Encontrar productos gaming de alta precisión",
+      "with_synonyms": {
+        "num_results": 7,
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 7,
+          "relevant_count": 0,
+          "nonrelevant_count": 7,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        }
+      },
+      "without_synonyms": {
+        "num_results": 2,
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 2,
+          "relevant_count": 0,
+          "nonrelevant_count": 2,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        }
+      }
+    },
+    "N17": {
+      "descripcion": "Encontrar dispositivos Apple con chip M2",
+      "with_synonyms": {
+        "num_results": 0,
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 0,
+          "relevant_count": 0,
+          "nonrelevant_count": 0,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        }
+      },
+      "without_synonyms": {
+        "num_results": 0,
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 0,
+          "relevant_count": 0,
+          "nonrelevant_count": 0,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        }
+      }
+    },
+    "N18": {
+      "descripcion": "Encontrar productos con pantalla AMOLED",
+      "with_synonyms": {
+        "num_results": 4,
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 4,
+          "relevant_count": 0,
+          "nonrelevant_count": 4,
           "retrieved_and_relevant": 0,
           "expanded_terms": []
         }
@@ -561,15 +561,15 @@
     "N19": {
       "descripcion": "Encontrar productos para fotografía profesional",
       "with_synonyms": {
-        "num_results": 10,
+        "num_results": 7,
         "metrics": {
           "average_precision": 0.0,
           "precision": 0.0,
           "recall": 0.0,
           "f1_score": 0.0,
-          "retrieved_count": 10,
+          "retrieved_count": 7,
           "relevant_count": 0,
-          "nonrelevant_count": 10,
+          "nonrelevant_count": 7,
           "retrieved_and_relevant": 0,
           "expanded_terms": []
         }
@@ -623,29 +623,29 @@
     "N21": {
       "descripcion": "Encontrar productos con carga rápida",
       "with_synonyms": {
-        "num_results": 22,
-        "metrics": {
-          "average_precision": 1.0,
-          "precision": 0.045454545454545456,
-          "recall": 1.0,
-          "f1_score": 0.08695652173913045,
-          "retrieved_count": 22,
-          "relevant_count": 1,
-          "nonrelevant_count": 21,
-          "retrieved_and_relevant": 1,
-          "expanded_terms": []
-        }
-      },
-      "without_synonyms": {
-        "num_results": 1,
+        "num_results": 19,
         "metrics": {
           "average_precision": 0.0,
           "precision": 0.0,
           "recall": 0.0,
           "f1_score": 0.0,
-          "retrieved_count": 1,
+          "retrieved_count": 19,
           "relevant_count": 0,
-          "nonrelevant_count": 1,
+          "nonrelevant_count": 19,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        }
+      },
+      "without_synonyms": {
+        "num_results": 0,
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 0,
+          "relevant_count": 0,
+          "nonrelevant_count": 0,
           "retrieved_and_relevant": 0,
           "expanded_terms": []
         }
@@ -654,15 +654,15 @@
     "N22": {
       "descripcion": "Encontrar dispositivos para creación de contenido",
       "with_synonyms": {
-        "num_results": 5,
+        "num_results": 4,
         "metrics": {
           "average_precision": 0.0,
           "precision": 0.0,
           "recall": 0.0,
           "f1_score": 0.0,
-          "retrieved_count": 5,
+          "retrieved_count": 4,
           "relevant_count": 0,
-          "nonrelevant_count": 5,
+          "nonrelevant_count": 4,
           "retrieved_and_relevant": 0,
           "expanded_terms": []
         }
@@ -685,15 +685,15 @@
     "N23": {
       "descripcion": "Encontrar productos con conectividad avanzada",
       "with_synonyms": {
-        "num_results": 2,
+        "num_results": 1,
         "metrics": {
           "average_precision": 0.0,
           "precision": 0.0,
           "recall": 0.0,
           "f1_score": 0.0,
-          "retrieved_count": 2,
+          "retrieved_count": 1,
           "relevant_count": 0,
-          "nonrelevant_count": 2,
+          "nonrelevant_count": 1,
           "retrieved_and_relevant": 0,
           "expanded_terms": []
         }
@@ -716,20 +716,37 @@
     "N24": {
       "descripcion": "Encontrar productos con diseño premium",
       "with_synonyms": {
-        "num_results": 23,
+        "num_results": 17,
         "metrics": {
           "average_precision": 0.0,
           "precision": 0.0,
           "recall": 0.0,
           "f1_score": 0.0,
-          "retrieved_count": 23,
+          "retrieved_count": 17,
           "relevant_count": 0,
-          "nonrelevant_count": 23,
+          "nonrelevant_count": 17,
           "retrieved_and_relevant": 0,
           "expanded_terms": []
         }
       },
       "without_synonyms": {
+        "num_results": 0,
+        "metrics": {
+          "average_precision": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1_score": 0.0,
+          "retrieved_count": 0,
+          "relevant_count": 0,
+          "nonrelevant_count": 0,
+          "retrieved_and_relevant": 0,
+          "expanded_terms": []
+        }
+      }
+    },
+    "N25": {
+      "descripcion": "Encontrar dispositivos para monitorización de salud",
+      "with_synonyms": {
         "num_results": 2,
         "metrics": {
           "average_precision": 0.0,
@@ -739,23 +756,6 @@
           "retrieved_count": 2,
           "relevant_count": 0,
           "nonrelevant_count": 2,
-          "retrieved_and_relevant": 0,
-          "expanded_terms": []
-        }
-      }
-    },
-    "N25": {
-      "descripcion": "Encontrar dispositivos para monitorización de salud",
-      "with_synonyms": {
-        "num_results": 3,
-        "metrics": {
-          "average_precision": 0.0,
-          "precision": 0.0,
-          "recall": 0.0,
-          "f1_score": 0.0,
-          "retrieved_count": 3,
-          "relevant_count": 0,
-          "nonrelevant_count": 3,
           "retrieved_and_relevant": 0,
           "expanded_terms": []
         }
@@ -778,13 +778,13 @@
   },
   "overall": {
     "with_synonyms": {
-      "precision": 0.033573423581125764,
-      "recall": 0.28,
+      "precision": 0.0211023331023331,
+      "recall": 0.16,
       "f1": 0.0
     },
     "without_synonyms": {
-      "precision": 0.009866666666666666,
-      "recall": 0.08,
+      "precision": 0.0,
+      "recall": 0.0,
       "f1": 0.0
     }
   }

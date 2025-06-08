@@ -118,12 +118,27 @@ class TextProcessor:
         
         # Factores de penalización
         self.penalty_terms = {
-            'malo': 0.5,
-            'defectuoso': 0.5,
-            'roto': 0.5,
-            'fallo': 0.5,
-            'problema': 0.6,
-            'negativo': 0.6
+            'malo': 0.2,
+            'defectuoso': 0.2,
+            'roto': 0.2,
+            'fallo': 0.2,
+            'problema': 0.3,
+            'negativo': 0.3,
+            'mala': 0.2,
+            'pobre': 0.2,
+            'decepcionante': 0.2,
+            'no recomendable': 0.2,
+            'no recomiendo': 0.2,
+            'no vale': 0.2,
+            'pesimo': 0.2,
+            'horrible': 0.2,
+            'evitar': 0.2,
+            'error': 0.3,
+            'corta': 0.3,
+            'poca': 0.3,
+            'poco': 0.3,
+            'inferior': 0.2,
+            'no satisfecho': 0.2
         }
         
     def _load_sinonimos(self) -> Dict[str, List[str]]:
@@ -562,9 +577,10 @@ class TextProcessor:
             
             # Normalizar por longitud del documento y aplicar boost de términos compuestos
             if score > 0:
-                score = (score / math.sqrt(doc_length)) * compound_boost
-                scores[doc_id] = score
-                print(f"Doc {doc_id}: Score final={score:.4f}")
+                # Normalizar score por longitud y aplicar compound boost
+                final_score = (score / math.sqrt(doc_length)) * compound_boost
+                scores[doc_id] = final_score
+                print(f"Doc {doc_id}: Base Score={score:.4f}, Final={final_score:.4f}")
         
         # Ordenar por score descendente
         return dict(sorted(scores.items(), key=lambda x: x[1], reverse=True)) 
